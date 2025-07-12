@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой Premium Подарок</title>
+    <title>Мой премиум-эмодзи</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -15,65 +15,51 @@
             margin: 0;
             background-color: #f0f8ff;
         }
-        .container {
-            text-align: center;
+        .premium-emoji {
+            font-size: 8rem;
+            animation: float 3s ease-in-out infinite;
         }
-        .emoji {
-            font-size: 5rem;
-            margin-bottom: 20px;
-        }
-        .gift {
-            font-size: 3rem;
-            animation: bounce 2s infinite;
-        }
-        @keyframes bounce {
+        @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-20px); }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="emoji">😊</div>
-        <div class="gift">🎁</div>
-        <h1>Ваш подарок!</h1>
-    </div>
+    <div class="premium-emoji" id="emoji-display">⌛</div>
+    <p>Ваш премиум-эмодзи</p>
 
     <script>
-        // Проверяем, есть ли Telegram WebApp
+        // Проверяем Telegram WebApp
         if (window.Telegram && Telegram.WebApp) {
             Telegram.WebApp.ready();
             
-            // Получаем данные пользователя
+            // Вариант 1: Если эмодзи доступен напрямую (редко)
             const user = Telegram.WebApp.initDataUnsafe?.user;
-            
-            // Эмодзи премиума (если есть)
-            const premiumEmoji = user?.premium_emoji_status?.emoji_id;
-            
-            if (premiumEmoji) {
-                // Для Telegram эмодзи нужно конвертировать из ID
-                // Это пример - реальная реализация зависит от API Telegram
-                const emojiMap = {
-                    '1': '🌟',  // пример маппинга ID эмодзи
-                    '2': '💎',
-                    '3': '👑',
-                    // добавьте другие premium эмодзи
-                };
-                
-                document.querySelector('.gift').textContent = 
-                    emojiMap[premiumEmoji] || '🎁';
+            if (user?.premium_emoji_status?.emoji_id) {
+                document.getElementById('emoji-display').textContent = 
+                    convertEmojiIdToSymbol(user.premium_emoji_status.emoji_id);
+            }
+            // Вариант 2: Для ручной установки вашего эмодзи
+            else {
+                const myEmoji = "🌟"; // ⬅️ ЗАМЕНИТЕ НА ВАШ ЭМОДЗИ!
+                document.getElementById('emoji-display').textContent = myEmoji;
             }
         } else {
-            // Если не Telegram, используем случайный подарок
-            const gifts = ['🎁', '🎀', '🎊', '🎈', '🛍️', '🎐'];
-            document.querySelector('.gift').textContent = 
-                gifts[Math.floor(Math.random() * gifts.length)];
+            // Режим вне Telegram (для теста)
+            document.getElementById('emoji-display').textContent = "🌟"; // Тестовый эмодзи
         }
 
-        // Случайный emoji для настроения
-        const emojis = ['😊', '😍', '🤩', '🥳', '🎉', '✨'];
-        document.querySelector('.emoji').textContent = 
-            emojis[Math.floor(Math.random() * emojis.length)];
+        // Функция конвертации ID в символ (примерная)
+        function convertEmojiIdToSymbol(id) {
+            const emojiMap = {
+                "1": "🌟",
+                "2": "💎",
+                "3": "✨",
+                // Добавьте другие маппинги по необходимости
+            };
+            return emojiMap[id] || "🎁";
+        }
     </script>
 </body>
 </html>
