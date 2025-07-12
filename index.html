@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой Emoji Подарок</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f8ff;
+        }
+        .container {
+            text-align: center;
+        }
+        .emoji {
+            font-size: 5rem;
+            margin-bottom: 20px;
+        }
+        .gift {
+            font-size: 3rem;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="emoji">😊</div>
+        <div class="gift">🎁</div>
+        <h1>Ваш подарок!</h1>
+    </div>
+
+    <script>
+        // Можно добавить случайный выбор emoji
+        const emojis = ['😊', '😍', '🤩', '🥳', '🎉', '✨'];
+        const gifts = ['🎁', '🎀', '🎊', '🎈', '🛍️', '🎐'];
+        
+        document.querySelector('.emoji').textContent = 
+            emojis[Math.floor(Math.random() * emojis.length)];
+        document.querySelector('.gift').textContent = 
+            gifts[Math.floor(Math.random() * gifts.length)];
+    </script>
+</body>
+</html>
