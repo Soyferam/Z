@@ -2,42 +2,48 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Просмотр премиум эмодзи</title>
-  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <title>Premium Emoji Viewer</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.1/lottie.min.js"></script>
   <style>
     body {
-      font-family: sans-serif;
-      text-align: center;
-      padding: 2rem;
+      margin: 0; padding: 2rem; text-align: center; font-family: sans-serif;
     }
-    lottie-player {
-      width: 150px;
-      height: 150px;
-      margin-top: 20px;
+    #animation {
+      margin: auto;
+      width: 300px;
+      height: 300px;
     }
   </style>
 </head>
 <body>
   <h1>Твой премиум эмодзи</h1>
-  <div id="animation-container"></div>
+  <div id="animation"></div>
+  <p id="error" style="color:red;"></p>
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
-    const emojiUrl = urlParams.get('emoji');
+    const emojiUrl = urlParams.get("emoji");
 
-    if (emojiUrl) {
-      const decodedUrl = decodeURIComponent(emojiUrl);
-      const container = document.getElementById('animation-container');
-      container.innerHTML = `<lottie-player
-        src="${decodedUrl}"
-        background="transparent"
-        speed="1"
-        loop
-        autoplay>
-      </lottie-player>`;
+    if (!emojiUrl) {
+      document.getElementById("error").textContent = "Не передан emoji URL";
     } else {
-      document.body.innerHTML += '<p style="color:red;">Не передан emoji URL</p>';
+      fetch(decodeURIComponent(emojiUrl))
+        .then(response => {
+          if (!response.ok) throw new Error('Ошибка загрузки анимации');
+          return response.json();
+        })
+        .then(animationData => {
+          lottie.loadAnimation({
+            container: document.getElementById('animation'),
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            animationData: animationData
+          });
+        })
+        .catch(err => {
+          document.getElementById("error").textContent = err.message;
+        });
     }
   </script>
 </body>
