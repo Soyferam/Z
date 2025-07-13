@@ -1,48 +1,33 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <title>Premium Emoji Viewer</title>
+  <title>Показываем Premium Emoji</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.1/lottie.min.js"></script>
-  <style>
-    body {
-      margin: 0; padding: 2rem; text-align: center; font-family: sans-serif;
-    }
-    #animation {
-      margin: auto;
-      width: 300px;
-      height: 300px;
-    }
-  </style>
 </head>
 <body>
-  <h1>Твой премиум эмодзи</h1>
-  <div id="animation"></div>
-  <p id="error" style="color:red;"></p>
+  <div id="emoji" style="width: 300px; height: 300px; margin: auto;"></div>
 
   <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const emojiUrl = urlParams.get("emoji");
+    // Получаем из URL параметр emoji (ссылка на .tgs файл)
+    const params = new URLSearchParams(window.location.search);
+    const emojiUrl = params.get('emoji');
 
     if (!emojiUrl) {
-      document.getElementById("error").textContent = "Не передан emoji URL";
+      document.body.innerHTML = 'Не передан URL эмодзи';
     } else {
       fetch(decodeURIComponent(emojiUrl))
-        .then(response => {
-          if (!response.ok) throw new Error('Ошибка загрузки анимации');
-          return response.json();
-        })
-        .then(animationData => {
+        .then(res => res.json())
+        .then(data => {
           lottie.loadAnimation({
-            container: document.getElementById('animation'),
+            container: document.getElementById('emoji'),
             renderer: 'svg',
             loop: true,
             autoplay: true,
-            animationData: animationData
+            animationData: data
           });
         })
-        .catch(err => {
-          document.getElementById("error").textContent = err.message;
+        .catch(e => {
+          document.body.innerHTML = 'Ошибка загрузки анимации: ' + e.message;
         });
     }
   </script>
