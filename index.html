@@ -2,86 +2,40 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Подарок от бота</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Мой эмодзи</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      background: #f0f8ff;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
+      font-family: sans-serif;
+      padding: 30px;
+      text-align: center;
     }
-    .gift {
-      font-size: 5rem;
-      margin: 20px 0;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-    }
-    .username {
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-    button {
-      margin-top: 30px;
-      padding: 12px 24px;
-      font-size: 1rem;
-      background-color: #0088cc;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    button:hover {
-      background-color: #006699;
+    #emoji {
+      font-size: 64px;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <div class="username" id="username">Загрузка...</div>
-  <div class="gift" id="gift">🎁</div>
-  <button id="closeBtn">Закрыть</button>
+  <h1>Твой эмодзи</h1>
+  <div id="emoji">⏳</div>
 
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
-    // Ждём инициализации Telegram WebApp
-    Telegram.WebApp.ready();
+    const tg = window.Telegram.WebApp;
+    tg.ready();
 
-    const usernameElem = document.getElementById('username');
-    const giftElem = document.getElementById('gift');
-    const closeBtn = document.getElementById('closeBtn');
+    const userId = tg.initDataUnsafe?.user?.id;
 
-    // Получаем данные пользователя
-    const user = Telegram.WebApp.initDataUnsafe?.user;
-
-    if (user) {
-      usernameElem.textContent = `Привет, ${user.first_name} ${user.last_name || ''}!`;
-
-      // Здесь можно динамически менять эмодзи подарка, например:
-      // Если у пользователя есть премиум (как пример, по id)
-      // let giftEmoji = user.is_premium ? "✨" : "🎁";
-
-      // Но Telegram API в WebApp пока не даёт is_premium, так что просто покажем эмодзи:
-      const giftEmoji = "🎁";  // или "✨"
-      giftElem.textContent = giftEmoji;
-    } else {
-      usernameElem.textContent = "Привет, гость!!";
-      giftElem.textContent = "🎁";
-    }
-
-    // Кнопка закрытия мини-приложения
-    closeBtn.onclick = () => {
-      Telegram.WebApp.close();
-    };
+    fetch(`https://YOUR-REPLIT-NAME.repl.co/get-emoji?user_id=${userId}`)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("emoji").textContent = data.emoji || "❓";
+      })
+      .catch(err => {
+        document.getElementById("emoji").textContent = "❌ Ошибка";
+        console.error(err);
+      });
   </script>
 </body>
 </html>
