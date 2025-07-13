@@ -1,41 +1,33 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Мой эмодзи</title>
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <style>
-    body {
-      font-family: sans-serif;
-      padding: 30px;
-      text-align: center;
-    }
-    #emoji {
-      font-size: 64px;
-      margin-top: 20px;
-    }
-  </style>
+<meta charset="UTF-8" />
+<title>Премиум Эмодзи</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; }
+  #emoji { font-size: 100px; }
+</style>
 </head>
 <body>
-  <h1>Твой эмодзи</h1>
-  <div id="emoji">⏳</div>
+<h1>Последний премиум эмодзи от бота</h1>
+<div id="emoji">–</div>
 
-  <script>
-    const tg = window.Telegram.WebApp;
-    tg.ready();
+<script>
+  async function fetchEmoji() {
+    try {
+      const res = await fetch('/last_emoji');
+      if (!res.ok) throw new Error('Ошибка загрузки');
+      const data = await res.json();
+      document.getElementById('emoji').textContent = data.emoji || '–';
+    } catch(e) {
+      console.error(e);
+      document.getElementById('emoji').textContent = 'Ошибка';
+    }
+  }
 
-    const userId = tg.initDataUnsafe?.user?.id;
-
-    fetch(`https://YOUR-REPLIT-NAME.repl.co/get-emoji?user_id=${userId}`)
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById("emoji").textContent = data.emoji || "❓";
-      })
-      .catch(err => {
-        document.getElementById("emoji").textContent = "❌ Ошибка";
-        console.error(err);
-      });
-  </script>
+  // Обновляем эмодзи каждую секунду
+  setInterval(fetchEmoji, 1000);
+  fetchEmoji();
+</script>
 </body>
 </html>
