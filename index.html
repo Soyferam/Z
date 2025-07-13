@@ -5,36 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Emoji Viewer</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.10.1/lottie.min.js"></script>
   <style>
     body {
       margin: 0;
       padding: 2rem;
       font-family: sans-serif;
       text-align: center;
+      background: #f0f0f0;
     }
-    img {
-      width: 120px;
-      height: auto;
-      margin-top: 2rem;
+    #emoji-container {
+      width: 200px;
+      height: 200px;
+      margin: auto;
     }
   </style>
 </head>
 <body>
   <h1>Твой премиум эмодзи</h1>
-  <img id="emoji" src="" alt="Премиум эмодзи" />
+  <div id="emoji-container"></div>
 
   <script>
     const tg = window.Telegram.WebApp;
     tg.ready();
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const emojiUrl = urlParams.get("emoji");
+    const params = new URLSearchParams(window.location.search);
+    const emojiUrlEncoded = params.get("emoji");
 
-    if (emojiUrl) {
-      // decodeURIComponent — чтобы получить правильный URL обратно
-      document.getElementById("emoji").src = decodeURIComponent(emojiUrl);
-    } else {
+    if (!emojiUrlEncoded) {
       document.body.innerHTML += "<p style='color:red;'>Не передан emoji URL</p>";
+    } else {
+      const emojiUrl = decodeURIComponent(emojiUrlEncoded);
+
+      // Используем lottie для загрузки tgs анимации
+      lottie.loadAnimation({
+        container: document.getElementById('emoji-container'),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: emojiUrl
+      });
     }
   </script>
 </body>
