@@ -15,6 +15,7 @@
     img {
       width: 120px;
       height: auto;
+      margin-top: 2rem;
     }
   </style>
 </head>
@@ -30,6 +31,7 @@
     const emojiUrl = urlParams.get("emoji");
 
     if (emojiUrl) {
+      // decodeURIComponent — чтобы получить правильный URL обратно
       document.getElementById("emoji").src = decodeURIComponent(emojiUrl);
     } else {
       document.body.innerHTML += "<p style='color:red;'>Не передан emoji URL</p>";
