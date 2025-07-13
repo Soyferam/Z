@@ -30,7 +30,7 @@
     const emojiUrl = urlParams.get("emoji");
 
     if (emojiUrl) {
-      document.getElementById("emoji").src = emojiUrl;
+      document.getElementById("emoji").src = decodeURIComponent(emojiUrl);
     } else {
       document.body.innerHTML += "<p style='color:red;'>Не передан emoji URL</p>";
     }
