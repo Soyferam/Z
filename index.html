@@ -1,33 +1,52 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8" />
-<title>Премиум Эмодзи</title>
-<style>
-  body { font-family: Arial, sans-serif; padding: 20px; }
-  #emoji { font-size: 100px; }
-</style>
+  <meta charset="UTF-8" />
+  <title>Премиум эмодзи</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.4/lottie.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+    }
+    #lottie {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto;
+    }
+  </style>
 </head>
 <body>
-<h1>Последний премиум эмодзи от бота</h1>
-<div id="emoji">–</div>
+  <h1>Премиум эмодзи от бота</h1>
+  <div id="lottie">Загрузка...</div>
 
-<script>
-  async function fetchEmoji() {
-    try {
-      const res = await fetch('/last_emoji');
-      if (!res.ok) throw new Error('Ошибка загрузки');
-      const data = await res.json();
-      document.getElementById('emoji').textContent = data.emoji || '–';
-    } catch(e) {
-      console.error(e);
-      document.getElementById('emoji').textContent = 'Ошибка';
+  <script>
+    async function loadAnimation() {
+      try {
+        const res = await fetch('/last_emoji');
+        if (!res.ok) throw new Error('Анимация не найдена');
+        const animationData = await res.json();
+
+        document.getElementById('lottie').textContent = '';
+
+        lottie.loadAnimation({
+          container: document.getElementById('lottie'),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          animationData: animationData
+        });
+      } catch (e) {
+        document.getElementById('lottie').textContent = 'Ошибка загрузки анимации';
+        console.error(e);
+      }
     }
-  }
 
-  // Обновляем эмодзи каждую секунду
-  setInterval(fetchEmoji, 1000);
-  fetchEmoji();
-</script>
+    loadAnimation();
+
+    // Можно обновлять анимацию, например, каждую минуту:
+    setInterval(loadAnimation, 60000);
+  </script>
 </body>
 </html>
