@@ -3,41 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Emoji Viewer</title>
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <title>Просмотр премиум эмодзи</title>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   <style>
     body {
-      margin: 0;
-      padding: 2rem;
       font-family: sans-serif;
       text-align: center;
-      background: #fff;
+      padding: 2rem;
     }
-    img {
-      width: 120px;
-      height: auto;
+    lottie-player {
+      width: 150px;
+      height: 150px;
       margin-top: 20px;
     }
   </style>
 </head>
 <body>
   <h1>Твой премиум эмодзи</h1>
-  <img id="emoji" src="" alt="Премиум эмодзи" />
-  <p id="error" style="color:red;"></p>
+  <div id="animation-container"></div>
 
   <script>
-    const tg = window.Telegram.WebApp;
-    tg.ready();
-
     const urlParams = new URLSearchParams(window.location.search);
-    const emojiUrl = urlParams.get("emoji");
+    const emojiUrl = urlParams.get('emoji');
 
     if (emojiUrl) {
-      // Декодируем URL, если закодирован
       const decodedUrl = decodeURIComponent(emojiUrl);
-      document.getElementById("emoji").src = decodedUrl;
+      const container = document.getElementById('animation-container');
+      container.innerHTML = `<lottie-player
+        src="${decodedUrl}"
+        background="transparent"
+        speed="1"
+        loop
+        autoplay>
+      </lottie-player>`;
     } else {
-      document.getElementById("error").textContent = "Не передан emoji URL";
+      document.body.innerHTML += '<p style="color:red;">Не передан emoji URL</p>';
     }
   </script>
 </body>
