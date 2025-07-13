@@ -11,16 +11,19 @@
       padding: 2rem;
       font-family: sans-serif;
       text-align: center;
+      background: #fff;
     }
     img {
       width: 120px;
       height: auto;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
   <h1>Твой премиум эмодзи</h1>
   <img id="emoji" src="" alt="Премиум эмодзи" />
+  <p id="error" style="color:red;"></p>
 
   <script>
     const tg = window.Telegram.WebApp;
@@ -30,9 +33,11 @@
     const emojiUrl = urlParams.get("emoji");
 
     if (emojiUrl) {
-      document.getElementById("emoji").src = decodeURIComponent(emojiUrl);
+      // Декодируем URL, если закодирован
+      const decodedUrl = decodeURIComponent(emojiUrl);
+      document.getElementById("emoji").src = decodedUrl;
     } else {
-      document.body.innerHTML += "<p style='color:red;'>Не передан emoji URL</p>";
+      document.getElementById("error").textContent = "Не передан emoji URL";
     }
   </script>
 </body>
