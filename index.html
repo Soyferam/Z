@@ -2,51 +2,38 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <title>Премиум эмодзи</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.4/lottie.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Emoji Viewer</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 2rem;
+      font-family: sans-serif;
       text-align: center;
-      padding: 40px;
     }
-    #lottie {
-      width: 200px;
-      height: 200px;
-      margin: 0 auto;
+    img {
+      width: 120px;
+      height: auto;
     }
   </style>
 </head>
 <body>
-  <h1>Премиум эмодзи от бота</h1>
-  <div id="lottie">Загрузка...</div>
+  <h1>Твой премиум эмодзи</h1>
+  <img id="emoji" src="" alt="Премиум эмодзи" />
 
   <script>
-    async function loadAnimation() {
-      try {
-        const res = await fetch('/last_emoji');
-        if (!res.ok) throw new Error('Анимация не найдена');
-        const animationData = await res.json();
+    const tg = window.Telegram.WebApp;
+    tg.ready();
 
-        document.getElementById('lottie').textContent = '';
+    const urlParams = new URLSearchParams(window.location.search);
+    const emojiUrl = urlParams.get("emoji");
 
-        lottie.loadAnimation({
-          container: document.getElementById('lottie'),
-          renderer: 'svg',
-          loop: true,
-          autoplay: true,
-          animationData: animationData
-        });
-      } catch (e) {
-        document.getElementById('lottie').textContent = 'Ошибка загрузки анимации';
-        console.error(e);
-      }
+    if (emojiUrl) {
+      document.getElementById("emoji").src = emojiUrl;
+    } else {
+      document.body.innerHTML += "<p style='color:red;'>Не передан emoji URL</p>";
     }
-
-    loadAnimation();
-
-    // Можно обновлять анимацию, например, каждую минуту:
-    setInterval(loadAnimation, 60000);
   </script>
 </body>
 </html>
