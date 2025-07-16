@@ -9,7 +9,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  font-family: 'Press Start 2P', sans-serif;
+  font-family: 'Press Start 2P', monospace;
   background-color: #000;
   background-image: radial-gradient(#fff 1px, transparent 1px);
   background-size: 20px 20px;
@@ -22,7 +22,7 @@ html, body {
   position: relative;
 }
 
-/* ======= 1. Верхний баланс с иконкой ======= */
+/* ======= Кошелёк ======= */
 .wallet-left {
   position: absolute;
   top: 130px;
@@ -41,7 +41,6 @@ html, body {
   margin-right: 8px;
 }
 
-/* ======= 2. Кнопка Deposit ======= */
 .wallet-right {
   position: absolute;
   top: 130px;
@@ -59,7 +58,7 @@ html, body {
   font-family: 'AntonSC', sans-serif;
 }
 
-/* ======= 3. Логотип игры ======= */
+/* ======= Лого ======= */
 .logo {
   position: absolute;
   top: 160px;
@@ -69,7 +68,7 @@ html, body {
   cursor: default;
 }
 
-/* ======= 4. Ввод TON ======= */
+/* ======= Ввод TON ======= */
 .amount-input {
   position: absolute;
   top: 500px;
@@ -90,7 +89,7 @@ html, body {
   color: #fff;
   font-size: 14px;
   text-align: center;
-  font-family: 'AntonSC', sans-serif;
+  font-family: 'Press Start 2P', monospace;
   outline: none;
 }
 
@@ -98,32 +97,7 @@ html, body {
   color: #888;
 }
 
-/* ======= 4.1 Быстрые кнопки (T9 над клавиатурой) ======= */
-.quick-ton-buttons {
-  position: fixed;
-  bottom: 300px; /* регулируется вручную для платформ */
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
-  background: rgba(0,0,0,0.9);
-  padding: 6px 12px;
-  border-radius: 20px;
-  z-index: 999;
-}
-
-.quick-ton-buttons button {
-  background: #24C256;
-  border: none;
-  color: #fff;
-  padding: 6px 12px;
-  border-radius: 16px;
-  font-size: 14px;
-  font-family: 'AntonSC', sans-serif;
-  cursor: pointer;
-}
-
-/* ======= 5. Кнопка PLAY ======= */
+/* ======= Кнопка PLAY ======= */
 .btn-play {
   position: absolute;
   top: 550px;
@@ -141,7 +115,7 @@ html, body {
   letter-spacing: 8px;
 }
 
-/* ======= 6. Кнопки меню ======= */
+/* ======= Кнопки меню ======= */
 .menu-buttons {
   position: static;
   width: 320px;
@@ -163,7 +137,7 @@ html, body {
 
 .menu-buttons button:nth-child(1) {
   top: 660px;
-  left: 17%;
+  left: 18%;
 }
 
 .menu-buttons button:nth-child(2) {
@@ -181,10 +155,10 @@ html, body {
   left: 65%;
 }
 
-/* ======= 7. Профит-бокс (фиксированный) ======= */
+/* ======= Профит-бокс (фиксированный) ======= */
 .profit-box {
   position: fixed;
-  bottom: 20px;
+  bottom: env(safe-area-inset-bottom, 20px);
   left: 50%;
   transform: translateX(-50%);
   background: #333;
@@ -201,7 +175,6 @@ html, body {
   z-index: 1000;
 }
 
-/* ======= 8. Внутри профит-бокса ======= */
 .profit-text {
   display: flex;
   flex-direction: column;

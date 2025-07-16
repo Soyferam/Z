@@ -26,7 +26,6 @@
       106.05
     </div>
 
-    <!-- 🧩 Кнопка TonConnect -->
     <div class="wallet-right">
       <div id="ton-connect"></div>
     </div>
@@ -37,22 +36,15 @@
 
   <!-- 💰 Ввод суммы TON -->
   <div class="amount-input">
-  <input
-    type="number"
-    inputmode="decimal"
-    step="0.01"
-    min="0"
-    placeholder="Enter TON amount"
-    id="depositInput"
-  />
-  <div class="quick-ton-buttons" id="quickTonButtons">
-    <button data-value="1">1 TON</button>
-    <button data-value="2">2 TON</button>
-    <button data-value="5">5 TON</button>
-    <button data-value="10">10 TON</button>
+    <input
+      type="number"
+      inputmode="decimal"
+      step="0.01"
+      min="0"
+      placeholder="Enter TON amount"
+      id="depositInput"
+    />
   </div>
-</div>
-
 
   <!-- ▶️ Играть -->
   <button class="btn-play" id="playBtn">PLAY</button>
@@ -66,7 +58,7 @@
   </div>
 
   <!-- 📈 Прибыль -->
-  <div class="profit-box">
+  <div class="profit-box" id="profitBox">
     <div class="profit-text">
       <div>Profit: <span style="color: #00FF00">50$ (20%)</span></div>
       <div>Tokens: <span style="color: #00FF00">2937 ⚡</span></div>
@@ -77,7 +69,6 @@
     </div>
   </div>
 
-  <!-- 📜 Скрипт -->
   <script>
     window.addEventListener("DOMContentLoaded", () => {
       const tg = window.Telegram?.WebApp;
@@ -88,22 +79,13 @@
         document.body.style.overflow = 'hidden';
       }
 
-      // ✅ Инициализация TonConnect
       const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
         manifestUrl: 'https://z-ten-iota.vercel.app/tonconnect-manifest.json',
         buttonRootId: 'ton-connect',
       });
 
-      // 👉 Быстрые кнопки TON
-      document.querySelectorAll('.quick-ton-buttons button').forEach(btn => {
-        btn.addEventListener('click', () => {
-          document.getElementById('depositInput').value = btn.dataset.value;
-        });
-      });
-
-      // ▶️ Обработка кнопки PLAY
-      const playBtn = document.getElementById('playBtn');
-      playBtn.addEventListener('click', () => {
+      // ▶️ PLAY кнопка
+      document.getElementById('playBtn').addEventListener('click', () => {
         const amount = parseFloat(document.getElementById('depositInput').value);
         if (isNaN(amount) || amount <= 0) {
           alert("Please enter a valid TON amount.");
