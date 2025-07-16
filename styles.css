@@ -10,9 +10,9 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: 'Press Start 2P', monospace;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.85);
   background-image: 
-    url('./bg/noise.png'),  /* добавь сюда png шум или градиент */
+    url('./bg/noise.png'),
     radial-gradient(#fff 1px, transparent 1px);
   background-size: cover, 20px 20px;
   background-position: center;
@@ -23,17 +23,17 @@ html, body {
   overscroll-behavior: none;
   touch-action: none;
   position: relative;
-  z-index: 0;
 }
 
-/* ======= Фоновый контейнер (для стеклянного эффекта) ======= */
+/* ======= Эффект стекла позади ======= */
 .background-glow {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 50% 50%, #1c1c1c, #000);
+  backdrop-filter: blur(8px) brightness(0.9);
+  -webkit-backdrop-filter: blur(8px) brightness(0.9);
   z-index: 0;
 }
 
@@ -42,13 +42,15 @@ html, body {
   position: absolute;
   top: 130px;
   left: 20px;
-  background: #333;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px) saturate(160%);
+  -webkit-backdrop-filter: blur(8px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 20px;
   padding: 6px 16px;
   display: flex;
   align-items: center;
   font-size: 14px;
-  cursor: default;
   z-index: 10;
 }
 
@@ -76,7 +78,6 @@ html, body {
   font-size: 12px;
   cursor: pointer;
   font-family: 'AntonSC', sans-serif;
-  transition: 0.3s ease;
 }
 
 /* ======= Лого ======= */
@@ -108,7 +109,9 @@ html, body {
   padding: 8px 16px;
   border-radius: 20px;
   border: none;
-  background: #333;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   color: #fff;
   font-size: 14px;
   text-align: center;
@@ -117,7 +120,7 @@ html, body {
 }
 
 .amount-input input::placeholder {
-  color: #888;
+  color: #ccc;
 }
 
 /* ======= Кнопка PLAY ======= */
@@ -138,7 +141,6 @@ html, body {
   cursor: pointer;
   font-family: 'AntonSC', sans-serif;
   letter-spacing: 8px;
-  transition: 0.3s ease;
   z-index: 10;
 }
 
@@ -194,7 +196,10 @@ html, body {
   bottom: calc(env(safe-area-inset-bottom, 20px) + 50px);
   left: 50%;
   transform: translateX(-50%);
-  background: #333;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 16px;
   padding: 10px 16px;
   font-size: 14px;
