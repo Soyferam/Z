@@ -2,13 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>ZmeiFi Menu</title>
+
+  <!-- Подключаем шрифт -->
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <!-- Подключаем Telegram WebApp SDK -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <!-- Встроенный CSS -->
   <style>
+    /* Базовые стили для всего документа */
     html, body {
       margin: 0;
       padding: 0;
@@ -22,38 +30,21 @@
       overflow: hidden;
     }
 
+    /* Контейнер — вертикальный стек */
     body {
       display: flex;
       flex-direction: column;
-      /* space-between можно оставить, но с отступами ниже скорректируем */
       justify-content: flex-start;
       padding-top: env(safe-area-inset-top, 20px);
       padding-bottom: env(safe-area-inset-bottom, 20px);
-      gap: 10px;
+      gap: 10px; /* расстояние между блоками */
       height: 100vh;
     }
 
-    /* Логотип с змеёй сверху */
-    .logo {
-      margin: 20px auto 15px;
-      max-width: 250px;
-      flex-shrink: 0;
-    }
-
-    /* Убираем заголовок h1 - удалён из HTML */
-
-    .amount {
-      margin: 0 auto 10px;
-      padding: 8px 16px;
-      background: #333;
-      border-radius: 20px;
-      display: inline-block;
-      font-size: 14px;
-      flex-shrink: 0;
-    }
-
+    /* Кнопка PLAY (перемещена вверх) */
     .btn-play {
-      margin: 0 auto 10px;
+      margin-top: 10px;        /* отступ сверху */
+      margin-bottom: 5px;      /* отступ снизу */
       background: #00FF00;
       color: #000;
       padding: 16px 40px;
@@ -65,11 +56,30 @@
       flex-shrink: 0;
     }
 
+    /* Логотип змеи */
+    .logo {
+      margin: 5px auto 15px; /* отступы сверху/снизу */
+      max-width: 250px;
+      flex-shrink: 0;
+    }
+
+    /* Отображение текущего баланса */
+    .amount {
+      margin: 0 auto 10px;
+      padding: 8px 16px;
+      background: #333;
+      border-radius: 20px;
+      display: inline-block;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    /* Кнопки в меню */
     .menu-buttons {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 12px; /* расстояние между кнопками */
       margin-bottom: 15px;
       flex-shrink: 0;
     }
@@ -85,6 +95,7 @@
       cursor: pointer;
     }
 
+    /* Маленький кружок-уведомление */
     .menu-buttons .notification::after {
       content: "1";
       position: absolute;
@@ -101,7 +112,7 @@
       justify-content: center;
     }
 
-    /* Перемещаем wallet внизу */
+    /* Блок с кошельком внизу */
     .wallet {
       display: flex;
       justify-content: space-between;
@@ -141,6 +152,7 @@
       flex-shrink: 0;
     }
 
+    /* Блок с прибылью */
     .profit-box {
       background: #333;
       border-radius: 16px;
@@ -159,13 +171,18 @@
     }
   </style>
 </head>
+
 <body>
-  <img src="./bg/snake-logo.png" alt="ZmeiFi Logo" class="logo" />
-
-  <div class="amount">AMOUNT&nbsp;&nbsp;0.0&nbsp;&nbsp;TON</div>
-
+  <!-- Кнопка PLAY теперь первая -->
   <button class="btn-play">PLAY</button>
 
+  <!-- Логотип -->
+  <img src="./bg/snake-logo.png" alt="ZmeiFi Logo" class="logo" />
+
+  <!-- Баланс TON -->
+  <div class="amount">AMOUNT&nbsp;&nbsp;0.0&nbsp;&nbsp;TON</div>
+
+  <!-- Кнопки: Guide, Rewards, Leaderboard, Portfolio -->
   <div class="menu-buttons">
     <button>GUIDE</button>
     <button class="notification">REWARDS</button>
@@ -173,6 +190,7 @@
     <button>PORTFOLIO</button>
   </div>
 
+  <!-- Кошелёк с TON -->
   <div class="wallet">
     <div class="wallet-left">
       <img src="./bg/logo.png" alt="TON" />
@@ -183,12 +201,14 @@
     </div>
   </div>
 
+  <!-- Профит и токены -->
   <div class="profit-box">
     Profit: <span style="color: #00FF00">50$ (20%)</span><br/>
     Tokens: <span style="color: #00FF00">2937 ⚡</span>
     <span class="share-btn">🔗</span>
   </div>
 
+  <!-- Telegram WebApp API -->
   <script>
     window.addEventListener("DOMContentLoaded", () => {
       const tg = window.Telegram?.WebApp;
