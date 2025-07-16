@@ -10,16 +10,31 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: 'Press Start 2P', monospace;
-  background-color: #000;
-  background-image: radial-gradient(#fff 1px, transparent 1px);
-  background-size: 20px 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+  background-image: 
+    url('./bg/noise.png'),  /* добавь сюда png шум или градиент */
+    radial-gradient(#fff 1px, transparent 1px);
+  background-size: cover, 20px 20px;
+  background-position: center;
+  background-repeat: repeat;
   color: #fff;
   text-align: center;
   height: 100%;
   overscroll-behavior: none;
   touch-action: none;
   position: relative;
-  /* overflow: hidden; */ /* оставлено закомментированным */
+  z-index: 0;
+}
+
+/* ======= Фоновый контейнер (для стеклянного эффекта) ======= */
+.background-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, #1c1c1c, #000);
+  z-index: 0;
 }
 
 /* ======= Кошелёк ======= */
@@ -34,6 +49,7 @@ html, body {
   align-items: center;
   font-size: 14px;
   cursor: default;
+  z-index: 10;
 }
 
 .wallet-left img {
@@ -45,26 +61,22 @@ html, body {
   position: absolute;
   top: 130px;
   right: 20px;
+  z-index: 10;
 }
 
 .wallet-right button {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   color: #fff;
   border-radius: 20px;
   padding: 8px 20px;
   font-size: 12px;
   cursor: pointer;
   font-family: 'AntonSC', sans-serif;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-.wallet-right button:hover {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.5);
+  transition: 0.3s ease;
 }
 
 /* ======= Лого ======= */
@@ -75,6 +87,7 @@ html, body {
   transform: translateX(-50%);
   max-width: 320px;
   cursor: default;
+  z-index: 10;
 }
 
 /* ======= Ввод TON ======= */
@@ -85,6 +98,7 @@ html, body {
   transform: translateX(-50%);
   width: auto;
   text-align: center;
+  z-index: 10;
 }
 
 .amount-input input {
@@ -112,25 +126,20 @@ html, body {
   top: 550px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   color: #fff;
   border-radius: 50px;
   padding: 10px 70px;
   font-size: 46px;
   cursor: pointer;
-  display: block;
   font-family: 'AntonSC', sans-serif;
   letter-spacing: 8px;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-.btn-play:hover {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.5);
+  transition: 0.3s ease;
+  z-index: 10;
 }
 
 /* ======= Кнопки меню ======= */
@@ -139,27 +148,24 @@ html, body {
   width: 320px;
   height: auto;
   margin: 0 auto;
+  z-index: 10;
 }
 
 .menu-buttons button {
   position: absolute;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   color: #fff;
   padding: 12px 20px;
   border-radius: 24px;
   font-size: 16px;
   cursor: pointer;
   font-family: 'AntonSC', sans-serif;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-.menu-buttons button:hover {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.5);
+  transition: 0.3s ease;
+  z-index: 10;
 }
 
 .menu-buttons button:nth-child(1) {
@@ -199,9 +205,9 @@ html, body {
   gap: 20px;
   white-space: nowrap;
   max-width: 95%;
-  z-index: 1000;
   min-width: 280px;
   box-sizing: border-box;
+  z-index: 1000;
 }
 
 .profit-text {
