@@ -2,99 +2,143 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <title>ZmeiFi Menu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ZmeiFi MiniApp Motion</title>
+  <style>
+    body {
+      font-family: 'Press Start 2P', monospace;
+      background: #000;
+      color: white;
+      margin: 0; padding: 0;
+      overflow-x: hidden;
+      text-align: center;
+      user-select: none;
+      height: 100vh;
+      position: relative;
+    }
 
-  <!-- Шрифты -->
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+    /* Кнопка включения гироскопа */
+    #enableMotionBtn {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 12px;
+      background: rgba(255 255 255 / 0.1);
+      border: 1px solid rgba(255 255 255 / 0.3);
+      color: white;
+      cursor: pointer;
+      z-index: 9999;
+      user-select: none;
+    }
 
-  <!-- Telegram SDK -->
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    /* Контейнер, который будем двигать */
+    #appContainer {
+      position: relative;
+      margin-top: 150px;
+      transition: transform 0.1s ease-out;
+    }
 
-  <!-- TonConnect UI SDK -->
-  <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+    /* Пример элементов */
+    .wallet-left, .wallet-right, .logo, .amount-input, .btn-play, .menu-buttons, .profit-box {
+      margin: 16px auto;
+      max-width: 320px;
+      background: rgba(255 255 255 / 0.1);
+      border-radius: 16px;
+      padding: 12px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 0 10px rgba(255 255 255 / 0.15);
+      font-family: 'AntonSC', sans-serif;
+      color: white;
+      user-select: none;
+    }
+
+    .btn-play {
+      font-size: 36px;
+      padding: 20px;
+      cursor: pointer;
+    }
+  </style>
 </head>
-
 <body>
-  <div class="background-glow"></div>
 
-  <!-- 💳 Кошелёк -->
-  <div class="wallet">
-    <div class="wallet-left">
-      <img src="./bg/logo.png" alt="TON" />
-      106.05
+  <!-- Кнопка для разрешения доступа к гироскопу -->
+  <button id="enableMotionBtn">Включить эффект движения</button>
+
+  <!-- Всё, что хотим двигать -->
+  <div id="appContainer">
+    <div class="wallet-left">Wallet Left: 106.05 TON</div>
+    <div class="wallet-right">Wallet Right (Кнопка)</div>
+    <div class="logo">ZmeiFi Logo</div>
+
+    <div class="amount-input">
+      <input type="number" placeholder="Enter TON amount" />
     </div>
-    <div class="wallet-right">
-      <div id="ton-connect"></div>
+
+    <button class="btn-play">PLAY</button>
+
+    <div class="menu-buttons">
+      <button>GUIDE</button>
+      <button>REWARDS</button>
+      <button>LEADERBOARD</button>
+      <button>WITHDRAW</button>
     </div>
-  </div>
 
-  <!-- 🐍 Лого игры -->
-  <img src="./bg/snake-logo.png" alt="ZmeiFi Logo" class="logo" />
-
-  <!-- 💰 Ввод суммы TON -->
-  <div class="amount-input">
-    <input
-      type="number"
-      inputmode="decimal"
-      step="0.01"
-      min="0"
-      placeholder="Enter TON amount"
-      id="depositInput"
-    />
-  </div>
-
-  <!-- ▶️ Играть -->
-  <button class="btn-play" id="playBtn">PLAY</button>
-
-  <!-- 📋 Кнопки меню -->
-  <div class="menu-buttons">
-    <button>GUIDE</button>
-    <button class="notification">REWARDS</button>
-    <button>LEADERBOARD</button>
-    <button>WITHDRAW</button>
-  </div>
-
-  <!-- 📈 Прибыль -->
-  <div class="profit-box" id="profitBox">
-    <div class="profit-text">
-      <div>Profit: <span style="color: #00FF00">50$ (20%)</span></div>
-      <div>Tokens: <span style="color: #00FF00">2937 ⚡</span></div>
-    </div>
-    <div class="share-btn">
-      🔗
-      <small>SHARE</small>
+    <div class="profit-box">
+      Profit: 50$ (20%) | Tokens: 2937 ⚡
     </div>
   </div>
 
   <script>
-    window.addEventListener("DOMContentLoaded", () => {
-      const tg = window.Telegram?.WebApp;
-      if (tg) {
-        tg.ready();
-        tg.expand();
-        tg.requestFullscreen?.();
-        document.body.style.overflow = 'hidden';
+    const enableMotionBtn = document.getElementById('enableMotionBtn');
+    const appContainer = document.getElementById('appContainer');
+
+    function handleOrientation(event) {
+      // event.gamma = left-right tilt (-90 to 90)
+      // event.beta = front-back tilt (-180 to 180)
+
+      let maxShift = 15; // макс. смещение в пикселях
+
+      let x = event.gamma; // горизонтальное наклон
+      let y = event.beta;  // вертикальное наклон
+
+      // Ограничиваем значения (некоторые устройства могут выдавать больше)
+      if (x > 30) x = 30;
+      if (x < -30) x = -30;
+      if (y > 30) y = 30;
+      if (y < -30) y = -30;
+
+      // Переводим наклоны в смещение по осям
+      let translateX = (x / 30) * maxShift;
+      let translateY = (y / 30) * maxShift;
+
+      // Применяем трансформацию к контейнеру
+      appContainer.style.transform = `translate(${translateX}px, ${translateY}px)`;
+    }
+
+    enableMotionBtn.addEventListener('click', () => {
+      // iOS требует запросить разрешение
+      if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+        DeviceOrientationEvent.requestPermission()
+          .then(permissionState => {
+            if (permissionState === 'granted') {
+              window.addEventListener('deviceorientation', handleOrientation);
+              enableMotionBtn.style.display = 'none';
+            } else {
+              alert('Разрешение на доступ к датчикам отклонено');
+            }
+          })
+          .catch(console.error);
+      } else {
+        // Другие устройства — сразу подключаем
+        window.addEventListener('deviceorientation', handleOrientation);
+        enableMotionBtn.style.display = 'none';
       }
-
-      const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-        manifestUrl: 'https://z-ten-iota.vercel.app/tonconnect-manifest.json',
-        buttonRootId: 'ton-connect',
-      });
-
-      document.getElementById('playBtn').addEventListener('click', () => {
-        const amount = parseFloat(document.getElementById('depositInput').value);
-        if (isNaN(amount) || amount <= 0) {
-          alert("Please enter a valid TON amount.");
-          return;
-        }
-        sessionStorage.setItem("depositAmount", amount);
-        window.location.href = "game.html";
-      });
     });
   </script>
+
 </body>
 </html>
