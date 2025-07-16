@@ -40,7 +40,7 @@ html, body {
 /* Можно двигать через top и right */
 .wallet-right {
   position: absolute;
-  top: 110px;      /* Сдвиг сверху */
+  top: 130px;      /* Сдвиг сверху */
   right: 20px;    /* Сдвиг справа */
 }
 
