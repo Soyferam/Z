@@ -1,77 +1,203 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="globals.css" />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="iphone-pro-max">
-      <div class="div">
-        <img class="group" src="img/group-235.png" />
-        <div class="overlap-group-wrapper">
-          <div class="overlap-group">
-            <div class="rectangle"></div>
-            <div class="text-wrapper">PLAY</div>
-          </div>
-        </div>
-        <div class="overlap-wrapper">
-          <div class="overlap">
-            <div class="rectangle-2"></div>
-            <div class="rectangle-3"></div>
-            <div class="text-wrapper-2">1</div>
-            <div class="text-wrapper-3">REWARDS</div>
-          </div>
-        </div>
-        <div class="div-wrapper">
-          <div class="overlap-2">
-            <div class="rectangle-4"></div>
-            <div class="text-wrapper-4">leaderboard</div>
-          </div>
-        </div>
-        <div class="overlap-3">
-          <div class="rectangle-5"></div>
-          <div class="text-wrapper-5">̬</div>
-          <div class="text-wrapper-6">106.05</div>
-          <img class="ton-symbol" src="img/ton-symbol-1.png" />
-          <img class="mask-group" src="img/mask-group-2.png" />
-        </div>
-        <div class="overlap-4"><div class="text-wrapper-7">Deposit</div></div>
-        <div class="overlap-5">
-          <div class="text-wrapper-8">0.0</div>
-          <div class="text-wrapper-9">TON</div>
-          <div class="text-wrapper-10">AMOUNT</div>
-        </div>
-        <div class="group-2">
-          <div class="overlap-6"><div class="text-wrapper-11">GUIDE</div></div>
-        </div>
-        <div class="overlap-7">
-          <div class="group-3">
-            <div class="overlap-8">
-              <p class="profit">
-                <span class="span"
-                  >Profit:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
-                >
-                <span class="text-wrapper-12">50$ (20%)</span>
-              </p>
-              <div class="overlap-group-2">
-                <p class="tokens">
-                  <span class="span"
-                    >Tokens:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
-                  >
-                  <span class="text-wrapper-12">2937</span>
-                </p>
-                <img class="img" src="img/image.png" />
-              </div>
-            </div>
-          </div>
-          <img class="mask-group-2" src="img/mask-group.png" />
-        </div>
-        <div class="group-4">
-          <div class="overlap-9"><div class="text-wrapper-13">PORTFOLIO</div></div>
-        </div>
-      </div>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>ZmeiFi Menu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Press Start 2P', sans-serif;
+      background-color: #000;
+      background-image: radial-gradient(#fff 1px, transparent 1px);
+      background-size: 20px 20px;
+      color: #fff;
+      text-align: center;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      /* space-between можно оставить, но с отступами ниже скорректируем */
+      justify-content: flex-start;
+      padding-top: env(safe-area-inset-top, 20px);
+      padding-bottom: env(safe-area-inset-bottom, 20px);
+      gap: 10px;
+      height: 100vh;
+    }
+
+    /* Логотип с змеёй сверху */
+    .logo {
+      margin: 20px auto 15px;
+      max-width: 250px;
+      flex-shrink: 0;
+    }
+
+    /* Убираем заголовок h1 - удалён из HTML */
+
+    .amount {
+      margin: 0 auto 10px;
+      padding: 8px 16px;
+      background: #333;
+      border-radius: 20px;
+      display: inline-block;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .btn-play {
+      margin: 0 auto 10px;
+      background: #00FF00;
+      color: #000;
+      padding: 16px 40px;
+      font-size: 18px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      display: block;
+      flex-shrink: 0;
+    }
+
+    .menu-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 15px;
+      flex-shrink: 0;
+    }
+
+    .menu-buttons button {
+      background: #00FF00;
+      color: #000;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 24px;
+      font-size: 14px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .menu-buttons .notification::after {
+      content: "1";
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: red;
+      color: white;
+      border-radius: 50%;
+      font-size: 10px;
+      width: 16px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Перемещаем wallet внизу */
+    .wallet {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      background: #111;
+      border-radius: 20px;
+      margin: 0 auto;
+      max-width: 320px;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .wallet-left {
+      background: #333;
+      border-radius: 20px;
+      padding: 6px 16px;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      flex-grow: 1;
+      justify-content: center;
+    }
+
+    .wallet-left img {
+      width: 20px;
+      margin-right: 8px;
+    }
+
+    .wallet-right button {
+      background: #00FF00;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 20px;
+      font-size: 12px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .profit-box {
+      background: #333;
+      border-radius: 16px;
+      display: inline-block;
+      padding: 10px 16px;
+      margin: 0 auto 20px;
+      font-size: 14px;
+      max-width: 320px;
+      flex-shrink: 0;
+    }
+
+    .share-btn {
+      margin-left: 10px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <img src="./bg/snake-logo.png" alt="ZmeiFi Logo" class="logo" />
+
+  <div class="amount">AMOUNT&nbsp;&nbsp;0.0&nbsp;&nbsp;TON</div>
+
+  <button class="btn-play">PLAY</button>
+
+  <div class="menu-buttons">
+    <button>GUIDE</button>
+    <button class="notification">REWARDS</button>
+    <button>LEADERBOARD</button>
+    <button>PORTFOLIO</button>
+  </div>
+
+  <div class="wallet">
+    <div class="wallet-left">
+      <img src="./bg/logo.png" alt="TON" />
+      106.05
     </div>
-  </body>
+    <div class="wallet-right">
+      <button>Deposit</button>
+    </div>
+  </div>
+
+  <div class="profit-box">
+    Profit: <span style="color: #00FF00">50$ (20%)</span><br/>
+    Tokens: <span style="color: #00FF00">2937 ⚡</span>
+    <span class="share-btn">🔗</span>
+  </div>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      const tg = window.Telegram?.WebApp;
+      if (tg) {
+        tg.ready();
+        tg.expand();
+        tg.requestFullscreen?.();
+      }
+    });
+  </script>
+</body>
 </html>
