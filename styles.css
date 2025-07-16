@@ -176,7 +176,6 @@ html, body {
 }
 
 .profit-text {
-    position: fixed;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -184,7 +183,6 @@ html, body {
 }
 
 .share-btn {
-    position: fixed;
   font-size: 20px;
   cursor: pointer;
   user-select: none;
@@ -195,7 +193,6 @@ html, body {
 }
 
 .share-btn small {
-    position: fixed;
   font-size: 10px;
   color: #aaa;
   margin-top: 2px;
