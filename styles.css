@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'AntonSC';
+  src: url('./fonts/AntonSC-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* 📌 Общие стили */
 html, body {
   margin: 0;
@@ -9,18 +16,17 @@ html, body {
   color: #fff;
   text-align: center;
   height: 100%;
-  overflow: hidden; /* 🚫 Убираем скролл */
+  overflow: hidden;
   overscroll-behavior: none;
   touch-action: none;
-  position: relative; /* Для абсолютного позиционирования элементов */
+  position: relative;
 }
 
 /* ======= 1. Верхний баланс с иконкой ======= */
-/* Можно двигать через top и left */
 .wallet-left {
   position: absolute;
-  top: 90px;      /* Сдвиг сверху */
-  left: 20px;     /* Сдвиг слева */
+  top: 90px;
+  left: 20px;
   background: #333;
   border-radius: 20px;
   padding: 6px 16px;
@@ -30,34 +36,33 @@ html, body {
   cursor: default;
 }
 
-/* Баланс иконка */
 .wallet-left img {
   width: 20px;
   margin-right: 8px;
 }
 
 /* ======= 2. Кнопка Deposit ======= */
-/* Можно двигать через top и right */
 .wallet-right {
   position: absolute;
-  top: 130px;      /* Сдвиг сверху */
-  right: 20px;    /* Сдвиг справа */
+  top: 130px;
+  right: 20px;
 }
 
 .wallet-right button {
   background: #00FF00;
+  color: #fff; /* ⬅️ Белый текст */
   border: none;
   border-radius: 20px;
   padding: 8px 20px;
   font-size: 12px;
   cursor: pointer;
+  font-family: 'AntonSC', sans-serif; /* ⬅️ Новый шрифт */
 }
 
 /* ======= 3. Логотип игры ======= */
-/* Можно двигать через top и left/ right */
 .logo {
   position: absolute;
-  top: 150px;       /* Сдвиг сверху */
+  top: 160px;
   left: 50%;
   transform: translateX(-50%);
   max-width: 320px;
@@ -65,10 +70,9 @@ html, body {
 }
 
 /* ======= 4. Баланс TON ======= */
-/* Можно двигать через top и left/right */
 .amount {
   position: absolute;
-  top: 500px;      /* Сдвиг сверху */
+  top: 500px;
   left: 50%;
   transform: translateX(-50%);
   padding: 8px 16px;
@@ -80,84 +84,85 @@ html, body {
 }
 
 /* ======= 5. Кнопка PLAY ======= */
-/* Можно двигать через top и left/right */
 .btn-play {
   position: absolute;
-  top: 550px;     /* Сдвиг сверху */
+  top: 550px;
   left: 50%;
   transform: translateX(-50%);
   background: #00FF00;
-  color: #000;
-  padding: 16px 40px;
-  font-size: 36px;
+  color: #fff; /* ⬅️ Белый текст */
+  padding: 16px 70px;
+  font-size: 46px;
   border-radius: 50px;
   border: none;
   cursor: pointer;
   display: block;
+  font-family: 'AntonSC', sans-serif; /* ⬅️ Новый шрифт */
+  letter-spacing: 8px; /* 👈 Добавлено */
 }
 
+/* ======= 6. Кнопки меню ======= */
 .menu-buttons {
-  position: static; /* Чтобы контейнер не влиял на позиционирование */
-  width: 320px; /* Можно оставить или убрать */
-  height: auto; /* убрать фиксированную высоту */
-  margin: 0 auto; /* по центру */
+  position: static;
+  width: 320px;
+  height: auto;
+  margin: 0 auto;
 }
 
-/* Все кнопки абсолютные по body (т.к. у body position: relative) */
+/* Все кнопки меню: белый текст + шрифт Anton */
 .menu-buttons button {
   position: absolute;
   background: #00FF00;
-  color: #000;
+  color: #fff; /* ⬅️ Белый текст */
   border: none;
   padding: 12px 20px;
   border-radius: 24px;
   font-size: 14px;
   cursor: pointer;
+  font-family: 'AntonSC', sans-serif; /* ⬅️ Новый шрифт */
 }
 
-/* Каждой кнопке задаём отдельные координаты */
+/* Координаты кнопок меню */
 .menu-buttons button:nth-child(1) { /* GUIDE */
   top: 650px;
-  left: 20%; /* Пример */
+  left: 20%;
 }
 
 .menu-buttons button:nth-child(2) { /* REWARDS */
   top: 650px;
-  left: 50%; /* Пример */
+  left: 50%;
 }
 
 .menu-buttons button:nth-child(3) { /* LEADERBOARD */
   top: 705px;
-  left: 20%; /* Пример */
+  left: 20%;
 }
 
-.menu-buttons button:nth-child(4) { /* PORTFOLIO */
+.menu-buttons button:nth-child(4) { /* WITHDRAW */
   top: 705px;
-  left: 60%; /* Пример */
+  left: 60%;
 }
-
 
 /* 📈 Профит-бокс */
 .profit-box {
-  position: absolute;         /* Абсолютное позиционирование для свободного перемещения */
-  bottom: 20px;               /* Отступ от низа экрана (меняй для движения вверх/вниз) */
-  left: 50%;                 /* Центрируем по горизонтали */
-  transform: translateX(-50%); /* Смещаем влево на 50% ширины, чтобы точно центрировать */
-  background: #333;           /* Фон */
-  border-radius: 16px;        /* Скругление углов */
-  padding: 10px 16px;         /* Отступы внутри */
-  font-size: 14px;            /* Размер шрифта */
-  color: #fff;                /* Цвет текста */
-  display: inline-block;      /* Чтобы блок по размеру содержимого */
-  cursor: default;            /* Курсор по умолчанию */
-  user-select: none;          /* Запрет выделения текста мышкой */
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  border-radius: 16px;
+  padding: 10px 16px;
+  font-size: 14px;
+  color: #fff;
+  display: inline-block;
+  cursor: default;
+  user-select: none;
 }
 
-/* Иконка шаринга внутри блока прибыли */
 .share-btn {
-  margin-left: 10px;          /* Отступ слева от текста */
-  font-size: 20px;            /* Размер иконки */
-  cursor: pointer;            /* Курсор в виде руки (кликабельная) */
-  vertical-align: middle;     /* Вертикальное выравнивание по центру текста */
-  user-select: none;          /* Запрет выделения */
+  margin-left: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  vertical-align: middle;
+  user-select: none;
 }

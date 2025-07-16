@@ -7,10 +7,15 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>ZmeiFi Menu</title>
 
-  <!-- Шрифт в стиле ретро -->
+  <!-- Шрифт -->
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- Telegram SDK -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <!-- TonConnect UI SDK -->
+  <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
 </head>
 
 <body>
@@ -20,8 +25,10 @@
       <img src="./bg/logo.png" alt="TON" />
       106.05
     </div>
+
+    <!-- 🧩 Кнопка TonConnect -->
     <div class="wallet-right">
-      <button>Deposit</button>
+      <div id="ton-connect"></div>
     </div>
   </div>
 
@@ -50,7 +57,6 @@
   </div>
 
   <script>
-    // 🧠 Telegram WebApp SDK + запрет скролла
     window.addEventListener("DOMContentLoaded", () => {
       const tg = window.Telegram?.WebApp;
       if (tg) {
@@ -59,6 +65,12 @@
         tg.requestFullscreen?.();
         document.body.style.overflow = 'hidden';
       }
+
+      // ✅ Инициализация TonConnect UI
+      const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+        manifestUrl: 'https://z-ten-iota.vercel.app/tonconnect-manifest.json',
+        buttonRootId: 'ton-connect',
+      });
     });
   </script>
 </body>
