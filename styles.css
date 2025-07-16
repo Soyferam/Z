@@ -69,24 +69,26 @@ html, body {
   cursor: default;
 }
 
-/* ======= Новый блок ввода TON ======= */
+/* ======= 4. Ввод TON ======= */
 .amount-input {
   position: absolute;
   top: 500px;
   left: 50%;
   transform: translateX(-50%);
-  width: 80%;
+  width: auto;
   text-align: center;
 }
 
 .amount-input input {
-  width: 100%;
-  padding: 12px 20px;
+  width: auto;
+  min-width: 220px;
+  max-width: 300px;
+  padding: 8px 16px;
   border-radius: 20px;
   border: none;
   background: #333;
   color: #fff;
-  font-size: 16px;
+  font-size: 14px;
   text-align: center;
   font-family: 'AntonSC', sans-serif;
   outline: none;
@@ -96,13 +98,18 @@ html, body {
   color: #888;
 }
 
-/* ======= Кнопки быстрого выбора TON ======= */
+/* ======= 4.1 Быстрые кнопки (T9 над клавиатурой) ======= */
 .quick-ton-buttons {
-  margin-top: 10px;
+  position: fixed;
+  bottom: 300px; /* регулируется вручную для платформ */
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
   gap: 10px;
+  background: rgba(0,0,0,0.9);
+  padding: 6px 12px;
+  border-radius: 20px;
+  z-index: 999;
 }
 
 .quick-ton-buttons button {
@@ -160,7 +167,7 @@ html, body {
 }
 
 .menu-buttons button:nth-child(2) {
-    top: 660px;
+  top: 660px;
   left: 39%;
 }
 
@@ -174,10 +181,10 @@ html, body {
   left: 65%;
 }
 
-/* 📈 Профит-бокс */
+/* ======= 7. Профит-бокс (фиксированный) ======= */
 .profit-box {
-  position: absolute;
-  bottom: 40px;
+  position: fixed;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   background: #333;
@@ -191,10 +198,10 @@ html, body {
   gap: 20px;
   white-space: nowrap;
   max-width: 95%;
-  width: auto;
+  z-index: 1000;
 }
 
-/* 📦 Внутренний блок с текстом */
+/* ======= 8. Внутри профит-бокса ======= */
 .profit-text {
   display: flex;
   flex-direction: column;
@@ -202,7 +209,6 @@ html, body {
   gap: 4px;
 }
 
-/* 🔗 Кнопка SHARE */
 .share-btn {
   font-size: 20px;
   cursor: pointer;
