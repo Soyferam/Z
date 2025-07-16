@@ -69,18 +69,51 @@ html, body {
   cursor: default;
 }
 
-/* ======= 4. Баланс TON ======= */
-.amount {
+/* ======= Новый блок ввода TON ======= */
+.amount-input {
   position: absolute;
   top: 500px;
   left: 50%;
   transform: translateX(-50%);
-  padding: 8px 16px;
-  background: #333;
+  width: 80%;
+  text-align: center;
+}
+
+.amount-input input {
+  width: 100%;
+  padding: 12px 20px;
   border-radius: 20px;
-  display: inline-block;
+  border: none;
+  background: #333;
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+  font-family: 'AntonSC', sans-serif;
+  outline: none;
+}
+
+.amount-input input::placeholder {
+  color: #888;
+}
+
+/* ======= Кнопки быстрого выбора TON ======= */
+.quick-ton-buttons {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.quick-ton-buttons button {
+  background: #24C256;
+  border: none;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 16px;
   font-size: 14px;
-  cursor: default;
+  font-family: 'AntonSC', sans-serif;
+  cursor: pointer;
 }
 
 /* ======= 5. Кнопка PLAY ======= */
