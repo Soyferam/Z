@@ -18,21 +18,15 @@
   <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
 </head>
 
-
-
-
-
-
-
 <body>
-    <div class="background-glow"></div>
+  <div class="background-glow"></div>
+
   <!-- 💳 Кошелёк -->
   <div class="wallet">
     <div class="wallet-left">
       <img src="./bg/logo.png" alt="TON" />
       106.05
     </div>
-
     <div class="wallet-right">
       <div id="ton-connect"></div>
     </div>
@@ -91,7 +85,6 @@
         buttonRootId: 'ton-connect',
       });
 
-      // ▶️ PLAY кнопка
       document.getElementById('playBtn').addEventListener('click', () => {
         const amount = parseFloat(document.getElementById('depositInput').value);
         if (isNaN(amount) || amount <= 0) {
