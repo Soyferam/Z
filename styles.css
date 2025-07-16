@@ -25,7 +25,7 @@ html, body {
 /* ======= 1. Верхний баланс с иконкой ======= */
 .wallet-left {
   position: absolute;
-  top: 90px;
+  top: 130px;
   left: 20px;
   background: #333;
   border-radius: 20px;
@@ -50,13 +50,13 @@ html, body {
 
 .wallet-right button {
   background: #00FF00;
-  color: #fff; /* ⬅️ Белый текст */
+  color: #fff;
   border: none;
   border-radius: 20px;
   padding: 8px 20px;
   font-size: 12px;
   cursor: pointer;
-  font-family: 'AntonSC', sans-serif; /* ⬅️ Новый шрифт */
+  font-family: 'AntonSC', sans-serif;
 }
 
 /* ======= 3. Логотип игры ======= */
@@ -90,15 +90,15 @@ html, body {
   left: 50%;
   transform: translateX(-50%);
   background: #00FF00;
-  color: #fff; /* ⬅️ Белый текст */
-  padding: 16px 70px;
+  color: #fff;
+  padding: 10px 70px;
   font-size: 46px;
   border-radius: 50px;
   border: none;
   cursor: pointer;
   display: block;
-  font-family: 'AntonSC', sans-serif; /* ⬅️ Новый шрифт */
-  letter-spacing: 8px; /* 👈 Добавлено */
+  font-family: 'AntonSC', sans-serif;
+  letter-spacing: 8px;
 }
 
 /* ======= 6. Кнопки меню ======= */
@@ -109,44 +109,42 @@ html, body {
   margin: 0 auto;
 }
 
-/* Все кнопки меню: белый текст + шрифт Anton */
 .menu-buttons button {
   position: absolute;
-  background: #00FF00;
-  color: #fff; /* ⬅️ Белый текст */
+  background: #24C256;
+  color: #fff;
   border: none;
   padding: 12px 20px;
   border-radius: 24px;
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
-  font-family: 'AntonSC', sans-serif; /* ⬅️ Новый шрифт */
+  font-family: 'AntonSC', sans-serif;
 }
 
-/* Координаты кнопок меню */
-.menu-buttons button:nth-child(1) { /* GUIDE */
-  top: 650px;
-  left: 20%;
+.menu-buttons button:nth-child(1) {
+  top: 660px;
+  left: 17%;
 }
 
-.menu-buttons button:nth-child(2) { /* REWARDS */
-  top: 650px;
-  left: 50%;
+.menu-buttons button:nth-child(2) {
+    top: 660px;
+  left: 39%;
 }
 
-.menu-buttons button:nth-child(3) { /* LEADERBOARD */
-  top: 705px;
-  left: 20%;
+.menu-buttons button:nth-child(3) {
+  top: 720px;
+  left: 36%;
 }
 
-.menu-buttons button:nth-child(4) { /* WITHDRAW */
-  top: 705px;
-  left: 60%;
+.menu-buttons button:nth-child(4) {
+  top: 660px;
+  left: 65%;
 }
 
 /* 📈 Профит-бокс */
 .profit-box {
   position: absolute;
-  bottom: 20px;
+  bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
   background: #333;
@@ -154,15 +152,36 @@ html, body {
   padding: 10px 16px;
   font-size: 14px;
   color: #fff;
-  display: inline-block;
-  cursor: default;
-  user-select: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  white-space: nowrap;
+  max-width: 95%;
+  width: auto;
 }
 
+/* 📦 Внутренний блок с текстом */
+.profit-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+/* 🔗 Кнопка SHARE */
 .share-btn {
-  margin-left: 10px;
   font-size: 20px;
   cursor: pointer;
-  vertical-align: middle;
   user-select: none;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.share-btn small {
+  font-size: 10px;
+  color: #aaa;
+  margin-top: 2px;
 }
