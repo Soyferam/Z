@@ -7,6 +7,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>ZmeiFi Menu</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
     html, body {
       margin: 0;
@@ -150,7 +151,7 @@
 
   <img src="./bg/snake-logo.png" alt="ZmeiFi Logo" class="logo" />
 
- 
+  <h1>ZmeiFi</h1>
 
   <div class="amount">AMOUNT&nbsp;&nbsp;0.0&nbsp;&nbsp;TON</div>
 
@@ -168,5 +169,16 @@
     Tokens: <span style="color: #00FF00">2937 ⚡</span>
     <span class="share-btn">🔗</span>
   </div>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      const tg = window.Telegram?.WebApp;
+      if (tg) {
+        tg.ready();
+        tg.expand();
+        tg.requestFullscreen?.();
+      }
+    });
+  </script>
 </body>
 </html>
