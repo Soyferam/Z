@@ -174,22 +174,27 @@ html, body {
 
 .menu-buttons button:nth-child(1) {
   top: 660px;
-  left: 18%;
+  left: 15%;
 }
 
 .menu-buttons button:nth-child(2) {
   top: 660px;
-  left: 39%;
+  left: 38%;
 }
 
 .menu-buttons button:nth-child(3) {
   top: 720px;
-  left: 36%;
+  left: 20%;
 }
 
 .menu-buttons button:nth-child(4) {
   top: 660px;
   left: 65%;
+}
+
+.menu-buttons button:nth-child(5) {
+  top: 720px;
+  left: 55%;
 }
 
 /* ======= Профит-бокс (фиксированный) ======= */
