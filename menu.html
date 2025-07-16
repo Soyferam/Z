@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>ZmeiFi Menu</title>
+
+  <!-- Шрифт в стиле ретро -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+
+<body>
+  <!-- 💳 Кошелёк -->
+  <div class="wallet">
+    <div class="wallet-left">
+      <img src="./bg/logo.png" alt="TON" />
+      106.05
+    </div>
+    <div class="wallet-right">
+      <button>Deposit</button>
+    </div>
+  </div>
+
+  <!-- 🐍 Лого игры -->
+  <img src="./bg/snake-logo.png" alt="ZmeiFi Logo" class="logo" />
+
+  <!-- 💰 Баланс -->
+  <div class="amount">AMOUNT&nbsp;&nbsp;0.0&nbsp;&nbsp;TON</div>
+
+  <!-- ▶️ Играть -->
+  <button class="btn-play">PLAY</button>
+
+  <!-- 📋 Кнопки меню -->
+  <div class="menu-buttons">
+    <button>GUIDE</button>
+    <button class="notification">REWARDS</button>
+    <button>LEADERBOARD</button>
+    <button>PORTFOLIO</button>
+  </div>
+
+  <!-- 📈 Прибыль -->
+  <div class="profit-box">
+    Profit: <span style="color: #00FF00">50$ (20%)</span><br/>
+    Tokens: <span style="color: #00FF00">2937 ⚡</span>
+    <span class="share-btn">🔗</span>
+  </div>
+
+  <script>
+    // 🧠 Telegram WebApp SDK + запрет скролла
+    window.addEventListener("DOMContentLoaded", () => {
+      const tg = window.Telegram?.WebApp;
+      if (tg) {
+        tg.ready();
+        tg.expand();
+        tg.requestFullscreen?.();
+        document.body.style.overflow = 'hidden';
+      }
+    });
+  </script>
+</body>
+</html>
