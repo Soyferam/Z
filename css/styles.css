@@ -14,7 +14,8 @@
   font-style: normal;
 }
 
-/* 🌌 Общий фон, шум и "горошек" */
+/* Общие стили */
+
 html, body {
   height: 100%;
   margin: 0;
@@ -30,25 +31,31 @@ html, body {
   background-position: center;
   color: #fff;
   text-align: center;
-  overflow-y: auto; /* включаем скролл */
+
+  /* ключевой момент: */
+  overflow-y: auto; /* разрешаем скролл */
   overscroll-behavior: none;
-  touch-action: none;
+  touch-action: manipulation;
   position: relative;
-}
-
-/* Контейнер для содержимого */
-.wrapper {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* чтобы profit-box внизу */
   min-height: 100vh;
-  padding-bottom: 100px; /* Отступ для плашки */
-  box-sizing: border-box;
 }
 
-/* 💳 Левая кнопка баланса */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 0 20px 20px 20px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Все остальные элементы - позиционируем как было, но без абсолютов для меню */
+
 .wallet-left {
-  position: absolute;
-  top: 130px;
-  left: 20px;
+  margin-top: 130px;
   background: rgba(255,255,255,0.1);
   backdrop-filter: blur(12px) saturate(180%);
   -webkit-backdrop-filter: blur(12px) saturate(180%);
@@ -56,63 +63,42 @@ html, body {
   box-shadow: 0 4px 16px rgba(0,0,0,0.2);
   border-radius: 20px;
   padding: 8px 20px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   font-size: 12px;
   font-family: 'AntonSC', sans-serif;
   cursor: pointer;
-  z-index: 10;
+  width: fit-content;
+  user-select: none;
 }
 
 .wallet-left img {
   width: 20px;
   margin-right: 8px;
+}
+
+.wallet-right {
+  margin-top: 130px;
+  display: inline-block;
+  text-align: right;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.logo {
+  max-width: 320px;
+  margin: 20px auto;
   user-select: none;
 }
 
-/* 🔌 Правая кнопка подключения */
-.wallet-right {
-  position: absolute;
-  top: 130px;
-  right: 20px;
-  z-index: 10;
-}
-
-.wallet-right button {
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  border: 1px solid rgba(255,255,255,0.25);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-  border-radius: 20px;
-  padding: 8px 20px;
-  font-size: 12px;
-  font-family: 'AntonSC', sans-serif;
-  color: #fff;
-  cursor: pointer;
-}
-
-/* 🐍 Лого */
-.logo {
-  position: absolute;
-  top: 160px;
-  left: 50%;
-  transform: translateX(-50%);
-  max-width: 320px;
-  z-index: 10;
-}
-
-/* 💰 Ввод суммы */
 .amount-input {
-  position: absolute;
-  top: 500px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
+  margin-top: 80px;
+  text-align: center;
+  width: 100%;
 }
 
 .amount-input input {
-  min-width: 220px;
+  width: 100%;
   max-width: 300px;
   padding: 8px 16px;
   border-radius: 20px;
@@ -127,12 +113,9 @@ html, body {
   outline: none;
 }
 
-/* ▶️ PLAY */
 .btn-play {
-  position: absolute;
-  top: 550px;
-  left: 50%;
-  transform: translateX(-50%);
+  margin: 20px auto 40px auto;
+  display: block;
   background: rgba(255,255,255,0.1);
   backdrop-filter: blur(12px) saturate(180%);
   -webkit-backdrop-filter: blur(12px) saturate(180%);
@@ -145,45 +128,44 @@ html, body {
   letter-spacing: 8px;
   color: #fff;
   cursor: pointer;
-  z-index: 10;
+  width: fit-content;
+  user-select: none;
 }
 
-/* 📋 Меню-кнопки */
 .menu-buttons {
-  position: relative; /* исправлено для корректного позиционирования кнопок */
-  width: 320px;
-  margin: 0 auto;
-  height: 120px; /* задаём высоту, чтобы кнопки могли позиционироваться абсолютно внутри */
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto 40px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
 }
 
 .menu-buttons button {
-  position: absolute;
+  flex: 1 1 45%;
+  min-width: 120px;
   background: rgba(255,255,255,0.1);
   backdrop-filter: blur(12px) saturate(180%);
   -webkit-backdrop-filter: blur(12px) saturate(180%);
   border: 1px solid rgba(255,255,255,0.25);
   box-shadow: 0 4px 16px rgba(0,0,0,0.2);
   border-radius: 24px;
-  padding: 12px 20px;
+  padding: 12px 0;
   font-size: 16px;
   font-family: 'AntonSC', sans-serif;
   color: #fff;
   cursor: pointer;
+  user-select: none;
   transition: 0.3s ease;
 }
 
-.menu-buttons button:nth-child(1) { top: 20px; left: 15%; }
-.menu-buttons button:nth-child(2) { top: 20px; left: 38%; }
-.menu-buttons button:nth-child(3) { top: 80px; left: 20%; }
-.menu-buttons button:nth-child(4) { top: 20px; left: 65%; }
-.menu-buttons button:nth-child(5) { top: 80px; left: 55%; }
+.menu-buttons button.notification {
+  position: relative;
+}
 
-/* 📈 Плашка прибыли — абсолютная позиция внутри wrapper */
+/* Плашка профита внизу, как обычный блок в потоке */
 .profit-box {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(10px) saturate(180%);
   -webkit-backdrop-filter: blur(10px) saturate(180%);
@@ -198,9 +180,9 @@ html, body {
   min-width: 280px;
   max-width: 95%;
   box-sizing: border-box;
-  z-index: 100;
-  pointer-events: auto;
   font-family: 'Press Start 2P', monospace;
+  margin: 0 auto 20px auto;
+  user-select: none;
 }
 
 .profit-text {

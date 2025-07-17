@@ -1,20 +1,18 @@
 window.addEventListener("DOMContentLoaded", () => {
-  // Telegram WebApp
   const tg = window.Telegram?.WebApp;
   if (tg) {
     tg.ready();
     tg.expand();
     tg.requestFullscreen?.();
-    document.body.style.overflow = "hidden";
+    // не блокируем скролл body, чтобы клавиатура не ломала viewport
+    // document.body.style.overflow = "hidden"; 
   }
 
-  // TonConnect UI
   const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
     manifestUrl: "https://z-ten-iota.vercel.app/tonconnect-manifest.json",
     buttonRootId: "ton-connect",
   });
 
-  // PLAY button
   document.getElementById("playBtn").addEventListener("click", () => {
     const amount = parseFloat(document.getElementById("depositInput").value);
     if (isNaN(amount) || amount <= 0) {
@@ -25,24 +23,26 @@ window.addEventListener("DOMContentLoaded", () => {
     window.location.href = "game.html";
   });
 
-  // Menu buttons
   document.getElementById("btnGuide").addEventListener("click", () => {
     window.location.href = "guide.html";
   });
+
   document.getElementById("btnRewards").addEventListener("click", () => {
     alert("Rewards page not implemented yet.");
   });
+
   document.getElementById("btnLeaderboard").addEventListener("click", () => {
     window.location.href = "stats.html";
   });
+
   document.getElementById("btnWithdraw").addEventListener("click", () => {
     window.location.href = "withdraw.html";
   });
+
   document.getElementById("btnReferral").addEventListener("click", () => {
     alert("Referral page not implemented yet.");
   });
 
-  // Share button
   document.getElementById("shareBtn").addEventListener("click", () => {
     if (navigator.share) {
       navigator.share({
