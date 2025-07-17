@@ -14,6 +14,15 @@ window.addEventListener("DOMContentLoaded", () => {
     buttonRootId: "ton-connect",
   });
 
+  // Фиксируем высоту .wrapper на размер окна для предотвращения "прыжков"
+  function setWrapperHeight() {
+    const wrapper = document.querySelector(".wrapper");
+    wrapper.style.height = window.innerHeight + "px";
+  }
+  window.addEventListener("resize", setWrapperHeight);
+  window.addEventListener("orientationchange", setWrapperHeight);
+  setWrapperHeight();
+
   // Кнопка PLAY — проверка и переход на игру
   document.getElementById("playBtn").addEventListener("click", () => {
     const amount = parseFloat(document.getElementById("depositInput").value);
