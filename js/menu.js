@@ -1,57 +1,67 @@
 window.addEventListener("DOMContentLoaded", () => {
+  // Telegram WebApp
   const tg = window.Telegram?.WebApp;
   if (tg) {
     tg.ready();
     tg.expand();
     tg.requestFullscreen?.();
-    // не блокируем скролл body, чтобы клавиатура не ломала viewport
-    // document.body.style.overflow = "hidden"; 
+    document.body.style.overflow = "hidden";
   }
 
-  const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+  // TonConnect UI
+  new TON_CONNECT_UI.TonConnectUI({
     manifestUrl: "https://z-ten-iota.vercel.app/tonconnect-manifest.json",
     buttonRootId: "ton-connect",
   });
 
+  // PLAY
   document.getElementById("playBtn").addEventListener("click", () => {
-    const amount = parseFloat(document.getElementById("depositInput").value);
-    if (isNaN(amount) || amount <= 0) {
+    const amt = parseFloat(document.getElementById("depositInput").value);
+    if (isNaN(amt) || amt <= 0) {
       alert("Please enter a valid TON amount.");
       return;
     }
-    sessionStorage.setItem("depositAmount", amount);
+    sessionStorage.setItem("depositAmount", amt);
     window.location.href = "game.html";
   });
 
-  document.getElementById("btnGuide").addEventListener("click", () => {
-    window.location.href = "guide.html";
-  });
+  // Меню
+  document.getElementById("btnGuide").onclick = () => window.location.href = "guide.html";
+  document.getElementById("btnRewards").onclick = () => alert("Rewards not ready");
+  document.getElementById("btnLeaderboard").onclick = () => window.location.href = "stats.html";
+  document.getElementById("btnWithdraw").onclick = () => window.location.href = "withdraw.html";
+  document.getElementById("btnReferral").onclick = () => alert("Referral not ready");
 
-  document.getElementById("btnRewards").addEventListener("click", () => {
-    alert("Rewards page not implemented yet.");
-  });
-
-  document.getElementById("btnLeaderboard").addEventListener("click", () => {
-    window.location.href = "stats.html";
-  });
-
-  document.getElementById("btnWithdraw").addEventListener("click", () => {
-    window.location.href = "withdraw.html";
-  });
-
-  document.getElementById("btnReferral").addEventListener("click", () => {
-    alert("Referral page not implemented yet.");
-  });
-
+  // Share
   document.getElementById("shareBtn").addEventListener("click", () => {
     if (navigator.share) {
       navigator.share({
         title: "ZmeiFi Game",
         text: "Check out ZmeiFi — awesome TON game!",
-        url: window.location.href,
-      }).catch(err => console.error("Share failed:", err));
+        url: location.href,
+      }).catch(console.error);
     } else {
-      alert("Your browser does not support the Share API.");
+      alert("Share API not supported");
     }
   });
+
+  // Подстройка плашки под клавиатуру
+  const profitBox = document.getElementById("profitBox");
+  function adjust() {
+    if (window.visualViewport) {
+      const vh = window.visualViewport.height;
+      const total = window.innerHeight;
+      const offset = total - (vh + window.visualViewport.offsetTop);
+      profitBox.style.bottom = `${offset > 20 ? offset : 20}px`;
+    } else {
+      profitBox.style.bottom = "20px";
+    }
+  }
+  adjust();
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", adjust);
+    window.visualViewport.addEventListener("scroll", adjust);
+  } else {
+    window.addEventListener("resize", adjust);
+  }
 });

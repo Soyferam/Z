@@ -2,35 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>ZmeiFi Menu</title>
 
+  <!-- Локальные стили -->
   <link rel="stylesheet" href="./css/styles.css" />
+
+  <!-- Telegram SDK -->
   <script src="https://telegram.org/js/telegram-web-app.js" defer></script>
+  <!-- TonConnect UI SDK -->
   <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js" defer></script>
+  <!-- Меню-скрипт -->
   <script src="./js/menu.js" defer></script>
 </head>
 <body>
   <div class="wrapper">
     <div class="background-glow"></div>
 
-    <!-- Кошелёк -->
-    <div class="wallet">
-      <div class="wallet-left">
-        <img src="./img/logo.png" alt="TON" />
-        106.05
-      </div>
-      <div class="wallet-right">
-        <div id="ton-connect"></div>
-      </div>
+    <!-- 💳 Левый кошелёк -->
+    <div class="wallet-left">
+      <img src="./img/logo.png" alt="TON" />
+      106.05
     </div>
 
-    <!-- Лого -->
+    <!-- 🔌 Правый кошелёк -->
+    <div class="wallet-right">
+      <div id="ton-connect"></div>
+    </div>
+
+    <!-- 🐍 Лого -->
     <img src="./img/snake-logo.png" alt="ZmeiFi Logo" class="logo" />
 
-    <!-- Ввод TON -->
+    <!-- 💰 Ввод суммы -->
     <div class="amount-input">
       <input
         type="number"
@@ -42,20 +48,20 @@
       />
     </div>
 
-    <!-- PLAY -->
+    <!-- ▶️ PLAY -->
     <button class="btn-play" id="playBtn">PLAY</button>
 
-    <!-- Меню кнопки -->
+    <!-- 📋 Меню-кнопки -->
     <div class="menu-buttons">
       <button id="btnGuide">GUIDE</button>
-      <button id="btnRewards" class="notification">REWARDS</button>
+      <button id="btnRewards">REWARDS</button>
       <button id="btnLeaderboard">LEADERBOARD</button>
       <button id="btnWithdraw">WITHDRAW</button>
       <button id="btnReferral">REFERRAL</button>
     </div>
 
-    <!-- Плашка профита — теперь в потоке -->
-    <div class="profit-box">
+    <!-- 📈 Плашка прибыли -->
+    <div class="profit-box" id="profitBox">
       <div class="profit-text">
         <div class="profit-line">
           Profit: <span class="profit-amount">50$</span>
