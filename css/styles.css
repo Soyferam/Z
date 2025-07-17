@@ -1,6 +1,14 @@
 @font-face {
   font-family: 'AntonSC';
-  src: url('./fonts/AntonSC-Regular.ttf') format('truetype');
+  src: url('../fonts/AntonSC-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Press Start 2P';
+  src: url('../fonts/PressStart2P-Regular.woff2') format('woff2'),
+       url('../fonts/PressStart2P-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -205,10 +213,18 @@ html, body {
   left: 55%;
 }
 
-/* 📈 Профит-бокс */
+.profit-wrapper {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  z-index: 1000;
+}
+
 .profit-box {
-  position: fixed;
-  bottom: env(safe-area-inset-bottom, 20px); /* Убрал + 50px, чтобы не поднимался при открытии клавиатуры */
+  position: sticky;
+  bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(255, 255, 255, 0.08);
@@ -227,7 +243,7 @@ html, body {
   max-width: 95%;
   min-width: 280px;
   box-sizing: border-box;
-  z-index: 1000;
+  /* убрал z-index из-за sticky */
 }
 
 .profit-text {
