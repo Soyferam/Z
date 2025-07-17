@@ -188,7 +188,7 @@ html, body {
 
 /* 💰 Бокс с профитом */
 .profit-box {
-  position: fixed; /* назад на fixed */
+  position: absolute;
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
@@ -206,10 +206,11 @@ html, body {
   min-width: 280px;
   max-width: 95%;
   box-sizing: border-box;
-  z-index: 1000;
+  z-index: 100;
   pointer-events: auto;
   font-family: 'Press Start 2P', monospace;
 }
+
 .profit-text {
   display: flex;
   flex-direction: column;

@@ -20,60 +20,61 @@
 </head>
 
 <body>
-  <div class="wrapper"></div>
-  <div class="background-glow"></div>
+  <div class="wrapper">
+    <div class="background-glow"></div>
 
-  <!-- 💳 Кошелёк -->
-  <div class="wallet">
-    <div class="wallet-left">
-      <img src="./img/logo.png" alt="TON" />
-      106.05
-    </div>
-    <div class="wallet-right">
-      <div id="ton-connect"></div>
-    </div>
-  </div>
-
-  <!-- 🐍 Лого -->
-  <img src="./img/snake-logo.png" alt="ZmeiFi Logo" class="logo" />
-
-  <!-- 💰 Ввод TON -->
-  <div class="amount-input">
-    <input
-      type="number"
-      inputmode="decimal"
-      step="0.01"
-      min="0"
-      placeholder="Enter TON amount"
-      id="depositInput"
-    />
-  </div>
-
-  <!-- ▶️ PLAY -->
-  <button class="btn-play" id="playBtn">PLAY</button>
-
-  <!-- 📋 Кнопки меню -->
-  <div class="menu-buttons">
-    <button id="btnGuide">GUIDE</button>
-    <button id="btnRewards" class="notification">REWARDS</button>
-    <button id="btnLeaderboard">LEADERBOARD</button>
-    <button id="btnWithdraw">WITHDRAW</button>
-    <button id="btnReferral">REFFERAL</button>
-  </div>
-
-  <!-- 📈 Профит -->
-  <div class="profit-box">
-    <div class="profit-text">
-      <div class="profit-line">
-        Profit: <span class="profit-amount">50$</span>
-        <span class="profit-percent">(20%)</span>
+    <!-- 💳 Кошелёк -->
+    <div class="wallet">
+      <div class="wallet-left">
+        <img src="./img/logo.png" alt="TON" />
+        106.05
       </div>
-      <div class="tokens-line">
-        Tokens: <span class="token-amount">2937</span><span class="token-icon">⚡</span>
+      <div class="wallet-right">
+        <div id="ton-connect"></div>
       </div>
     </div>
-    <div class="share-btn">
-      🔄 <small>Share</small>
+
+    <!-- 🐍 Лого -->
+    <img src="./img/snake-logo.png" alt="ZmeiFi Logo" class="logo" />
+
+    <!-- 💰 Ввод TON -->
+    <div class="amount-input">
+      <input
+        type="number"
+        inputmode="decimal"
+        step="0.01"
+        min="0"
+        placeholder="Enter TON amount"
+        id="depositInput"
+      />
+    </div>
+
+    <!-- ▶️ PLAY -->
+    <button class="btn-play" id="playBtn">PLAY</button>
+
+    <!-- 📋 Кнопки меню -->
+    <div class="menu-buttons">
+      <button id="btnGuide">GUIDE</button>
+      <button id="btnRewards" class="notification">REWARDS</button>
+      <button id="btnLeaderboard">LEADERBOARD</button>
+      <button id="btnWithdraw">WITHDRAW</button>
+      <button id="btnReferral">REFERRAL</button>
+    </div>
+
+    <!-- 📈 Профит -->
+    <div class="profit-box" id="shareBtn">
+      <div class="profit-text">
+        <div class="profit-line">
+          Profit: <span class="profit-amount">50$</span>
+          <span class="profit-percent">(20%)</span>
+        </div>
+        <div class="tokens-line">
+          Tokens: <span class="token-amount">2937</span><span class="token-icon">⚡</span>
+        </div>
+      </div>
+      <div class="share-btn">
+        🔄 <small>Share</small>
+      </div>
     </div>
   </div>
 </body>

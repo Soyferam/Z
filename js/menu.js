@@ -8,7 +8,7 @@ window.addEventListener("DOMContentLoaded", () => {
     document.body.style.overflow = "hidden";
   }
 
-  // TonConnect UI инициализация
+  // TonConnect UI
   const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
     manifestUrl: "https://z-ten-iota.vercel.app/tonconnect-manifest.json",
     buttonRootId: "ton-connect",
@@ -25,13 +25,13 @@ window.addEventListener("DOMContentLoaded", () => {
     window.location.href = "game.html";
   });
 
-  // Обработчики кнопок меню (пример — можно адаптировать под свои страницы)
+  // Кнопки меню
   document.getElementById("btnGuide").addEventListener("click", () => {
     window.location.href = "guide.html";
   });
 
   document.getElementById("btnRewards").addEventListener("click", () => {
-    alert("Rewards page not implemented yet."); // или window.location.href = "rewards.html";
+    alert("Rewards page not implemented yet.");
   });
 
   document.getElementById("btnLeaderboard").addEventListener("click", () => {
@@ -46,7 +46,7 @@ window.addEventListener("DOMContentLoaded", () => {
     alert("Referral page not implemented yet.");
   });
 
-  // Кнопка SHARE
+  // Кнопка Share
   document.getElementById("shareBtn").addEventListener("click", () => {
     if (navigator.share) {
       navigator
