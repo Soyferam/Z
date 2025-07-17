@@ -29,10 +29,11 @@ html, body {
   background-position: center;
   color: #fff;
   text-align: center;
-  height: 100%;
+  height: auto;
   overscroll-behavior: none;
   touch-action: none;
   position: relative;
+  min-height: 100vh;
 }
 
 /* 💡 Фоновой эффект */
@@ -146,47 +147,40 @@ html, body {
   z-index: 10;
 }
 
-/* 📋 Меню-кнопки */
+/* 📋 Меню-кнопки через flex */
 .menu-buttons {
-  position: relative; /* поменял с static на relative */
-  width: 320px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  max-width: 320px;
   margin: 0 auto;
-  height: 100px; /* чтобы вместить кнопки */
+  padding-top: 20px;
+  position: relative;
 }
+
 .menu-buttons button {
-  position: absolute;
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  border: 1px solid rgba(255,255,255,0.25);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  flex: 1 1 45%;
+  min-width: 130px;
   border-radius: 24px;
   padding: 12px 20px;
   font-size: 16px;
   font-family: 'AntonSC', sans-serif;
   color: #fff;
   cursor: pointer;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.25);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
   transition: 0.3s ease;
-}
-.menu-buttons button:nth-child(1) { top: 0; left: 15%; }
-.menu-buttons button:nth-child(2) { top: 0; left: 38%; }
-.menu-buttons button:nth-child(3) { top: 50px; left: 20%; }
-.menu-buttons button:nth-child(4) { top: 0; left: 65%; }
-.menu-buttons button:nth-child(5) { top: 50px; left: 55%; }
-
-/* ✅ Контейнер для абсолютного позиционирования */
-.wrapper {
-  position: relative;
-  height: auto; /* Убрали height: 100vh */
-  min-height: 100vh; /* Заменили на min-height, чтобы не прыгало */
-  width: 100%;
-  /* overflow: hidden; - оставляем как есть */
+  position: static;
 }
 
-/* 💰 Бокс с профитом */
+/* 📈 Плашка прибыли — fixed и не прыгает */
 .profit-box {
-  position: absolute; /* абсолютное позиционирование */
-  bottom: 20px;
+  position: fixed;
+  bottom: env(safe-area-inset-bottom, 20px);
   left: 50%;
   transform: translateX(-50%);
   background: rgba(255,255,255,0.08);
@@ -213,6 +207,7 @@ html, body {
   flex-direction: column;
   gap: 4px;
   align-items: flex-start;
+  font-family: 'Press Start 2P', monospace;
 }
 
 .profit-line, .tokens-line {
@@ -240,6 +235,7 @@ html, body {
   cursor: pointer;
   user-select: none;
 }
+
 .share-btn small {
   font-size: 10px;
   color: #aaa;

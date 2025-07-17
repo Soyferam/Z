@@ -14,16 +14,7 @@ window.addEventListener("DOMContentLoaded", () => {
     buttonRootId: "ton-connect",
   });
 
-  // Фиксируем высоту .wrapper на размер окна для предотвращения "прыжков"
-  function setWrapperHeight() {
-    const wrapper = document.querySelector(".wrapper");
-    wrapper.style.height = window.innerHeight + "px";
-  }
-  window.addEventListener("resize", setWrapperHeight);
-  window.addEventListener("orientationchange", setWrapperHeight);
-  setWrapperHeight();
-
-  // Кнопка PLAY — проверка и переход на игру
+  // Поддержка кнопки PLAY
   document.getElementById("playBtn").addEventListener("click", () => {
     const amount = parseFloat(document.getElementById("depositInput").value);
     if (isNaN(amount) || amount <= 0) {
@@ -34,28 +25,24 @@ window.addEventListener("DOMContentLoaded", () => {
     window.location.href = "game.html";
   });
 
-  // Кнопки меню
+  // Меню кнопки
   document.getElementById("btnGuide").addEventListener("click", () => {
     window.location.href = "guide.html";
   });
-
   document.getElementById("btnRewards").addEventListener("click", () => {
     alert("Rewards page not implemented yet.");
   });
-
   document.getElementById("btnLeaderboard").addEventListener("click", () => {
     window.location.href = "stats.html";
   });
-
   document.getElementById("btnWithdraw").addEventListener("click", () => {
     window.location.href = "withdraw.html";
   });
-
   document.getElementById("btnReferral").addEventListener("click", () => {
     alert("Referral page not implemented yet.");
   });
 
-  // Кнопка Share
+  // Share button
   document.getElementById("shareBtn").addEventListener("click", () => {
     if (navigator.share) {
       navigator
@@ -67,6 +54,21 @@ window.addEventListener("DOMContentLoaded", () => {
         .catch((err) => console.error("Share failed:", err));
     } else {
       alert("Your browser does not support the Share API.");
+    }
+  });
+
+  // Подстройка плашки профита при изменении размера окна (клавиатура)
+  const profitBox = document.querySelector(".profit-box");
+  window.initialInnerHeight = window.innerHeight;
+
+  window.addEventListener("resize", () => {
+    if (!profitBox) return;
+
+    // Можно сделать здесь логику, если хочешь отличать открытие клавиатуры
+    if (window.innerHeight < window.initialInnerHeight) {
+      profitBox.style.bottom = "20px"; // Можно подкорректировать, если нужно
+    } else {
+      profitBox.style.bottom = "20px";
     }
   });
 });
