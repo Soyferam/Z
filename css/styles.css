@@ -10,7 +10,7 @@
        url('../fonts/PressStart2P-Regular.ttf') format('truetype');
 }
 
-/* 🌌 Общий фон, шум и "горошек" */
+/* 🌌 Общий фон */
 html, body {
   margin: 0;
   padding: 0;
@@ -25,8 +25,6 @@ html, body {
   background-position: center;
   color: #fff;
   text-align: center;
-
-  /* Запретим скролл, чтобы страница не листалась */
   height: 100%;
   overflow: hidden;
   overscroll-behavior: none;
@@ -34,7 +32,6 @@ html, body {
   position: relative;
 }
 
-/* 💡 Фоновой эффект */
 .background-glow {
   position: fixed;
   inset: 0;
@@ -44,21 +41,23 @@ html, body {
   z-index: 0;
 }
 
-/* ✅ Контейнер */
 .wrapper {
   position: relative;
   height: 100vh;
   width: 100%;
+  max-width: 768px;
+  margin: 0 auto;
 }
 
-/* 💳 Левая кнопка баланса */
-.wallet-left {
+.wallet-left, .wallet-right {
   position: absolute;
-  top: 130px;
-  left: 20px;
+  top: 4vh;
+  z-index: 10;
+}
+.wallet-left {
+  left: 4vw;
   background: rgba(255,255,255,0.1);
   backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
   border: 1px solid rgba(255,255,255,0.25);
   box-shadow: 0 4px 16px rgba(0,0,0,0.2);
   border-radius: 20px;
@@ -68,27 +67,18 @@ html, body {
   font-size: 14px;
   font-family: 'AntonSC', sans-serif;
   cursor: pointer;
-  z-index: 10;
 }
 .wallet-left img {
   width: 20px;
   margin-right: 8px;
   user-select: none;
 }
-
-/* 🔌 Правая кнопка подключения */
 .wallet-right {
-  position: absolute;
-  top: 130px;
-  right: 20px;
-  z-index: 10;
+  right: 4vw;
 }
-
-/* 🔌 TonConnect UIButton */
 .wallet-right #ton-connect button {
   background: rgba(255,255,255,0.1);
   backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
   border: 1px solid rgba(255,255,255,0.25);
   box-shadow: 0 4px 16px rgba(0,0,0,0.2);
   border-radius: 20px;
@@ -99,20 +89,18 @@ html, body {
   cursor: pointer;
 }
 
-/* 🐍 Лого */
 .logo {
   position: absolute;
-  top: 160px;
+  top: 20vh;
   left: 50%;
   transform: translateX(-50%);
-  max-width: 320px;
+  max-width: 80vw;
   z-index: 10;
 }
 
-/* 💰 Ввод суммы */
 .amount-input {
   position: absolute;
-  top: 500px;
+  top: 55vh;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
@@ -120,12 +108,12 @@ html, body {
 .amount-input input {
   min-width: 220px;
   max-width: 300px;
+  width: 60vw;
   padding: 8px 16px;
   border-radius: 20px;
   border: none;
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
   color: #fff;
   font-size: 14px;
   text-align: center;
@@ -133,20 +121,18 @@ html, body {
   font-family: 'Press Start 2P', monospace;
 }
 
-/* ▶️ PLAY */
 .btn-play {
   position: absolute;
-  top: 550px;
+  top: 63vh;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(255,255,255,0.1);
   backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
   border: 1px solid rgba(255,255,255,0.25);
   box-shadow: 0 4px 16px rgba(0,0,0,0.2);
   border-radius: 50px;
   padding: 10px 70px;
-  font-size: 46px;
+  font-size: 36px;
   font-family: 'AntonSC', sans-serif;
   letter-spacing: 8px;
   color: #fff;
@@ -154,21 +140,19 @@ html, body {
   z-index: 10;
 }
 
-/* 📋 Меню-кнопки */
 .menu-buttons {
   position: absolute;
   width: 320px;
-  margin: 0 auto;
+  max-width: 90vw;
   left: 50%;
   transform: translateX(-50%);
-  top: 660px;
+  top: 74vh;
   height: 120px;
 }
 .menu-buttons button {
   position: absolute;
   background: rgba(255,255,255,0.1);
   backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
   border: 1px solid rgba(255,255,255,0.25);
   box-shadow: 0 4px 16px rgba(0,0,0,0.2);
   border-radius: 24px;
@@ -185,15 +169,13 @@ html, body {
 .menu-buttons button:nth-child(4) { top: 0; left: 67%; }
 .menu-buttons button:nth-child(5) { top: 60px; left: 56%; }
 
-/* 📈 Плашка прибыли — теперь fixed */
 .profit-box {
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 50px;
+  bottom: 4vh;
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(10px) saturate(180%);
-  -webkit-backdrop-filter: blur(10px) saturate(180%);
   border: 1px solid rgba(255,255,255,0.2);
   box-shadow: 0 4px 16px rgba(0,0,0,0.2);
   border-radius: 16px;
@@ -208,6 +190,7 @@ html, body {
   z-index: 100;
   font-family: 'Press Start 2P', monospace;
 }
+
 .profit-text { display: flex; flex-direction: column; gap: 4px; }
 .profit-line, .tokens-line { font-size: 14px; white-space: nowrap; }
 .profit-amount, .profit-percent, .token-amount, .token-icon {
@@ -216,3 +199,27 @@ html, body {
 .token-icon { font-size: 14px; }
 .share-btn { display: flex; flex-direction: column; align-items: center; cursor: pointer; }
 .share-btn small { font-size: 10px; color: #aaa; margin-top: 2px; }
+
+/* 🌐 Адаптация под горизонтальную ориентацию */
+@media (orientation: landscape) and (max-height: 500px) {
+  .logo { top: 10vh; max-width: 60vw; }
+  .amount-input { top: 35vh; }
+  .btn-play { top: 45vh; font-size: 28px; padding: 10px 40px; }
+  .menu-buttons { top: 55vh; }
+  .profit-box { bottom: 2vh; }
+}
+
+/* 💻 Адаптация под десктоп */
+@media (min-width: 1024px) {
+  .btn-play { font-size: 48px; }
+  .logo { max-width: 300px; }
+  .menu-buttons button { font-size: 18px; }
+}
+
+/* 📱 Адаптация под очень маленькие экраны */
+@media (max-width: 360px) {
+  .amount-input input { font-size: 12px; padding: 6px 12px; }
+  .btn-play { font-size: 28px; padding: 8px 40px; }
+  .menu-buttons button { font-size: 14px; padding: 10px 16px; }
+  .profit-line, .tokens-line { font-size: 12px; }
+}
