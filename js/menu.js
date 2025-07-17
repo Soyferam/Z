@@ -14,7 +14,7 @@ window.addEventListener("DOMContentLoaded", () => {
     buttonRootId: "ton-connect",
   });
 
-  // Поддержка кнопки PLAY
+  // Кнопка PLAY — проверка и переход на игру
   document.getElementById("playBtn").addEventListener("click", () => {
     const amount = parseFloat(document.getElementById("depositInput").value);
     if (isNaN(amount) || amount <= 0) {
@@ -25,24 +25,28 @@ window.addEventListener("DOMContentLoaded", () => {
     window.location.href = "game.html";
   });
 
-  // Меню кнопки
+  // Кнопки меню
   document.getElementById("btnGuide").addEventListener("click", () => {
     window.location.href = "guide.html";
   });
+
   document.getElementById("btnRewards").addEventListener("click", () => {
     alert("Rewards page not implemented yet.");
   });
+
   document.getElementById("btnLeaderboard").addEventListener("click", () => {
     window.location.href = "stats.html";
   });
+
   document.getElementById("btnWithdraw").addEventListener("click", () => {
     window.location.href = "withdraw.html";
   });
+
   document.getElementById("btnReferral").addEventListener("click", () => {
     alert("Referral page not implemented yet.");
   });
 
-  // Share button
+  // Кнопка Share
   document.getElementById("shareBtn").addEventListener("click", () => {
     if (navigator.share) {
       navigator
@@ -57,18 +61,29 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Подстройка плашки профита при изменении размера окна (клавиатура)
+  // Подстройка плашки профита по visualViewport, чтобы не прыгала при клавиатуре
   const profitBox = document.querySelector(".profit-box");
-  window.initialInnerHeight = window.innerHeight;
+  if (!profitBox) return;
 
-  window.addEventListener("resize", () => {
-    if (!profitBox) return;
+  function updateProfitBoxPosition() {
+    if (window.visualViewport) {
+      const vh = window.visualViewport.height;
+      const totalH = window.innerHeight;
+      const bottomOffset = totalH - (vh + window.visualViewport.offsetTop);
 
-    // Можно сделать здесь логику, если хочешь отличать открытие клавиатуры
-    if (window.innerHeight < window.initialInnerHeight) {
-      profitBox.style.bottom = "20px"; // Можно подкорректировать, если нужно
+      // Минимальный отступ 20px
+      profitBox.style.bottom = `${bottomOffset > 20 ? bottomOffset : 20}px`;
     } else {
       profitBox.style.bottom = "20px";
     }
-  });
+  }
+
+  updateProfitBoxPosition();
+
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", updateProfitBoxPosition);
+    window.visualViewport.addEventListener("scroll", updateProfitBoxPosition);
+  } else {
+    window.addEventListener("resize", updateProfitBoxPosition);
+  }
 });

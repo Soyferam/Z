@@ -180,7 +180,7 @@ html, body {
 /* 📈 Плашка прибыли — fixed и не прыгает */
 .profit-box {
   position: fixed;
-  bottom: env(safe-area-inset-bottom, 20px);
+  bottom: 20px; /* базовый отступ, будет переопределён JS */
   left: 50%;
   transform: translateX(-50%);
   background: rgba(255,255,255,0.08);
@@ -201,6 +201,7 @@ html, body {
   pointer-events: auto;
   font-family: 'Press Start 2P', monospace;
 }
+
 
 .profit-text {
   display: flex;
