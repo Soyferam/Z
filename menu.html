@@ -21,6 +21,7 @@
 </head>
 
 <body>
+  <div class="wrapper"></div>
   <div class="background-glow"></div>
 
   <!-- 💳 Кошелёк -->
@@ -62,15 +63,18 @@
   </div>
 
   <!-- 📈 Прибыль -->
-  <div class="profit-box" id="profitBox">
-    <div class="profit-text">
-      <div>Profit: <span style="color: #00FF00">50$ (20%)</span></div>
-      <div>Tokens: <span style="color: #00FF00">2937 ⚡</span></div>
+ <div class="profit-box">
+  <div class="profit-text">
+    <div class="profit-line">
+      Profit: <span class="profit-amount">50$</span> <span class="profit-percent">(20%)</span>
     </div>
-    <div class="share-btn" id="shareBtn">
-      🔗
-      <small>SHARE</small>
+    <div class="tokens-line">
+      Tokens: <span class="token-amount">2937</span><span class="token-icon">⚡</span>
     </div>
   </div>
+  <div class="share-btn">
+    🔄 <small>Share</small>
+  </div>
+</div>
 </body>
 </html>

@@ -178,9 +178,18 @@ html, body {
 .menu-buttons button:nth-child(5) { top: 720px; left: 55%; }
 
 /* 📈 Плашка прибыли — fixed, клики не мешает другим элементам */
+/* ✅ Контейнер для абсолютного позиционирования */
+.wrapper {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* 💰 Бокс с профитом */
 .profit-box {
-  position: fixed;
-  bottom: env(safe-area-inset-bottom, 20px);
+  position: absolute; /* заменено с fixed на absolute */
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(255,255,255,0.08);
@@ -201,19 +210,37 @@ html, body {
   pointer-events: auto;
   font-family: 'Press Start 2P', monospace;
 }
+
 .profit-text {
   display: flex;
   flex-direction: column;
   gap: 4px;
   align-items: flex-start;
   font-family: 'Press Start 2P', monospace;
-  white-space: nowrap;
-  line-height: 1.4;
 }
 
-.percent {
-  color: #aaa;
+.profit-line,
+.tokens-line {
+  white-space: nowrap;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  line-height: 1.5;
 }
+
+.profit-amount,
+.profit-percent,
+.token-amount,
+.token-icon {
+  display: inline;
+  color: #1eff00; 
+  margin-left: 4px;
+}
+
+.token-icon {
+  margin-left: 4px;
+  font-size: 14px;
+}
+
 .share-btn {
   display: flex;
   flex-direction: column;
