@@ -65,7 +65,7 @@ html, body {
   padding: 8px 20px;
   display: flex;
   align-items: center;
-  font-size: 12px;
+  font-size: 14px;
   font-family: 'AntonSC', sans-serif;
   cursor: pointer;
   z-index: 10;
