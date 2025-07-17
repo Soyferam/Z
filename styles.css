@@ -41,19 +41,27 @@ html, body {
 
 /* 💳 Левая кнопка TON-баланса */
 .wallet-left {
+  /* size & padding, как в wallet-right button */
+  padding: 8px 20px; /* изменено с 6px 16px */ /* -- ЗАМЕНЕНО: padding под кнопку справа */
+  font-size: 12px; /* изменено с 14px */ /* -- ЗАМЕНЕНО: font-size под кнопку справа */
+  cursor: pointer; /* -- ЗАМЕНЕНО: добавить курсор для кнопки */
+  
+  /* добавить тень и границу как у wallet-right button */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* -- ЗАМЕНЕНО: box-shadow */
+  border: 1px solid rgba(255, 255, 255, 0.25); /* -- ЗАМЕНЕНО: цвет бордера */
+
+  backdrop-filter: blur(12px) saturate(180%); /* -- ЗАМЕНЕНО: блюр как у кнопки справа */
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  
+  /* остальные стили без изменений */
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  font-family: 'AntonSC', sans-serif;
   position: absolute;
   top: 130px;
   left: 20px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(8px) saturate(160%);
-  -webkit-backdrop-filter: blur(8px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 20px;
-  padding: 6px 16px;
-  display: flex;
-  align-items: center;
-  font-size: 14px;
-  font-family: 'AntonSC', sans-serif;
   z-index: 10;
 }
 
@@ -199,9 +207,24 @@ html, body {
   left: 55%;
 }
 
+.profit-wrapper {
+  position: fixed;
+  bottom: env(safe-area-inset-bottom, 20px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 600px;
+  pointer-events: none; /* чтобы не блокировала клики по другим элементам */
+  z-index: 1001;
+  display: flex;
+  justify-content: center;
+}
+
+
 /* 📈 Профит-бокс */
 .profit-box {
-  position: fixed;
+  position: relative;
+  pointer-events: auto;
   bottom: calc(env(safe-area-inset-bottom, 20px) + 50px);
   left: 50%;
   transform: translateX(-50%);
