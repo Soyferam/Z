@@ -1,10 +1,10 @@
-/* Локальные шрифты */
 @font-face {
   font-family: 'AntonSC';
   src: url('../fonts/AntonSC-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
+
 @font-face {
   font-family: 'Press Start 2P';
   src: url('../fonts/PressStart2P-Regular.woff2') format('woff2'),
@@ -16,6 +16,7 @@
 
 /* 🌌 Общий фон, шум и "горошек" */
 html, body {
+  height: 100%;
   margin: 0;
   padding: 0;
   font-family: 'Press Start 2P', monospace;
@@ -29,21 +30,18 @@ html, body {
   background-position: center;
   color: #fff;
   text-align: center;
-  height: auto;
+  overflow-y: auto; /* включаем скролл */
   overscroll-behavior: none;
   touch-action: none;
   position: relative;
-  min-height: 100vh;
 }
 
-/* 💡 Фоновой эффект */
-.background-glow {
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(0,34,85,0.4), rgba(0,0,0,0.8));
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  z-index: 0;
+/* Контейнер для содержимого */
+.wrapper {
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 100px; /* Отступ для плашки */
+  box-sizing: border-box;
 }
 
 /* 💳 Левая кнопка баланса */
@@ -65,6 +63,7 @@ html, body {
   cursor: pointer;
   z-index: 10;
 }
+
 .wallet-left img {
   width: 20px;
   margin-right: 8px;
@@ -78,6 +77,7 @@ html, body {
   right: 20px;
   z-index: 10;
 }
+
 .wallet-right button {
   background: rgba(255,255,255,0.1);
   backdrop-filter: blur(12px) saturate(180%);
@@ -110,6 +110,7 @@ html, body {
   transform: translateX(-50%);
   z-index: 10;
 }
+
 .amount-input input {
   min-width: 220px;
   max-width: 300px;
@@ -147,40 +148,40 @@ html, body {
   z-index: 10;
 }
 
-/* 📋 Меню-кнопки через flex */
+/* 📋 Меню-кнопки */
 .menu-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-  max-width: 320px;
+  position: relative; /* исправлено для корректного позиционирования кнопок */
+  width: 320px;
   margin: 0 auto;
-  padding-top: 20px;
-  position: relative;
+  height: 120px; /* задаём высоту, чтобы кнопки могли позиционироваться абсолютно внутри */
 }
 
 .menu-buttons button {
-  flex: 1 1 45%;
-  min-width: 130px;
+  position: absolute;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.25);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
   border-radius: 24px;
   padding: 12px 20px;
   font-size: 16px;
   font-family: 'AntonSC', sans-serif;
   color: #fff;
   cursor: pointer;
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  border: 1px solid rgba(255,255,255,0.25);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
   transition: 0.3s ease;
-  position: static;
 }
 
-/* 📈 Плашка прибыли — fixed и не прыгает */
+.menu-buttons button:nth-child(1) { top: 20px; left: 15%; }
+.menu-buttons button:nth-child(2) { top: 20px; left: 38%; }
+.menu-buttons button:nth-child(3) { top: 80px; left: 20%; }
+.menu-buttons button:nth-child(4) { top: 20px; left: 65%; }
+.menu-buttons button:nth-child(5) { top: 80px; left: 55%; }
+
+/* 📈 Плашка прибыли — абсолютная позиция внутри wrapper */
 .profit-box {
-  position: fixed;
-  bottom: 20px; /* базовый отступ, будет переопределён JS */
+  position: absolute;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(255,255,255,0.08);
@@ -201,7 +202,6 @@ html, body {
   pointer-events: auto;
   font-family: 'Press Start 2P', monospace;
 }
-
 
 .profit-text {
   display: flex;
