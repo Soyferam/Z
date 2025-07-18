@@ -73,17 +73,21 @@ window.addEventListener("DOMContentLoaded", () => {
   let currentSlide = 0;
 
   function showSlide(index) {
+    console.log(`Showing slide ${index}`); // Отладка
     guideSlides.forEach((slide, i) => {
       slide.classList.toggle('active', i === index);
       const backBtn = slide.querySelector('.guide-back');
       const nextBtn = slide.querySelector('.guide-next');
+
       if (backBtn) {
         backBtn.style.display = index === 0 ? 'none' : 'block';
-        backBtn.textContent = 'Back'; // Гарантируем наличие текста
+        backBtn.textContent = backBtn.dataset.text || 'Back';
+        console.log(`Back button on slide ${i}: display=${backBtn.style.display}, text=${backBtn.textContent}`); // Отладка
       }
       if (nextBtn) {
         nextBtn.style.display = index === guideSlides.length - 1 ? 'none' : 'block';
-        nextBtn.textContent = 'Next'; // Гарантируем наличие текста
+        nextBtn.textContent = nextBtn.dataset.text || 'Next';
+        console.log(`Next button on slide ${i}: display=${nextBtn.style.display}, text=${nextBtn.textContent}`); // Отладка
       }
     });
 

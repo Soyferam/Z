@@ -361,11 +361,17 @@ html, body {
   padding: 10px 20px;
   font-size: 14px;
   font-family: 'AntonSC', sans-serif;
-  color: #fff;
+  color: #fff !important;
   cursor: pointer;
   text-align: center;
   line-height: normal;
   min-width: 80px;
+  visibility: visible;
+  opacity: 1;
+}
+
+.guide-back[style*="display: none"], .guide-next[style*="display: none"] {
+  visibility: hidden;
 }
 
 .guide-dots {
