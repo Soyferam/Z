@@ -73,7 +73,6 @@ html, body {
   margin-right: 8px;
   user-select: none;
 }
-/* 🧪 Заглушка для ton-connect внутри .wallet-right */
 .wallet-right {
   position: absolute;
   top: 12vh;
@@ -83,7 +82,6 @@ html, body {
   justify-content: center;
   align-items: center;
 }
-
 .wallet-right #ton-connect button {
   background: rgba(255,255,255,0.1);
   border: 1px solid rgba(255,255,255,0.25);
@@ -235,7 +233,6 @@ html, body {
 }
 
 @media (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
-  /* iPhone X */
   .logo { top: 15vh; }
   .amount-input { top: 45vh; width: 65vw; }
   .btn-play { top: 52vh; }
@@ -281,7 +278,6 @@ html, body {
   z-index: 1000;
   padding: 20px;
 }
-/* Удаляем скрытие wrapper */
 @media (orientation: landscape) and (max-height: 500px) {
   .landscape-warning { display: none; }
 }
@@ -294,8 +290,8 @@ html, body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.85); /* Увеличена непрозрачность для скрытия меню */
-  backdrop-filter: blur(8px); /* Сильное размытие фона */
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   z-index: 1000;
 }
@@ -305,7 +301,7 @@ html, body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.9); /* Более тёмный и непрозрачный фон */
+  background: rgba(0, 0, 0, 0.9);
   border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   border-radius: 20px;
@@ -316,7 +312,7 @@ html, body {
   overflow-y: auto;
   color: #fff;
   font-family: 'Press Start 2P', monospace;
-  backdrop-filter: blur(12px); /* Размытие для контента */
+  backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
 
@@ -344,23 +340,25 @@ html, body {
 .guide-nav {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-top: 20px;
   width: 100%;
+  min-height: 40px; /* Защищает пространство для кнопок */
 }
 
 .guide-back {
-  order: 1; /* Всегда слева */
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-  border-radius: 20px;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-family: 'AntonSC', Arial, sans-serif;
+  margin-right: auto; /* Слева */
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
+  border-radius: 20px !important;
+  padding: 10px 20px !important;
+  font-size: 14px !important;
+  font-family: 'AntonSC', Arial, sans-serif !important;
   color: #fff !important;
   cursor: pointer;
   text-align: center;
-  line-height: 20px;
+  line-height: 20px !important;
   min-width: 80px;
   height: 40px;
   visibility: visible;
@@ -368,18 +366,18 @@ html, body {
 }
 
 .guide-next {
-  order: 2; /* Всегда справа */
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-  border-radius: 20px;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-family: 'AntonSC', Arial, sans-serif;
+  margin-left: auto; /* Справа */
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
+  border-radius: 20px !important;
+  padding: 10px 20px !important;
+  font-size: 14px !important;
+  font-family: 'AntonSC', Arial, sans-serif !important;
   color: #fff !important;
   cursor: pointer;
   text-align: center;
-  line-height: 20px;
+  line-height: 20px !important;
   min-width: 80px;
   height: 40px;
   visibility: visible;
@@ -387,8 +385,8 @@ html, body {
 }
 
 .guide-back[style*="display: none"], .guide-next[style*="display: none"] {
-  visibility: hidden;
-  opacity: 0;
+  visibility: hidden !important;
+  opacity: 0 !important;
 }
 
 .guide-dots {
