@@ -1,5 +1,5 @@
 window.addEventListener("DOMContentLoaded", () => {
-  // ✅ Telegram WebApp
+  // Telegram WebApp Init
   const tg = window.Telegram?.WebApp;
   if (tg) {
     tg.ready();
@@ -8,15 +8,64 @@ window.addEventListener("DOMContentLoaded", () => {
     document.body.style.overflow = "hidden";
   }
 
-  // ✅ TonConnect UI
+  // TonConnect UI Init
   new TON_CONNECT_UI.TonConnectUI({
     manifestUrl: "https://z-ten-iota.vercel.app/tonconnect-manifest.json",
     buttonRootId: "ton-connect",
   });
 
-  // 🎮 Кнопка PLAY
-  document.getElementById("playBtn")?.addEventListener("click", () => {
-    const amt = parseFloat(document.getElementById("depositInput").value);
+  const depositInput = document.getElementById("depositInput");
+  const customKeyboard = document.getElementById("customKeyboard");
+  const profitBox = document.getElementById("profitBox");
+  const delKey = document.getElementById("delKey");
+  const closeKeyboardBtn = document.getElementById("closeKeyboardBtn");
+
+  // Показываем клавиатуру при фокусе на input
+  depositInput.addEventListener("focus", () => {
+    customKeyboard.style.display = "block";
+    if (profitBox) {
+      profitBox.style.opacity = "0";
+      profitBox.style.pointerEvents = "none";
+    }
+  });
+
+  // Закрываем клавиатуру по кнопке
+  closeKeyboardBtn.addEventListener("click", () => {
+    customKeyboard.style.display = "none";
+    depositInput.blur();
+    if (profitBox) {
+      profitBox.style.opacity = "1";
+      profitBox.style.pointerEvents = "auto";
+    }
+  });
+
+  // Удаление последнего символа
+  delKey.addEventListener("click", () => {
+    depositInput.value = depositInput.value.slice(0, -1);
+  });
+
+  // Обработчик нажатий на цифровые кнопки и точку
+  customKeyboard.querySelectorAll("button.key").forEach((btn) => {
+    if (btn.id === "delKey" || btn.id === "closeKeyboardBtn") return; // пропускаем удаление и закрытие
+
+    btn.addEventListener("click", () => {
+      const val = btn.textContent;
+      const current = depositInput.value;
+
+      if (val === ".") {
+        // Вводим точку только один раз
+        if (!current.includes(".")) {
+          depositInput.value += val;
+        }
+      } else {
+        depositInput.value += val;
+      }
+    });
+  });
+
+  // PLAY кнопка (пример проверки суммы)
+  document.getElementById("playBtn").addEventListener("click", () => {
+    const amt = parseFloat(depositInput.value);
     if (isNaN(amt) || amt <= 0) {
       alert("Please enter a valid TON amount.");
       return;
@@ -25,13 +74,12 @@ window.addEventListener("DOMContentLoaded", () => {
     window.location.href = "game.html";
   });
 
-  // 🧭 Навигация по меню
+  // Меню навигация
   const navMap = {
     btnGuide: "guide.html",
     btnLeaderboard: "stats.html",
     btnWithdraw: "withdraw.html",
   };
-
   for (const [id, url] of Object.entries(navMap)) {
     document.getElementById(id)?.addEventListener("click", () => {
       window.location.href = url;
@@ -46,7 +94,7 @@ window.addEventListener("DOMContentLoaded", () => {
     alert("Referral system coming soon");
   });
 
-  // 📤 Share кнопка
+  // Share кнопка
   const shareBtn = document.getElementById("shareBtn");
   if (shareBtn && navigator.share) {
     shareBtn.addEventListener("click", () => {
@@ -55,45 +103,6 @@ window.addEventListener("DOMContentLoaded", () => {
         text: "Check out ZmeiFi — awesome TON game!",
         url: location.href,
       }).catch(console.error);
-    });
-  }
-
-  // 🔢 Кастомная клавиатура
-  const depositInput = document.getElementById("depositInput");
-  const customKeyboard = document.getElementById("customKeyboard");
-  const profitBox = document.getElementById("profitBox");
-  const enterKey = document.getElementById("enterKey");
-  const delKey = document.getElementById("delKey");
-
-  if (depositInput && customKeyboard) {
-    depositInput.addEventListener("focus", () => {
-      customKeyboard.style.display = "block";
-      if (profitBox) {
-        profitBox.style.opacity = "0";
-        profitBox.style.pointerEvents = "none";
-      }
-    });
-
-    enterKey?.addEventListener("click", () => {
-      customKeyboard.style.display = "none";
-      depositInput.blur();
-      if (profitBox) {
-        profitBox.style.opacity = "1";
-        profitBox.style.pointerEvents = "auto";
-      }
-    });
-
-    delKey?.addEventListener("click", () => {
-      depositInput.value = depositInput.value.slice(0, -1);
-    });
-
-    customKeyboard.querySelectorAll("button").forEach((btn) => {
-      const val = btn.textContent;
-      if (!["←", "OK"].includes(val)) {
-        btn.addEventListener("click", () => {
-          depositInput.value += val;
-        });
-      }
     });
   }
 });

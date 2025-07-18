@@ -7,86 +7,15 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>ZmeiFi Menu</title>
 
-  <!-- Локальные стили -->
+  <!-- Подключаем стили -->
   <link rel="stylesheet" href="./css/styles.css" />
 
   <!-- Telegram SDK -->
   <script src="https://telegram.org/js/telegram-web-app.js" defer></script>
   <!-- TonConnect UI SDK -->
   <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js" defer></script>
-  <!-- Меню-скрипт -->
-  <script src="./js/menu.js" defer></script>
-  <script defer>
-    window.addEventListener("DOMContentLoaded", () => {
-      const tg = window.Telegram?.WebApp;
-      if (tg) {
-        tg.ready();
-        tg.expand();
-        tg.requestFullscreen?.();
-      }
-
-      const depositInput = document.getElementById("depositInput");
-      const customKeyboard = document.getElementById("customKeyboard");
-      const profitBox = document.getElementById("profitBox");
-
-      depositInput.addEventListener("focus", () => {
-        customKeyboard.style.display = "block";
-        profitBox.style.opacity = "0";
-      });
-
-      document.getElementById("enterKey").addEventListener("click", () => {
-        customKeyboard.style.display = "none";
-        depositInput.blur();
-        profitBox.style.opacity = "1";
-      });
-
-      document.getElementById("delKey").addEventListener("click", () => {
-        depositInput.value = depositInput.value.slice(0, -1);
-      });
-
-      customKeyboard.querySelectorAll("button").forEach((btn) => {
-        const val = btn.textContent;
-        if (!["←", "OK"].includes(val)) {
-          btn.addEventListener("click", () => {
-            depositInput.value += val;
-          });
-        }
-      });
-    });
-  </script>
-  <style>
-    .custom-keyboard {
-      position: absolute;
-      top: 62vh;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(255,255,255,0.05);
-      backdrop-filter: blur(14px) saturate(180%);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 20px;
-      padding: 12px;
-      z-index: 100;
-      display: none;
-    }
-    .custom-keyboard .key-row {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin: 6px 0;
-    }
-    .custom-keyboard button {
-      width: 60px;
-      height: 60px;
-      font-size: 20px;
-      font-family: 'AntonSC', sans-serif;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.25);
-      border-radius: 16px;
-      color: #fff;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
-  </style>
+  <!-- Наш скрипт -->
+  <script src="./js/keyboard.js" defer></script>
 </head>
 <body>
   <div class="wrapper">
@@ -110,22 +39,26 @@
         inputmode="none"
         placeholder="Enter TON amount"
         id="depositInput"
+        autocomplete="off"
       />
     </div>
 
     <!-- 🧮 Кастомная клавиатура -->
-    <div class="custom-keyboard" id="customKeyboard">
+    <div class="custom-keyboard" id="customKeyboard" aria-label="Custom numeric keyboard">
       <div class="key-row">
-        <button>1</button><button>2</button><button>3</button>
+        <button class="key">1</button><button class="key">2</button><button class="key">3</button>
       </div>
       <div class="key-row">
-        <button>4</button><button>5</button><button>6</button>
+        <button class="key">4</button><button class="key">5</button><button class="key">6</button>
       </div>
       <div class="key-row">
-        <button>7</button><button>8</button><button>9</button>
+        <button class="key">7</button><button class="key">8</button><button class="key">9</button>
       </div>
       <div class="key-row">
-        <button id="delKey">←</button><button>0</button><button id="enterKey">OK</button>
+        <button class="key">.</button><button class="key">0</button><button class="key" id="delKey">←</button>
+      </div>
+      <div class="key-row">
+        <button class="key" id="closeKeyboardBtn">Закрыть</button>
       </div>
     </div>
 
@@ -150,7 +83,7 @@
           <span class="token-icon">⚡</span>
         </div>
       </div>
-      <div class="share-btn" id="shareBtn">
+      <div class="share-btn" id="shareBtn" role="button" tabindex="0" aria-label="Share game link">
         🔗 <small>SHARE</small>
       </div>
     </div>
