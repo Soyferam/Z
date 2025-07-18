@@ -6,7 +6,7 @@ window.addEventListener("DOMContentLoaded", () => {
     tg.expand();
     tg.requestFullscreen?.();
     document.body.style.overflow = "hidden";
-    console.log("Telegram WebApp initialized"); // Отладка
+    console.log("[Guide] Telegram WebApp initialized");
   }
 
   // ✅ TonConnect UI
@@ -74,7 +74,7 @@ window.addEventListener("DOMContentLoaded", () => {
   let currentSlide = 0;
 
   function showSlide(index) {
-    console.log(`[Guide] Showing slide ${index + 1} of ${guideSlides.length}`); // Отладка
+    console.log(`[Guide] Showing slide ${index + 1} of ${guideSlides.length}`);
     guideSlides.forEach((slide, i) => {
       const isActive = i === index;
       slide.classList.toggle('active', isActive);
@@ -83,18 +83,18 @@ window.addEventListener("DOMContentLoaded", () => {
 
       if (backBtn) {
         backBtn.style.display = index === 0 ? 'none' : 'block';
-        backBtn.textContent = backBtn.dataset.text || 'Back';
         backBtn.style.visibility = index === 0 ? 'hidden' : 'visible';
-        console.log(`[Guide] Slide ${i + 1}: Back button display=${backBtn.style.display}, text=${backBtn.textContent}, visibility=${backBtn.style.visibility}`);
+        backBtn.textContent = backBtn.dataset.text || 'Back';
+        console.log(`[Guide] Slide ${i + 1}: Back button display=${backBtn.style.display}, visibility=${backBtn.style.visibility}, text=${backBtn.textContent}, order=${window.getComputedStyle(backBtn).order}`);
       } else {
         console.warn(`[Guide] Slide ${i + 1}: Back button not found`);
       }
 
       if (nextBtn) {
         nextBtn.style.display = index === guideSlides.length - 1 ? 'none' : 'block';
-        nextBtn.textContent = nextBtn.dataset.text || 'Next';
         nextBtn.style.visibility = index === guideSlides.length - 1 ? 'hidden' : 'visible';
-        console.log(`[Guide] Slide ${i + 1}: Next button display=${nextBtn.style.display}, text=${nextBtn.textContent}, visibility=${nextBtn.style.visibility}`);
+        nextBtn.textContent = nextBtn.dataset.text || 'Next';
+        console.log(`[Guide] Slide ${i + 1}: Next button display=${nextBtn.style.display}, visibility=${nextBtn.style.visibility}, text=${nextBtn.textContent}, order=${window.getComputedStyle(nextBtn).order}`);
       } else {
         console.warn(`[Guide] Slide ${i + 1}: Next button not found`);
       }
@@ -107,7 +107,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // Open guide
   document.getElementById('btnGuide').addEventListener('click', () => {
-    console.log("[Guide] Opening guide modal"); // Отладка
+    console.log("[Guide] Opening guide modal");
     guideModal.style.display = 'block';
     currentSlide = 0;
     showSlide(currentSlide);
@@ -115,7 +115,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // Close guide
   guideClose.addEventListener('click', () => {
-    console.log("[Guide] Closing guide modal"); // Отладка
+    console.log("[Guide] Closing guide modal");
     guideModal.style.display = 'none';
   });
 
@@ -128,7 +128,7 @@ window.addEventListener("DOMContentLoaded", () => {
       nextBtn.addEventListener('click', () => {
         if (currentSlide < guideSlides.length - 1) {
           currentSlide++;
-          console.log(`[Guide] Clicking Next: Moving to slide ${currentSlide + 1}`); // Отладка
+          console.log(`[Guide] Clicking Next: Moving to slide ${currentSlide + 1}`);
           showSlide(currentSlide);
         }
       });
@@ -138,7 +138,7 @@ window.addEventListener("DOMContentLoaded", () => {
       backBtn.addEventListener('click', () => {
         if (currentSlide > 0) {
           currentSlide--;
-          console.log(`[Guide] Clicking Back: Moving to slide ${currentSlide + 1}`); // Отладка
+          console.log(`[Guide] Clicking Back: Moving to slide ${currentSlide + 1}`);
           showSlide(currentSlide);
         }
       });
@@ -148,7 +148,7 @@ window.addEventListener("DOMContentLoaded", () => {
   // Dots
   guideDots.forEach((dot, index) => {
     dot.addEventListener('click', () => {
-      console.log(`[Guide] Clicking dot: Moving to slide ${index + 1}`); // Отладка
+      console.log(`[Guide] Clicking dot: Moving to slide ${index + 1}`);
       currentSlide = index;
       showSlide(currentSlide);
     });
