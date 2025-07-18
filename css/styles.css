@@ -76,10 +76,11 @@ html, body {
   margin-right: 8px;
   user-select: none;
 }
-/* 🧪 Заглушка для ton-connect внутри .wallet-right 
+/* 🧪 Заглушка для ton-connect внутри .wallet-right */
 .wallet-right {
   position: absolute;
-  top: 10vh;
+  top: 12vh;
+  font-size: 16px;
   right: 4vw;
   z-index: 10;
   display: flex;
