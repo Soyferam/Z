@@ -87,17 +87,6 @@ html, body {
   align-items: center;
 }
 
-.wallet-right .dev-wallet-button {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px dashed rgba(255, 255, 255, 0.4);
-  color: #fff;
-  font-family: 'AntonSC', sans-serif;
-  border-radius: 20px;
-  padding: 10px 20px;
-  font-size: 12px;
-  opacity: 0.6;
-  pointer-events: none;
-}
 .wallet-right #ton-connect button {
   background: rgba(255,255,255,0.1);
   backdrop-filter: blur(12px) saturate(180%);
@@ -109,6 +98,9 @@ html, body {
   font-family: 'AntonSC', sans-serif;
   color: #fff;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* === 🐍 Логотип ==== */

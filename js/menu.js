@@ -65,7 +65,7 @@ window.addEventListener("DOMContentLoaded", () => {
       }, 100); // чуть задержим, чтобы клавиатура точно свернулась
     });
 
-      // 🔍 Показывать заглушку, если TonConnect не загрузился
+      /*// 🔍 Показывать заглушку, если TonConnect не загрузился
   if (!window.TON_CONNECT_UI) {
     const fallback = document.createElement("button");
     fallback.innerText = "Connect Wallet (Dev)";
@@ -75,6 +75,6 @@ window.addEventListener("DOMContentLoaded", () => {
     if (tonConnectDiv && tonConnectDiv.children.length === 0) {
       tonConnectDiv.appendChild(fallback);
     }
-  }
+  }*/
   }
 });
