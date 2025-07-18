@@ -87,16 +87,17 @@ html, body {
 #wallet-left #ton-connect .dev-wallet-button,
 #ton-connect button,
 #ton-connect .dev-wallet-button {
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(12px) saturate(180%);
-  border: 1px solid rgba(255,255,255,0.25);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-  border-radius: 20px;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-family: 'AntonSC', sans-serif;
-  color: #fff;
-  cursor: pointer;
+ background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(12px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2) !important;
+  border-radius: 20px !important;
+  padding: 10px 20px !important;
+  font-size: 16px !important;
+  font-family: 'AntonSC', sans-serif !important;
+  color: #fff !important;
+  cursor: pointer !important;
+}
 }
 
 /* === 🐍 Логотип ==== */
