@@ -78,7 +78,7 @@ html, body {
 }
 .wallet-right {
   position: absolute;
-  top: 12vh;
+  top: 16vh;
   right: 4vw;
   z-index: 10;
   display: flex;
