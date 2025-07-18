@@ -76,7 +76,6 @@ html, body {
   margin-right: 8px;
   user-select: none;
 }
-/* 🧪 Заглушка для ton-connect внутри .wallet-right */
 .wallet-right {
   position: absolute;
   top: 12vh;
@@ -86,7 +85,6 @@ html, body {
   justify-content: center;
   align-items: center;
 }
-
 .wallet-right #ton-connect button {
   background: rgba(255,255,255,0.1);
   backdrop-filter: blur(12px) saturate(180%);
@@ -103,7 +101,7 @@ html, body {
   justify-content: center;
 }
 
-/* === 🐍 Логотип ==== */
+/* === 🐍 Логотип === */
 .logo {
   position: absolute;
   top: 17vh;
@@ -137,6 +135,39 @@ html, body {
   text-align: center;
   outline: none;
   font-family: 'Press Start 2P', monospace;
+}
+
+/* === 🧮 Кастомная клавиатура === */
+.custom-keyboard {
+  position: absolute;
+  top: 62vh;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(14px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 20px;
+  padding: 12px;
+  z-index: 100;
+  display: none;
+}
+.custom-keyboard .key-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 6px 0;
+}
+.custom-keyboard button {
+  width: 60px;
+  height: 60px;
+  font-size: 20px;
+  font-family: 'AntonSC', sans-serif;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 16px;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* === ▶️ Кнопка PLAY === */
@@ -213,14 +244,33 @@ html, body {
   z-index: 100;
   font-family: 'Press Start 2P', monospace;
 }
-.profit-text { display: flex; flex-direction: column; gap: 4px; }
-.profit-line, .tokens-line { font-size: 14px; white-space: nowrap; }
-.profit-amount, .profit-percent, .token-amount, .token-icon {
-  color: #1eff00; margin-left: 4px;
+.profit-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
-.token-icon { font-size: 14px; }
-.share-btn { display: flex; flex-direction: column; align-items: center; cursor: pointer; }
-.share-btn small { font-size: 10px; color: #aaa; margin-top: 2px; }
+.profit-line, .tokens-line {
+  font-size: 14px;
+  white-space: nowrap;
+}
+.profit-amount, .profit-percent, .token-amount, .token-icon {
+  color: #1eff00;
+  margin-left: 4px;
+}
+.token-icon {
+  font-size: 14px;
+}
+.share-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+.share-btn small {
+  font-size: 10px;
+  color: #aaa;
+  margin-top: 2px;
+}
 
 /* === 📱 Маленькие экраны === */
 @media (max-width: 400px), (max-height: 650px) {

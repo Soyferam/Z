@@ -14,8 +14,8 @@ window.addEventListener("DOMContentLoaded", () => {
     buttonRootId: "ton-connect",
   });
 
-  // ▶️ Кнопка PLAY
-  document.getElementById("playBtn").addEventListener("click", () => {
+  // 🎮 Кнопка PLAY
+  document.getElementById("playBtn")?.addEventListener("click", () => {
     const amt = parseFloat(document.getElementById("depositInput").value);
     if (isNaN(amt) || amt <= 0) {
       alert("Please enter a valid TON amount.");
@@ -26,56 +26,74 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   // 🧭 Навигация по меню
-  document.getElementById("btnGuide").onclick       = () => window.location.href = "guide.html";
-  document.getElementById("btnRewards").onclick     = () => alert("Rewards not ready yet");
-  document.getElementById("btnLeaderboard").onclick = () => window.location.href = "stats.html";
-  document.getElementById("btnWithdraw").onclick    = () => window.location.href = "withdraw.html";
-  document.getElementById("btnReferral").onclick    = () => alert("Referral system coming soon");
+  const navMap = {
+    btnGuide: "guide.html",
+    btnLeaderboard: "stats.html",
+    btnWithdraw: "withdraw.html",
+  };
 
-  // 📤 Share кнопка (если поддерживается)
-  const shareBtn = document.getElementById("shareBtn");
-  if (shareBtn) {
-    shareBtn.addEventListener("click", () => {
-      if (navigator.share) {
-        navigator.share({
-          title: "ZmeiFi Game",
-          text: "Check out ZmeiFi — awesome TON game!",
-          url: location.href,
-        }).catch(console.error);
-      } else {
-        alert("Sharing not supported on this device");
-      }
+  for (const [id, url] of Object.entries(navMap)) {
+    document.getElementById(id)?.addEventListener("click", () => {
+      window.location.href = url;
     });
   }
 
-  // 👀 Скрыть/показать блок профита при фокусе
-  const profitBox = document.getElementById("profitBox");
-  const depositInput = document.getElementById("depositInput");
+  document.getElementById("btnRewards")?.addEventListener("click", () => {
+    alert("Rewards not ready yet");
+  });
 
-  if (profitBox && depositInput) {
+  document.getElementById("btnReferral")?.addEventListener("click", () => {
+    alert("Referral system coming soon");
+  });
+
+  // 📤 Share кнопка
+  const shareBtn = document.getElementById("shareBtn");
+  if (shareBtn && navigator.share) {
+    shareBtn.addEventListener("click", () => {
+      navigator.share({
+        title: "ZmeiFi Game",
+        text: "Check out ZmeiFi — awesome TON game!",
+        url: location.href,
+      }).catch(console.error);
+    });
+  }
+
+  // 🔢 Кастомная клавиатура
+  const depositInput = document.getElementById("depositInput");
+  const customKeyboard = document.getElementById("customKeyboard");
+  const profitBox = document.getElementById("profitBox");
+  const enterKey = document.getElementById("enterKey");
+  const delKey = document.getElementById("delKey");
+
+  if (depositInput && customKeyboard) {
     depositInput.addEventListener("focus", () => {
-      profitBox.style.opacity = "0";
-      profitBox.style.pointerEvents = "none";
+      customKeyboard.style.display = "block";
+      if (profitBox) {
+        profitBox.style.opacity = "0";
+        profitBox.style.pointerEvents = "none";
+      }
     });
 
-    depositInput.addEventListener("blur", () => {
-      setTimeout(() => {
+    enterKey?.addEventListener("click", () => {
+      customKeyboard.style.display = "none";
+      depositInput.blur();
+      if (profitBox) {
         profitBox.style.opacity = "1";
         profitBox.style.pointerEvents = "auto";
-      }, 100); // чуть задержим, чтобы клавиатура точно свернулась
+      }
     });
 
-      /*// 🔍 Показывать заглушку, если TonConnect не загрузился
-  if (!window.TON_CONNECT_UI) {
-    const fallback = document.createElement("button");
-    fallback.innerText = "Connect Wallet (Dev)";
-    fallback.className = "dev-wallet-button";
-    
-    const tonConnectDiv = document.getElementById("ton-connect");
-    if (tonConnectDiv && tonConnectDiv.children.length === 0) {
-      tonConnectDiv.appendChild(fallback);
-    }
-  }*/
- 
+    delKey?.addEventListener("click", () => {
+      depositInput.value = depositInput.value.slice(0, -1);
+    });
+
+    customKeyboard.querySelectorAll("button").forEach((btn) => {
+      const val = btn.textContent;
+      if (!["←", "OK"].includes(val)) {
+        btn.addEventListener("click", () => {
+          depositInput.value += val;
+        });
+      }
+    });
   }
 });
