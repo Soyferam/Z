@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,
+  "manifest_version": "2",
   "id": "zmeifi-app",
   "name": "ZmeiFi",
   "iconUrl": "https://z-ten-iota.vercel.app/bg/snake-logo.png",
