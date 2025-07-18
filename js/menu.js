@@ -64,5 +64,17 @@ window.addEventListener("DOMContentLoaded", () => {
         profitBox.style.pointerEvents = "auto";
       }, 100); // чуть задержим, чтобы клавиатура точно свернулась
     });
+
+      // 🔍 Показывать заглушку, если TonConnect не загрузился
+  if (!window.TON_CONNECT_UI) {
+    const fallback = document.createElement("button");
+    fallback.innerText = "Connect Wallet (Dev)";
+    fallback.className = "dev-wallet-button";
+    
+    const tonConnectDiv = document.getElementById("ton-connect");
+    if (tonConnectDiv && tonConnectDiv.children.length === 0) {
+      tonConnectDiv.appendChild(fallback);
+    }
+  }
   }
 });

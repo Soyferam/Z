@@ -1,4 +1,4 @@
-/* Локальные шрифты */
+/* === 📦 Локальные шрифты === */
 @font-face {
   font-family: 'AntonSC';
   src: url('../fonts/AntonSC-Regular.ttf') format('truetype');
@@ -10,7 +10,7 @@
        url('../fonts/PressStart2P-Regular.ttf') format('truetype');
 }
 
-/* 🌌 Общий фон */
+/* === 🌌 Общий фон === */
 html, body {
   margin: 0;
   padding: 0;
@@ -18,7 +18,7 @@ html, body {
   background-color: #000;
   background-image:
     url('../img/noise.png'),
-    radial-gradient(#00f 1px, transparent 1px),
+    radial-gradient(rgba(0, 0, 255, 0.2) 1px, transparent 1px),
     linear-gradient(135deg, #001428 0%, #000000 100%);
   background-size: cover, 20px 20px, cover;
   background-repeat: repeat, repeat, no-repeat;
@@ -32,6 +32,7 @@ html, body {
   position: relative;
 }
 
+/* === ✨ Фон-свечение === */
 .background-glow {
   position: fixed;
   inset: 0;
@@ -41,21 +42,23 @@ html, body {
   z-index: 0;
 }
 
+/* === 📱 Обёртка === */
 .wrapper {
   position: relative;
   height: 100vh;
   width: 100%;
-  max-width: 768px;
+  max-width: 1024px;
   margin: 0 auto;
 }
 
+/* === 💳 Баланс и кошелёк === */
 .wallet-left, .wallet-right {
   position: absolute;
-  top: 4vh;
+  top: 10vh;
   z-index: 10;
 }
 .wallet-left {
-  left: 4vw;
+  left: 5vw;
   background: rgba(255,255,255,0.1);
   backdrop-filter: blur(12px) saturate(180%);
   border: 1px solid rgba(255,255,255,0.25);
@@ -64,7 +67,7 @@ html, body {
   padding: 8px 20px;
   display: flex;
   align-items: center;
-  font-size: 14px;
+  font-size: 16px;
   font-family: 'AntonSC', sans-serif;
   cursor: pointer;
 }
@@ -73,8 +76,27 @@ html, body {
   margin-right: 8px;
   user-select: none;
 }
+/* 🧪 Заглушка для ton-connect внутри .wallet-right */
 .wallet-right {
+  position: absolute;
+  top: 10vh;
   right: 4vw;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wallet-right .dev-wallet-button {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px dashed rgba(255, 255, 255, 0.4);
+  color: #fff;
+  font-family: 'AntonSC', sans-serif;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 12px;
+  opacity: 0.6;
+  pointer-events: none;
 }
 .wallet-right #ton-connect button {
   background: rgba(255,255,255,0.1);
@@ -82,34 +104,38 @@ html, body {
   border: 1px solid rgba(255,255,255,0.25);
   box-shadow: 0 4px 16px rgba(0,0,0,0.2);
   border-radius: 20px;
-  padding: 8px 20px;
-  font-size: 12px;
+  padding: 10px 20px;
+  font-size: 16px;
   font-family: 'AntonSC', sans-serif;
   color: #fff;
   cursor: pointer;
 }
 
+/* === 🐍 Логотип === */
 .logo {
   position: absolute;
-  top: 20vh;
+  top: 17vh;
   left: 50%;
   transform: translateX(-50%);
-  max-width: 80vw;
+  width: 60vw;
+  max-width: 260px;
+  height: auto;
   z-index: 10;
 }
 
+/* === 💰 Ввод TON === */
 .amount-input {
   position: absolute;
-  top: 55vh;
+  top: 47vh;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
+  width: 70vw;
+  max-width: 340px;
 }
 .amount-input input {
-  min-width: 220px;
-  max-width: 300px;
-  width: 60vw;
-  padding: 8px 16px;
+  width: 100%;
+  padding: 10px 10px;
   border-radius: 20px;
   border: none;
   background: rgba(255,255,255,0.08);
@@ -121,9 +147,10 @@ html, body {
   font-family: 'Press Start 2P', monospace;
 }
 
+/* === ▶️ Кнопка PLAY === */
 .btn-play {
   position: absolute;
-  top: 63vh;
+  top: 52vh;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(255,255,255,0.1);
@@ -140,35 +167,39 @@ html, body {
   z-index: 10;
 }
 
+/* === 📋 Кнопки меню === */
 .menu-buttons {
   position: absolute;
-  width: 320px;
-  max-width: 90vw;
+  top: 70vh;
   left: 50%;
   transform: translateX(-50%);
-  top: 74vh;
-  height: 120px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 12px 14px;
+  width: 90vw;
+  max-width: 360px;
+  padding: 0 10px;
+  z-index: 10;
 }
 .menu-buttons button {
-  position: absolute;
   background: rgba(255,255,255,0.1);
   backdrop-filter: blur(12px) saturate(180%);
   border: 1px solid rgba(255,255,255,0.25);
   box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-  border-radius: 24px;
-  padding: 12px 20px;
-  font-size: 16px;
+  border-radius: 20px;
+  padding: 12px 16px;
+  font-size: 14px;
   font-family: 'AntonSC', sans-serif;
   color: #fff;
   cursor: pointer;
   transition: 0.3s ease;
+  width: 100%;
+  min-width: 90px;
+  max-width: 140px;
+  white-space: nowrap;
 }
-.menu-buttons button:nth-child(1) { top: 0; left: 5%; }
-.menu-buttons button:nth-child(2) { top: 0; left: 33%; }
-.menu-buttons button:nth-child(3) { top: 60px; left: 14%; }
-.menu-buttons button:nth-child(4) { top: 0; left: 67%; }
-.menu-buttons button:nth-child(5) { top: 60px; left: 56%; }
 
+/* === 📈 Блок профита === */
 .profit-box {
   position: fixed;
   left: 50%;
@@ -190,7 +221,6 @@ html, body {
   z-index: 100;
   font-family: 'Press Start 2P', monospace;
 }
-
 .profit-text { display: flex; flex-direction: column; gap: 4px; }
 .profit-line, .tokens-line { font-size: 14px; white-space: nowrap; }
 .profit-amount, .profit-percent, .token-amount, .token-icon {
@@ -200,26 +230,76 @@ html, body {
 .share-btn { display: flex; flex-direction: column; align-items: center; cursor: pointer; }
 .share-btn small { font-size: 10px; color: #aaa; margin-top: 2px; }
 
-/* 🌐 Адаптация под горизонтальную ориентацию */
-@media (orientation: landscape) and (max-height: 500px) {
-  .logo { top: 10vh; max-width: 60vw; }
-  .amount-input { top: 35vh; }
-  .btn-play { top: 45vh; font-size: 28px; padding: 10px 40px; }
-  .menu-buttons { top: 55vh; }
+/* === 📱 Маленькие экраны === */
+@media (max-width: 400px), (max-height: 650px) {
+  .wallet-left { top: 13vh; left: 5vw; font-size: 12px; padding: 6px 12px; }
+  .wallet-right { top: 13vh; right: 3vw; }
+  .logo { top: 17vh; width: 50vw; max-width: 200px; }
+  .amount-input { top: 48vh; width: 59vw; left: 50%; transform: translateX(-50%); position: absolute; }
+  .btn-play { top: 55vh; font-size: 28px; padding: 10px 40px; }
+  .menu-buttons { top: 70vh; }
+  .profit-line, .tokens-line { font-size: 12px; }
+}
+
+/* === 🌐 iPad Pro / iPhone X === */
+@media (min-width: 820px) and (max-width: 1024px) and (orientation: portrait) {
+  .logo { top: 10vh; max-width: 300px; }
+  .amount-input { top: 40vh; width: 60vw; }
+  .btn-play { top: 50vh; font-size: 34px; }
+  .menu-buttons { top: 62vh; }
+  .profit-box { bottom: 4vh; }
+}
+
+@media (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
+  /* iPhone X */
+  .logo { top: 15vh; }
+  .amount-input { top: 45vh; width: 65vw; }
+  .btn-play { top: 52vh; }
+}
+
+/* === 🌐 Горизонтальный режим === */
+@media (orientation: landscape) and (max-height: 600px) {
+  html, body {
+    background-image: url('../img/noise.png'), radial-gradient(#00f 1px, transparent 1px), linear-gradient(135deg, #001428 0%, #000000 100%);
+  }
+  .wallet-left { top: 10vh; left: 14vw; font-size: 12px; }
+  .wallet-right { top: 10vh; right: 10vw; }
+  .logo { top: 2vh; width: 15vw; }
+  .amount-input { top: 38vh; }
+  .btn-play { top: 50vh; font-size: 28px; padding: 10px 40px; }
+  .menu-buttons { top: 70vh; left: 50vw;}
+  .profit-box { bottom: 67vh; left: 18vw; padding: 5px 5px; }
+}
+
+/* === 💻 Десктопы === */
+@media (min-width: 1024px) {
+  .wallet-left { top: 4vh; left: 4vw; }
+  .wallet-right { top: 4vh; right: 4vw; }
+  .amount-input { top: 55vh; }
+  .btn-play { top: 60vh; font-size: 48px; }
+  .logo { top: 5vh; max-width: 450px; }
+  .menu-buttons { top: 75vh; }
   .profit-box { bottom: 2vh; }
 }
 
-/* 💻 Адаптация под десктоп */
-@media (min-width: 1024px) {
-  .btn-play { font-size: 48px; }
-  .logo { max-width: 300px; }
-  .menu-buttons button { font-size: 18px; }
+/* === ❌ Предупреждение о горизонтальной ориентации === */
+.landscape-warning {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.95);
+  color: #fff;
+  font-size: 16px;
+  font-family: 'AntonSC', sans-serif;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 1000;
+  padding: 20px;
 }
+/* Удаляем скрытие wrapper */
+@media (orientation: landscape) and (max-height: 500px) {
+  .landscape-warning { display: none; }
 
-/* 📱 Адаптация под очень маленькие экраны */
-@media (max-width: 360px) {
-  .amount-input input { font-size: 12px; padding: 6px 12px; }
-  .btn-play { font-size: 28px; padding: 8px 40px; }
-  .menu-buttons button { font-size: 14px; padding: 10px 16px; }
-  .profit-line, .tokens-line { font-size: 12px; }
+
 }
