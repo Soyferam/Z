@@ -76,14 +76,27 @@ html, body {
   margin-right: 8px;
   user-select: none;
 }
+/* 🧪 Заглушка для ton-connect внутри .wallet-right */
 .wallet-right {
   position: absolute;
-  top: 16vh;
+  top: 12vh;
   right: 4vw;
   z-index: 10;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.wallet-right .dev-wallet-button {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px dashed rgba(255, 255, 255, 0.4);
+  color: #fff;
+  font-family: 'AntonSC', sans-serif;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 12px;
+  opacity: 0.6;
+  pointer-events: none;
 }
 .wallet-right #ton-connect button {
   background: rgba(255,255,255,0.1);
@@ -287,4 +300,6 @@ html, body {
 /* Удаляем скрытие wrapper */
 @media (orientation: landscape) and (max-height: 500px) {
   .landscape-warning { display: none; }
+
+
 }
