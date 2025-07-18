@@ -100,6 +100,25 @@ html, body {
   white-space: nowrap;
 }
 
+#ton-connect button {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
+  backdrop-filter: blur(12px) saturate(180%) !important;
+  border-radius: 20px !important;
+  padding: 10px 20px !important;
+  font-family: 'AntonSC', sans-serif !important;
+  font-size: 16px !important;
+  cursor: pointer !important;
+  user-select: none !important;
+}
+
+#ton-connect button:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: #d0f0ff !important;
+}
+
 /* === 🐍 Логотип ==== */
 .logo {
   position: absolute;
