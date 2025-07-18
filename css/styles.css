@@ -87,7 +87,6 @@ html, body {
   align-items: center;
 }
 
-
 .wallet-right .dev-wallet-button {
   background: rgba(255, 255, 255, 0.05);
   border: 1px dashed rgba(255, 255, 255, 0.4);
@@ -98,7 +97,7 @@ html, body {
   font-size: 12px;
   opacity: 0.6;
   pointer-events: none;
-}*/
+}
 .wallet-right #ton-connect button {
   background: rgba(255,255,255,0.1);
   backdrop-filter: blur(12px) saturate(180%);
