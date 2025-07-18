@@ -74,11 +74,15 @@ window.addEventListener("DOMContentLoaded", () => {
 
   function showSlide(index) {
     guideSlides.forEach((slide, i) => {
-      slide.classList.toggle('active', i === index);
-      const backBtn = slide.querySelector('.guide-back');
-      const nextBtn = slide.querySelector('.guide-next');
-      if (backBtn) backBtn.disabled = index === 0;
-      if (nextBtn) nextBtn.disabled = index === guideSlides.length - 1;
+      if (i === index) {
+        slide.classList.add('active');
+        const backBtn = slide.querySelector('.guide-back');
+        const nextBtn = slide.querySelector('.guide-next');
+        if (backBtn) backBtn.style.display = index === 0 ? 'none' : 'block';
+        if (nextBtn) nextBtn.style.display = index === guideSlides.length - 1 ? 'none' : 'block';
+      } else {
+        slide.classList.remove('active');
+      }
     });
 
     guideDots.forEach((dot, i) => {

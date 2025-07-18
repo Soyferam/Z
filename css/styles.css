@@ -252,7 +252,7 @@ html, body {
 /* === 🌐 Горизонтальный режим === */
 @media (orientation: landscape) and (max-height: 600px) {
   html, body {
-    background-image: url('../img/noise.png'), radial-gradient(#00f 1px, transparent 1px), linear-gradient(135deg, #001428 0%, #000000 100%);
+    background-image: url('../img/noise.png'), radial-gradient(#00f 1px, transparent 1px), linear-gradient(135deg, #001428 0%, #000000  🙂100);
   }
   .wallet-left { top: 10vh; left: 14vw; font-size: 12px; }
   .wallet-right { top: 10vh; right: 10vw; }
@@ -363,12 +363,6 @@ html, body {
   font-family: 'AntonSC', sans-serif;
   color: #fff;
   cursor: pointer;
-}
-
-.guide-back:disabled, .guide-next:disabled {
-  background: rgba(255, 255, 255, 0.05);
-  color: #aaa;
-  cursor: not-allowed;
 }
 
 .guide-dots {
