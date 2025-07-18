@@ -51,54 +51,42 @@ html, body {
   margin: 0 auto;
 }
 
-/* === 💳 Баланс и кошелёк === */
-.wallet-left, .wallet-right {
+/* === 💳 Баланс и кнопка кошелька теперь вместе === */
+.wallet-left {
   position: absolute;
   top: 12vh;
-  z-index: 10;
-}
-.wallet-left {
   left: 5vw;
+  z-index: 10;
+
   background: rgba(255,255,255,0.1);
   backdrop-filter: blur(12px) saturate(180%);
   border: 1px solid rgba(255,255,255,0.25);
   box-shadow: 0 4px 16px rgba(0,0,0,0.2);
   border-radius: 20px;
+
   padding: 8px 20px;
+
   display: flex;
   align-items: center;
+  gap: 12px; /* отступ между балансом и кнопкой */
+
   font-size: 16px;
   font-family: 'AntonSC', sans-serif;
+
   cursor: pointer;
 }
+
 .wallet-left img {
   width: 20px;
-  margin-right: 8px;
   user-select: none;
-}
-/* 🧪 Заглушка для ton-connect внутри .wallet-right */
-.wallet-right {
-  position: absolute;
-  top: 12vh;
-  right: 4vw;
-  z-index: 10;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-right: 8px;
 }
 
-.wallet-right .dev-wallet-button {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px dashed rgba(255, 255, 255, 0.4);
-  color: #fff;
-  font-family: 'AntonSC', sans-serif;
-  border-radius: 20px;
-  padding: 10px 20px;
-  font-size: 12px;
-  opacity: 0.6;
-  pointer-events: none;
-}
-.wallet-right #ton-connect button {
+/* Кнопка TonConnect внутри wallet-left */
+#wallet-left #ton-connect button,
+#wallet-left #ton-connect .dev-wallet-button,
+#ton-connect button,
+#ton-connect .dev-wallet-button {
   background: rgba(255,255,255,0.1);
   backdrop-filter: blur(12px) saturate(180%);
   border: 1px solid rgba(255,255,255,0.25);
@@ -233,7 +221,6 @@ html, body {
 /* === 📱 Маленькие экраны === */
 @media (max-width: 400px), (max-height: 650px) {
   .wallet-left { top: 13vh; left: 5vw; font-size: 12px; padding: 6px 12px; }
-  .wallet-right { top: 13vh; right: 3vw; }
   .logo { top: 17vh; width: 50vw; max-width: 200px; }
   .amount-input { top: 48vh; width: 59vw; left: 50%; transform: translateX(-50%); position: absolute; }
   .btn-play { top: 55vh; font-size: 28px; padding: 10px 40px; }
@@ -263,7 +250,6 @@ html, body {
     background-image: url('../img/noise.png'), radial-gradient(#00f 1px, transparent 1px), linear-gradient(135deg, #001428 0%, #000000 100%);
   }
   .wallet-left { top: 10vh; left: 14vw; font-size: 12px; }
-  .wallet-right { top: 10vh; right: 10vw; }
   .logo { top: 2vh; width: 15vw; }
   .amount-input { top: 38vh; }
   .btn-play { top: 50vh; font-size: 28px; padding: 10px 40px; }
@@ -274,7 +260,6 @@ html, body {
 /* === 💻 Десктопы === */
 @media (min-width: 1024px) {
   .wallet-left { top: 4vh; left: 4vw; }
-  .wallet-right { top: 4vh; right: 4vw; }
   .amount-input { top: 55vh; }
   .btn-play { top: 60vh; font-size: 48px; }
   .logo { top: 5vh; max-width: 450px; }
@@ -300,6 +285,4 @@ html, body {
 /* Удаляем скрытие wrapper */
 @media (orientation: landscape) and (max-height: 500px) {
   .landscape-warning { display: none; }
-
-
 }
