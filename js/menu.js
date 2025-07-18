@@ -14,9 +14,16 @@ window.addEventListener("DOMContentLoaded", () => {
     buttonRootId: "ton-connect",
   });
 
+  // Элементы
+  const depositInput = document.getElementById("depositInput");
+  const customKeyboard = document.getElementById("customKeyboard");
+  const keyboardCloseBtn = document.getElementById("keyboardCloseBtn");
+  const playBtn = document.getElementById("playBtn");
+  const profitBox = document.getElementById("profitBox");
+
   // ▶️ Кнопка PLAY
-  document.getElementById("playBtn").addEventListener("click", () => {
-    const amt = parseFloat(document.getElementById("depositInput").value);
+  playBtn.addEventListener("click", () => {
+    const amt = parseFloat(depositInput.value);
     if (isNaN(amt) || amt <= 0) {
       alert("Please enter a valid TON amount.");
       return;
@@ -48,34 +55,101 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 👀 Скрыть/показать блок профита при фокусе
-  const profitBox = document.getElementById("profitBox");
-  const depositInput = document.getElementById("depositInput");
-
+  // 👀 Скрыть/показать блок профита при фокусе (оставляем как есть)
   if (profitBox && depositInput) {
     depositInput.addEventListener("focus", () => {
       profitBox.style.opacity = "0";
       profitBox.style.pointerEvents = "none";
+      openKeyboard();
     });
 
     depositInput.addEventListener("blur", () => {
       setTimeout(() => {
+        // Здесь не скрываем клавиатуру, т.к. она закрывается крестиком или Enter
         profitBox.style.opacity = "1";
         profitBox.style.pointerEvents = "auto";
-      }, 100); // чуть задержим, чтобы клавиатура точно свернулась
+      }, 100);
     });
-
-      /*// 🔍 Показывать заглушку, если TonConnect не загрузился
-  if (!window.TON_CONNECT_UI) {
-    const fallback = document.createElement("button");
-    fallback.innerText = "Connect Wallet (Dev)";
-    fallback.className = "dev-wallet-button";
-    
-    const tonConnectDiv = document.getElementById("ton-connect");
-    if (tonConnectDiv && tonConnectDiv.children.length === 0) {
-      tonConnectDiv.appendChild(fallback);
-    }
-  }*/
- 
   }
+
+  // Открыть кастомную клавиатуру
+  function openKeyboard() {
+    if (customKeyboard.classList.contains("hidden")) {
+      customKeyboard.classList.remove("hidden");
+      customKeyboard.setAttribute("aria-hidden", "false");
+    }
+  }
+
+  // Закрыть кастомную клавиатуру
+  function closeKeyboard() {
+    if (!customKeyboard.classList.contains("hidden")) {
+      customKeyboard.classList.add("hidden");
+      customKeyboard.setAttribute("aria-hidden", "true");
+      depositInput.blur();
+    }
+  }
+
+  // Обработка кликов по кнопкам клавиатуры
+  let lastClickTime = 0;
+  customKeyboard.addEventListener("click", (e) => {
+    if (e.target.tagName !== "BUTTON") return;
+
+    const now = Date.now();
+    if (now - lastClickTime < 150) {
+      // Предотвращаем быстрые двойные нажатия
+      e.preventDefault();
+      return;
+    }
+    lastClickTime = now;
+
+    const key = e.target.dataset.key;
+    if (!key) return;
+
+    if (key === "backspace") {
+      // Удаляем последний символ
+      depositInput.value = depositInput.value.slice(0, -1);
+    } else if (key === "enter") {
+      // Закрываем клавиатуру и триггерим нажатие playBtn
+      closeKeyboard();
+      playBtn.click();
+    } else if (key === "close") {
+      // Закрыть клавиатуру крестиком
+      closeKeyboard();
+    } else {
+      // Добавляем цифру или точку
+
+      // Логика:  
+      // - Разрешаем только 1 точку
+      // - Максимум 10 символов (примерно), можно расширить или убрать ограничение
+      if (key === ".") {
+        if (depositInput.value.includes(".")) return;
+        if (depositInput.value.length === 0) {
+          // Если ввод сразу с точки — добавляем 0.
+          depositInput.value = "0.";
+          return;
+        }
+      }
+      // Максимальная длина — 10 символов (цифры + точка)
+      if (depositInput.value.length >= 10) return;
+
+      // Добавляем
+      depositInput.value += key;
+    }
+
+    // Фокус на инпут, чтобы визуально всегда был активен
+    depositInput.focus();
+  });
+
+  // Закрытие клавиатуры крестиком
+  keyboardCloseBtn.addEventListener("click", () => {
+    closeKeyboard();
+  });
+
+  // При клике по инпуту — открыть клавиатуру
+  depositInput.addEventListener("click", () => {
+    openKeyboard();
+  });
+
+  // Чтобы не выскакивала системная клавиатура, инпут readonly и кастомная клавиатура
+
 });
