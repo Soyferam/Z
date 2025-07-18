@@ -2,38 +2,76 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Loading...</title>
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: #000;
-      color: #00FF00;
-      font-family: monospace;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-  </style>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>ZmeiFi Menu</title>
+
+  <!-- Локальные стили -->
+  <link rel="stylesheet" href="./css/styles.css" />
+
+  <!-- Telegram SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js" defer></script>
+  <!-- TonConnect UI SDK -->
+  <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js" defer></script>
+  <!-- Меню-скрипт -->
+  <script src="./js/menu.js" defer></script>
 </head>
 <body>
-  <div>Loading...</div>
+  <div class="wrapper">
+    <div class="background-glow"></div>
 
-  <script>
-    window.addEventListener("DOMContentLoaded", () => {
-      const tg = window.Telegram?.WebApp;
-      if (tg) {
-        tg.ready();
-        tg.expand();
-        tg.requestFullscreen?.();
-      }
-      setTimeout(() => {
-        window.location.href = "menu.html";
-      }, 300); // небольшая задержка, чтобы fullscreen успел примениться
-    });
-  </script>
+    <!-- 💳 Баланс и кнопка кошелька вместе слева -->
+    <div class="wallet-left" id="wallet-left">
+      <img src="./img/logo.png" alt="TON" />
+      106.05
+      <div id="ton-connect"></div>
+    </div>
+
+    <!-- 🐍 Логотип -->
+    <img src="./img/snake-logo.png" alt="ZmeiFi Logo" class="logo" />
+
+    <!-- 💰 Ввод TON -->
+    <div class="amount-input">
+      <input
+        type="number"
+        inputmode="decimal"
+        step="0.01"
+        min="0"
+        placeholder="Enter TON amount"
+        id="depositInput"
+      />
+    </div>
+
+    <!-- ▶️ Кнопка PLAY -->
+    <button class="btn-play" id="playBtn">PLAY</button>
+
+    <!-- 📋 Меню -->
+    <div class="menu-buttons">
+      <button id="btnGuide">GUIDE</button>
+      <button id="btnRewards">REWARDS</button>
+      <button id="btnLeaderboard">LEADERBOARD</button>
+      <button id="btnWithdraw">WITHDRAW</button>
+      <button id="btnReferral">REFERRAL</button>
+    </div>
+
+    <!-- 📈 Профит -->
+    <div class="profit-box" id="profitBox">
+      <div class="profit-text">
+        <div class="profit-line">
+          Profit: <span class="profit-amount">50$</span>
+          <span class="profit-percent">(20%)</span>
+        </div>
+        <div class="tokens-line">
+          Tokens: <span class="token-amount">2937</span>
+          <span class="token-icon">⚡</span>
+        </div>
+      </div>
+      <div class="share-btn" id="shareBtn">
+        🔗 <small>SHARE</small>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

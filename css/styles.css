@@ -82,27 +82,14 @@ html, body {
   margin-right: 8px;
 }
 
-/* Кнопка TonConnect внутри wallet-left */
+/* Стили для кнопки TonConnect внутри wallet-left */
 #wallet-left #ton-connect button,
 #wallet-left #ton-connect .dev-wallet-button,
 #ton-connect button,
 #ton-connect .dev-wallet-button {
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(12px) saturate(180%);
-  border: 1px solid rgba(255,255,255,0.25);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-  border-radius: 20px;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-family: 'AntonSC', sans-serif;
-  color: #fff;
-  cursor: pointer;
-}
-
-#ton-connect button {
-  background: rgba(255, 255, 255, 0.1) !important;
+  background: rgba(255,255,255,0.1) !important;
   backdrop-filter: blur(12px) saturate(180%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  border: 1px solid rgba(255,255,255,0.25) !important;
   box-shadow: 0 4px 16px rgba(0,0,0,0.2) !important;
   border-radius: 20px !important;
   padding: 10px 20px !important;
@@ -110,6 +97,7 @@ html, body {
   font-family: 'AntonSC', sans-serif !important;
   color: #fff !important;
   cursor: pointer !important;
+  white-space: nowrap;
 }
 
 /* === 🐍 Логотип ==== */
