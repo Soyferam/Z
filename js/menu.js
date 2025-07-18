@@ -26,7 +26,6 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   // 🧭 Навигация по меню
-  document.getElementById("btnGuide").onclick       = () => window.location.href = "guide.html";
   document.getElementById("btnRewards").onclick     = () => alert("Rewards not ready yet");
   document.getElementById("btnLeaderboard").onclick = () => window.location.href = "stats.html";
   document.getElementById("btnWithdraw").onclick    = () => window.location.href = "withdraw.html";
@@ -64,18 +63,70 @@ window.addEventListener("DOMContentLoaded", () => {
         profitBox.style.pointerEvents = "auto";
       }, 100); // чуть задержим, чтобы клавиатура точно свернулась
     });
-
-      /*// 🔍 Показывать заглушку, если TonConnect не загрузился
-  if (!window.TON_CONNECT_UI) {
-    const fallback = document.createElement("button");
-    fallback.innerText = "Connect Wallet (Dev)";
-    fallback.className = "dev-wallet-button";
-    
-    const tonConnectDiv = document.getElementById("ton-connect");
-    if (tonConnectDiv && tonConnectDiv.children.length === 0) {
-      tonConnectDiv.appendChild(fallback);
-    }
-  }*/
- 
   }
+
+  // 🧭 Guide functionality
+  const guideModal = document.getElementById('guideModal');
+  const guideClose = document.getElementById('guideClose');
+  const guideSlides = document.querySelectorAll('.guide-slide');
+  const guideDots = document.querySelectorAll('.dot');
+  let currentSlide = 0;
+
+  function showSlide(index) {
+    guideSlides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === index);
+      const backBtn = slide.querySelector('.guide-back');
+      const nextBtn = slide.querySelector('.guide-next');
+      if (backBtn) backBtn.disabled = index === 0;
+      if (nextBtn) nextBtn.disabled = index === guideSlides.length - 1;
+    });
+
+    guideDots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === index);
+    });
+  }
+
+  // Open guide
+  document.getElementById('btnGuide').addEventListener('click', () => {
+    guideModal.style.display = 'block';
+    currentSlide = 0;
+    showSlide(currentSlide);
+  });
+
+  // Close guide
+  guideClose.addEventListener('click', () => {
+    guideModal.style.display = 'none';
+  });
+
+  // Navigation buttons
+  guideSlides.forEach(slide => {
+    const nextBtn = slide.querySelector('.guide-next');
+    const backBtn = slide.querySelector('.guide-back');
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        if (currentSlide < guideSlides.length - 1) {
+          currentSlide++;
+          showSlide(currentSlide);
+        }
+      });
+    }
+
+    if (backBtn) {
+      backBtn.addEventListener('click', () => {
+        if (currentSlide > 0) {
+          currentSlide--;
+          showSlide(currentSlide);
+        }
+      });
+    }
+  });
+
+  // Dots
+  guideDots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      currentSlide = index;
+      showSlide(currentSlide);
+    });
+  });
 });
