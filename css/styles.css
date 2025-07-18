@@ -80,7 +80,6 @@ html, body {
 .wallet-right {
   position: absolute;
   top: 12vh;
-  font-size: 16px;
   right: 4vw;
   z-index: 10;
   display: flex;
