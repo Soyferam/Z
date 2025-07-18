@@ -26,10 +26,10 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   // 🧭 Навигация по меню
-  document.getElementById("btnRewards").onclick     = () => alert("Rewards not ready yet");
+  document.getElementById("btnRewards").onclick = () => alert("Rewards not ready yet");
   document.getElementById("btnLeaderboard").onclick = () => window.location.href = "stats.html";
-  document.getElementById("btnWithdraw").onclick    = () => window.location.href = "withdraw.html";
-  document.getElementById("btnReferral").onclick    = () => alert("Referral system coming soon");
+  document.getElementById("btnWithdraw").onclick = () => window.location.href = "withdraw.html";
+  document.getElementById("btnReferral").onclick = () => alert("Referral system coming soon");
 
   // 📤 Share кнопка (если поддерживается)
   const shareBtn = document.getElementById("shareBtn");
@@ -61,7 +61,7 @@ window.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => {
         profitBox.style.opacity = "1";
         profitBox.style.pointerEvents = "auto";
-      }, 100); // чуть задержим, чтобы клавиатура точно свернулась
+      }, 100); // Задержка для сворачивания клавиатуры
     });
   }
 
@@ -74,14 +74,16 @@ window.addEventListener("DOMContentLoaded", () => {
 
   function showSlide(index) {
     guideSlides.forEach((slide, i) => {
-      if (i === index) {
-        slide.classList.add('active');
-        const backBtn = slide.querySelector('.guide-back');
-        const nextBtn = slide.querySelector('.guide-next');
-        if (backBtn) backBtn.style.display = index === 0 ? 'none' : 'block';
-        if (nextBtn) nextBtn.style.display = index === guideSlides.length - 1 ? 'none' : 'block';
-      } else {
-        slide.classList.remove('active');
+      slide.classList.toggle('active', i === index);
+      const backBtn = slide.querySelector('.guide-back');
+      const nextBtn = slide.querySelector('.guide-next');
+      if (backBtn) {
+        backBtn.style.display = index === 0 ? 'none' : 'block';
+        backBtn.textContent = 'Back'; // Гарантируем наличие текста
+      }
+      if (nextBtn) {
+        nextBtn.style.display = index === guideSlides.length - 1 ? 'none' : 'block';
+        nextBtn.textContent = 'Next'; // Гарантируем наличие текста
       }
     });
 

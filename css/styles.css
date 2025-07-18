@@ -259,7 +259,7 @@ html, body {
   .logo { top: 2vh; width: 15vw; }
   .amount-input { top: 38vh; }
   .btn-play { top: 50vh; font-size: 28px; padding: 10px 40px; }
-  .menu-buttons { top: 70vh; left: 50vw;}
+  .menu-buttons { top: 70vh; left: 50vw; }
   .profit-box { bottom: 67vh; left: 18vw; padding: 5px 5px; }
 }
 
@@ -363,6 +363,9 @@ html, body {
   font-family: 'AntonSC', sans-serif;
   color: #fff;
   cursor: pointer;
+  text-align: center;
+  line-height: normal;
+  min-width: 80px;
 }
 
 .guide-dots {
