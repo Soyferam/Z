@@ -76,6 +76,7 @@ html, body {
   margin-right: 8px;
   user-select: none;
 }
+/* 🧪 Заглушка для ton-connect внутри .wallet-right */
 .wallet-right {
   position: absolute;
   top: 12vh;
@@ -85,6 +86,7 @@ html, body {
   justify-content: center;
   align-items: center;
 }
+
 .wallet-right #ton-connect button {
   background: rgba(255,255,255,0.1);
   backdrop-filter: blur(12px) saturate(180%);
@@ -135,7 +137,6 @@ html, body {
   text-align: center;
   outline: none;
   font-family: 'Press Start 2P', monospace;
-  caret-color: #1eff00;
 }
 
 /* === ▶️ Кнопка PLAY === */
@@ -221,77 +222,6 @@ html, body {
 .share-btn { display: flex; flex-direction: column; align-items: center; cursor: pointer; }
 .share-btn small { font-size: 10px; color: #aaa; margin-top: 2px; }
 
-/* === === Клавиатура === */
-
-.custom-keyboard {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 400px;
-  background: rgba(255, 255, 255, 0.07);
-  backdrop-filter: blur(14px) saturate(180%);
-  -webkit-backdrop-filter: blur(14px) saturate(180%);
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.3);
-  z-index: 10000;
-  padding: 12px 14px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  user-select: none;
-  touch-action: manipulation;
-  font-family: 'AntonSC', sans-serif;
-}
-
-.custom-keyboard.hidden {
-  display: none;
-}
-
-.custom-keyboard button {
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 14px;
-  color: #fff;
-  font-size: 22px;
-  font-weight: 700;
-  cursor: pointer;
-  padding: 14px 0;
-  transition: background-color 0.25s ease;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  user-select: none;
-}
-
-.custom-keyboard button:active {
-  background: rgba(30, 255, 0, 0.5);
-  color: #000;
-  transform: scale(0.95);
-  transition: none;
-}
-
-/* Особые кнопки */
-.custom-keyboard .btn-backspace {
-  font-size: 22px;
-}
-.custom-keyboard .btn-enter {
-  background: #1eff00;
-  color: #000;
-  font-weight: 900;
-  grid-column: span 1;
-}
-.custom-keyboard .btn-close {
-  background: transparent;
-  color: #fff;
-  font-size: 28px;
-  font-weight: 900;
-  justify-content: center;
-  padding: 0;
-}
-
 /* === 📱 Маленькие экраны === */
 @media (max-width: 400px), (max-height: 650px) {
   .wallet-left { top: 13vh; left: 5vw; font-size: 12px; padding: 6px 12px; }
@@ -301,13 +231,6 @@ html, body {
   .btn-play { top: 55vh; font-size: 28px; padding: 10px 40px; }
   .menu-buttons { top: 70vh; }
   .profit-line, .tokens-line { font-size: 12px; }
-  .custom-keyboard button {
-    font-size: 18px;
-    padding: 12px 0;
-  }
-  .custom-keyboard .btn-enter {
-    grid-column: span 4;
-  }
 }
 
 /* === 🌐 iPad Pro / iPhone X === */
@@ -336,7 +259,8 @@ html, body {
   .logo { top: 2vh; width: 15vw; }
   .amount-input { top: 38vh; }
   .btn-play { top: 50vh; font-size: 28px; padding: 10px 40px; }
-  .menu-buttons { top: 70vh; left: 50%; transform: translateX(-50%); }
+  .menu-buttons { top: 70vh; left: 50vw;}
+  .profit-box { bottom: 67vh; left: 18vw; padding: 5px 5px; }
 }
 
 /* === 💻 Десктопы === */

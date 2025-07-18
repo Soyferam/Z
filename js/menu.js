@@ -9,77 +9,73 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   // ✅ TonConnect UI
- // TonConnect UI инициализация
-const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-  manifestUrl: "https://zmeifi.com/tonconnect-manifest.json",
-});
+  new TON_CONNECT_UI.TonConnectUI({
+    manifestUrl: "https://z-ten-iota.vercel.app/tonconnect-manifest.json",
+    buttonRootId: "ton-connect",
+  });
 
-// Вставляем кнопку подключения в div
-tonConnectUI.connectButton(document.getElementById("ton-connect"));
+  // ▶️ Кнопка PLAY
+  document.getElementById("playBtn").addEventListener("click", () => {
+    const amt = parseFloat(document.getElementById("depositInput").value);
+    if (isNaN(amt) || amt <= 0) {
+      alert("Please enter a valid TON amount.");
+      return;
+    }
+    sessionStorage.setItem("depositAmount", amt);
+    window.location.href = "game.html";
+  });
 
-// Отслеживаем смену статуса подключения
-tonConnectUI.onStatusChange((wallet) => {
-  const tonConnectDiv = document.getElementById("ton-connect");
-  if (wallet) {
-    tonConnectDiv.textContent = `Connected: ${wallet.account}`;
-  } else {
-    tonConnectDiv.textContent = "Connect Wallet";
+  // 🧭 Навигация по меню
+  document.getElementById("btnGuide").onclick       = () => window.location.href = "guide.html";
+  document.getElementById("btnRewards").onclick     = () => alert("Rewards not ready yet");
+  document.getElementById("btnLeaderboard").onclick = () => window.location.href = "stats.html";
+  document.getElementById("btnWithdraw").onclick    = () => window.location.href = "withdraw.html";
+  document.getElementById("btnReferral").onclick    = () => alert("Referral system coming soon");
+
+  // 📤 Share кнопка (если поддерживается)
+  const shareBtn = document.getElementById("shareBtn");
+  if (shareBtn) {
+    shareBtn.addEventListener("click", () => {
+      if (navigator.share) {
+        navigator.share({
+          title: "ZmeiFi Game",
+          text: "Check out ZmeiFi — awesome TON game!",
+          url: location.href,
+        }).catch(console.error);
+      } else {
+        alert("Sharing not supported on this device");
+      }
+    });
   }
-});
 
-
-  const playBtn = document.getElementById("playBtn");
+  // 👀 Скрыть/показать блок профита при фокусе
+  const profitBox = document.getElementById("profitBox");
   const depositInput = document.getElementById("depositInput");
 
-  // Клавиатура
-  const keyboard = document.getElementById("customKeyboard");
-  const keyboardCloseBtn = document.getElementById("keyboardCloseBtn");
+  if (profitBox && depositInput) {
+    depositInput.addEventListener("focus", () => {
+      profitBox.style.opacity = "0";
+      profitBox.style.pointerEvents = "none";
+    });
 
-  // Показать клавиатуру при фокусе
-  depositInput.addEventListener("focus", () => {
-    openKeyboard();
-  });
+    depositInput.addEventListener("blur", () => {
+      setTimeout(() => {
+        profitBox.style.opacity = "1";
+        profitBox.style.pointerEvents = "auto";
+      }, 100); // чуть задержим, чтобы клавиатура точно свернулась
+    });
 
-  // Обработчик нажатий на кнопки клавиатуры
-  keyboard.addEventListener("click", (e) => {
-    const btn = e.target.closest("button");
-    if (!btn) return;
-
-    const key = btn.dataset.key;
-
-    if (!key) return;
-
-    if (key === "backspace") {
-      depositInput.value = depositInput.value.slice(0, -1);
-    } else if (key === "close") {
-      closeKeyboard();
-    } else if (key === "enter") {
-      // Просто закрываем клавиатуру, не вызываем playBtn.click()
-      closeKeyboard();
-    } else {
-      // Добавляем символ, если это цифра или точка
-      if ((/[\d.]/).test(key)) {
-        // Проверка на одну точку
-        if (key === "." && depositInput.value.includes(".")) {
-          return;
-        }
-        depositInput.value += key;
-      }
+      /*// 🔍 Показывать заглушку, если TonConnect не загрузился
+  if (!window.TON_CONNECT_UI) {
+    const fallback = document.createElement("button");
+    fallback.innerText = "Connect Wallet (Dev)";
+    fallback.className = "dev-wallet-button";
+    
+    const tonConnectDiv = document.getElementById("ton-connect");
+    if (tonConnectDiv && tonConnectDiv.children.length === 0) {
+      tonConnectDiv.appendChild(fallback);
     }
-  });
-
-  keyboardCloseBtn.addEventListener("click", () => {
-    closeKeyboard();
-  });
-
-  function openKeyboard() {
-    keyboard.classList.remove("hidden");
-    keyboard.setAttribute("aria-hidden", "false");
-  }
-
-  function closeKeyboard() {
-    keyboard.classList.add("hidden");
-    keyboard.setAttribute("aria-hidden", "true");
-    depositInput.blur();
+  }*/
+ 
   }
 });
