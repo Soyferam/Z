@@ -14,14 +14,14 @@ window.addEventListener("DOMContentLoaded", () => {
     buttonRootId: "ton-connect",
   });
 
-  const depositInput = document.getElementById("depositInput");
+ const depositInput = document.getElementById("depositInput");
   const customKeyboard = document.getElementById("customKeyboard");
   const profitBox = document.getElementById("profitBox");
   const delKey = document.getElementById("delKey");
   const closeKeyboardBtn = document.getElementById("closeKeyboardBtn");
 
-  // Показываем клавиатуру при фокусе на input
-  depositInput.addEventListener("focus", () => {
+  // Показываем кастомную клавиатуру по клику на input (readonly не дает фокус)
+  depositInput.addEventListener("click", () => {
     customKeyboard.style.display = "block";
     if (profitBox) {
       profitBox.style.opacity = "0";
@@ -29,39 +29,42 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Закрываем клавиатуру по кнопке
+  // Кнопка закрытия клавиатуры
   closeKeyboardBtn.addEventListener("click", () => {
     customKeyboard.style.display = "none";
-    depositInput.blur();
     if (profitBox) {
       profitBox.style.opacity = "1";
       profitBox.style.pointerEvents = "auto";
     }
   });
 
-  // Удаление последнего символа
+  // Удаление символа
   delKey.addEventListener("click", () => {
     depositInput.value = depositInput.value.slice(0, -1);
   });
 
-  // Обработчик нажатий на цифровые кнопки и точку
+  // Обработчик нажатия на цифры и точку
   customKeyboard.querySelectorAll("button.key").forEach((btn) => {
-    if (btn.id === "delKey" || btn.id === "closeKeyboardBtn") return; // пропускаем удаление и закрытие
+    if (btn.id === "delKey" || btn.id === "closeKeyboardBtn") return;
 
     btn.addEventListener("click", () => {
       const val = btn.textContent;
       const current = depositInput.value;
 
       if (val === ".") {
-        // Вводим точку только один раз
+        if (!current.includes(".")) {
+          depositInput.value += val;
+        }
+      if (val === ".") {
         if (!current.includes(".")) {
           depositInput.value += val;
         }
       } else {
         depositInput.value += val;
       }
+    }
     });
-  });
+    });
 
   // PLAY кнопка (пример проверки суммы)
   document.getElementById("playBtn").addEventListener("click", () => {
