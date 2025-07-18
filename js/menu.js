@@ -9,16 +9,24 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   // ✅ TonConnect UI
-  new TON_CONNECT_UI.TonConnectUI({
-    manifestUrl: "https://zmeifi.com/tonconnect-manifest.json",
-  }).onStatusChange((wallet) => {
-    const tonConnectDiv = document.getElementById("ton-connect");
-    if (wallet) {
-      tonConnectDiv.textContent = `Connected: ${wallet.account}`;
-    } else {
-      tonConnectDiv.textContent = "Connect Wallet";
-    }
-  });
+ // TonConnect UI инициализация
+const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+  manifestUrl: "https://zmeifi.com/tonconnect-manifest.json",
+});
+
+// Вставляем кнопку подключения в div
+tonConnectUI.connectButton(document.getElementById("ton-connect"));
+
+// Отслеживаем смену статуса подключения
+tonConnectUI.onStatusChange((wallet) => {
+  const tonConnectDiv = document.getElementById("ton-connect");
+  if (wallet) {
+    tonConnectDiv.textContent = `Connected: ${wallet.account}`;
+  } else {
+    tonConnectDiv.textContent = "Connect Wallet";
+  }
+});
+
 
   const playBtn = document.getElementById("playBtn");
   const depositInput = document.getElementById("depositInput");
