@@ -1,5 +1,5 @@
 window.addEventListener("DOMContentLoaded", () => {
-  // Telegram WebApp Init
+  // ✅ Telegram WebApp
   const tg = window.Telegram?.WebApp;
   if (tg) {
     tg.ready();
@@ -8,67 +8,15 @@ window.addEventListener("DOMContentLoaded", () => {
     document.body.style.overflow = "hidden";
   }
 
-  // TonConnect UI Init
+  // ✅ TonConnect UI
   new TON_CONNECT_UI.TonConnectUI({
     manifestUrl: "https://z-ten-iota.vercel.app/tonconnect-manifest.json",
     buttonRootId: "ton-connect",
   });
 
- const depositInput = document.getElementById("depositInput");
-  const customKeyboard = document.getElementById("customKeyboard");
-  const profitBox = document.getElementById("profitBox");
-  const delKey = document.getElementById("delKey");
-  const closeKeyboardBtn = document.getElementById("closeKeyboardBtn");
-
-  // Показываем кастомную клавиатуру по клику на input (readonly не дает фокус)
-  depositInput.addEventListener("click", () => {
-    customKeyboard.style.display = "block";
-    if (profitBox) {
-      profitBox.style.opacity = "0";
-      profitBox.style.pointerEvents = "none";
-    }
-  });
-
-  // Кнопка закрытия клавиатуры
-  closeKeyboardBtn.addEventListener("click", () => {
-    customKeyboard.style.display = "none";
-    if (profitBox) {
-      profitBox.style.opacity = "1";
-      profitBox.style.pointerEvents = "auto";
-    }
-  });
-
-  // Удаление символа
-  delKey.addEventListener("click", () => {
-    depositInput.value = depositInput.value.slice(0, -1);
-  });
-
-  // Обработчик нажатия на цифры и точку
-  customKeyboard.querySelectorAll("button.key").forEach((btn) => {
-    if (btn.id === "delKey" || btn.id === "closeKeyboardBtn") return;
-
-    btn.addEventListener("click", () => {
-      const val = btn.textContent;
-      const current = depositInput.value;
-
-      if (val === ".") {
-        if (!current.includes(".")) {
-          depositInput.value += val;
-        }
-      if (val === ".") {
-        if (!current.includes(".")) {
-          depositInput.value += val;
-        }
-      } else {
-        depositInput.value += val;
-      }
-    }
-    });
-    });
-
-  // PLAY кнопка (пример проверки суммы)
+  // ▶️ Кнопка PLAY
   document.getElementById("playBtn").addEventListener("click", () => {
-    const amt = parseFloat(depositInput.value);
+    const amt = parseFloat(document.getElementById("depositInput").value);
     if (isNaN(amt) || amt <= 0) {
       alert("Please enter a valid TON amount.");
       return;
@@ -77,35 +25,57 @@ window.addEventListener("DOMContentLoaded", () => {
     window.location.href = "game.html";
   });
 
-  // Меню навигация
-  const navMap = {
-    btnGuide: "guide.html",
-    btnLeaderboard: "stats.html",
-    btnWithdraw: "withdraw.html",
-  };
-  for (const [id, url] of Object.entries(navMap)) {
-    document.getElementById(id)?.addEventListener("click", () => {
-      window.location.href = url;
+  // 🧭 Навигация по меню
+  document.getElementById("btnGuide").onclick       = () => window.location.href = "guide.html";
+  document.getElementById("btnRewards").onclick     = () => alert("Rewards not ready yet");
+  document.getElementById("btnLeaderboard").onclick = () => window.location.href = "stats.html";
+  document.getElementById("btnWithdraw").onclick    = () => window.location.href = "withdraw.html";
+  document.getElementById("btnReferral").onclick    = () => alert("Referral system coming soon");
+
+  // 📤 Share кнопка (если поддерживается)
+  const shareBtn = document.getElementById("shareBtn");
+  if (shareBtn) {
+    shareBtn.addEventListener("click", () => {
+      if (navigator.share) {
+        navigator.share({
+          title: "ZmeiFi Game",
+          text: "Check out ZmeiFi — awesome TON game!",
+          url: location.href,
+        }).catch(console.error);
+      } else {
+        alert("Sharing not supported on this device");
+      }
     });
   }
 
-  document.getElementById("btnRewards")?.addEventListener("click", () => {
-    alert("Rewards not ready yet");
-  });
+  // 👀 Скрыть/показать блок профита при фокусе
+  const profitBox = document.getElementById("profitBox");
+  const depositInput = document.getElementById("depositInput");
 
-  document.getElementById("btnReferral")?.addEventListener("click", () => {
-    alert("Referral system coming soon");
-  });
-
-  // Share кнопка
-  const shareBtn = document.getElementById("shareBtn");
-  if (shareBtn && navigator.share) {
-    shareBtn.addEventListener("click", () => {
-      navigator.share({
-        title: "ZmeiFi Game",
-        text: "Check out ZmeiFi — awesome TON game!",
-        url: location.href,
-      }).catch(console.error);
+  if (profitBox && depositInput) {
+    depositInput.addEventListener("focus", () => {
+      profitBox.style.opacity = "0";
+      profitBox.style.pointerEvents = "none";
     });
+
+    depositInput.addEventListener("blur", () => {
+      setTimeout(() => {
+        profitBox.style.opacity = "1";
+        profitBox.style.pointerEvents = "auto";
+      }, 100); // чуть задержим, чтобы клавиатура точно свернулась
+    });
+
+      /*// 🔍 Показывать заглушку, если TonConnect не загрузился
+  if (!window.TON_CONNECT_UI) {
+    const fallback = document.createElement("button");
+    fallback.innerText = "Connect Wallet (Dev)";
+    fallback.className = "dev-wallet-button";
+    
+    const tonConnectDiv = document.getElementById("ton-connect");
+    if (tonConnectDiv && tonConnectDiv.children.length === 0) {
+      tonConnectDiv.appendChild(fallback);
+    }
+  }*/
+ 
   }
 });

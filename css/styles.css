@@ -1,3 +1,4 @@
+/* === 📦 Локальные шрифты === */
 @font-face {
   font-family: 'AntonSC';
   src: url('../fonts/AntonSC-Regular.ttf') format('truetype');
@@ -9,6 +10,7 @@
        url('../fonts/PressStart2P-Regular.ttf') format('truetype');
 }
 
+/* === 🌌 Общий фон === */
 html, body {
   margin: 0;
   padding: 0;
@@ -30,6 +32,7 @@ html, body {
   position: relative;
 }
 
+/* === ✨ Фон-свечение === */
 .background-glow {
   position: fixed;
   inset: 0;
@@ -39,6 +42,7 @@ html, body {
   z-index: 0;
 }
 
+/* === 📱 Обёртка === */
 .wrapper {
   position: relative;
   height: 100vh;
@@ -47,6 +51,7 @@ html, body {
   margin: 0 auto;
 }
 
+/* === 💳 Баланс и кошелёк === */
 .wallet-left, .wallet-right {
   position: absolute;
   top: 12vh;
@@ -71,14 +76,17 @@ html, body {
   margin-right: 8px;
   user-select: none;
 }
+/* 🧪 Заглушка для ton-connect внутри .wallet-right */
 .wallet-right {
-  right: 4vw;
+  position: absolute;
   top: 12vh;
+  right: 4vw;
   z-index: 10;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .wallet-right #ton-connect button {
   background: rgba(255,255,255,0.1);
   backdrop-filter: blur(12px) saturate(180%);
@@ -95,6 +103,7 @@ html, body {
   justify-content: center;
 }
 
+/* === 🐍 Логотип ==== */
 .logo {
   position: absolute;
   top: 17vh;
@@ -106,6 +115,7 @@ html, body {
   z-index: 10;
 }
 
+/* === 💰 Ввод TON === */
 .amount-input {
   position: absolute;
   top: 47vh;
@@ -129,39 +139,7 @@ html, body {
   font-family: 'Press Start 2P', monospace;
 }
 
-.custom-keyboard {
-  position: absolute;
-  top: 62vh;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(14px) saturate(180%);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 20px;
-  padding: 12px;
-  z-index: 100;
-  display: none;
-}
-.custom-keyboard .key-row {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin: 6px 0;
-}
-.custom-keyboard button {
-  width: 60px;
-  height: 60px;
-  font-size: 20px;
-  font-family: 'AntonSC', sans-serif;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.25);
-  border-radius: 16px;
-  color: #fff;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  user-select: none;
-}
-
+/* === ▶️ Кнопка PLAY === */
 .btn-play {
   position: absolute;
   top: 52vh;
@@ -181,6 +159,7 @@ html, body {
   z-index: 10;
 }
 
+/* === 📋 Кнопки меню === */
 .menu-buttons {
   position: absolute;
   top: 70vh;
@@ -210,9 +189,9 @@ html, body {
   min-width: 90px;
   max-width: 140px;
   white-space: nowrap;
-  user-select: none;
 }
 
+/* === 📈 Блок профита === */
 .profit-box {
   position: fixed;
   left: 50%;
@@ -233,35 +212,15 @@ html, body {
   box-sizing: border-box;
   z-index: 100;
   font-family: 'Press Start 2P', monospace;
-  user-select: none;
 }
-.profit-text {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.profit-line, .tokens-line {
-  font-size: 14px;
-  white-space: nowrap;
-}
+.profit-text { display: flex; flex-direction: column; gap: 4px; }
+.profit-line, .tokens-line { font-size: 14px; white-space: nowrap; }
 .profit-amount, .profit-percent, .token-amount, .token-icon {
-  color: #1eff00;
-  margin-left: 4px;
+  color: #1eff00; margin-left: 4px;
 }
-.token-icon {
-  font-size: 14px;
-}
-.share-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-}
-.share-btn small {
-  font-size: 10px;
-  color: #aaa;
-  margin-top: 2px;
-}
+.token-icon { font-size: 14px; }
+.share-btn { display: flex; flex-direction: column; align-items: center; cursor: pointer; }
+.share-btn small { font-size: 10px; color: #aaa; margin-top: 2px; }
 
 /* === 📱 Маленькие экраны === */
 @media (max-width: 400px), (max-height: 650px) {
