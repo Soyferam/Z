@@ -44,7 +44,11 @@ html, body {
 
 /* === 📱 Обёртка === */
 .wrapper {
-  height: calc(var(--vh, 1vh) * 100);
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
 }
 
 /* === 💳 Баланс и кошелёк === */
