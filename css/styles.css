@@ -76,19 +76,28 @@ html, body {
   margin-right: 8px;
   user-select: none;
 }
+/* 🧪 Заглушка для ton-connect внутри .wallet-right */
 .wallet-right {
+  position: absolute;
+  top: 12vh;
   right: 4vw;
+  z-index: 10;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Убираем стили заглушки, чтобы не мешала */
 .wallet-right .dev-wallet-button {
-  display: none !important;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px dashed rgba(255, 255, 255, 0.4);
+  color: #fff;
+  font-family: 'AntonSC', sans-serif;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 12px;
+  opacity: 0.6;
+  pointer-events: none;
 }
-
-/* Стиль для кнопки TonConnect в #ton-connect */
 .wallet-right #ton-connect button {
   background: rgba(255,255,255,0.1);
   backdrop-filter: blur(12px) saturate(180%);
@@ -100,11 +109,6 @@ html, body {
   font-family: 'AntonSC', sans-serif;
   color: #fff;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.wallet-right #ton-connect button:hover {
-  background: rgba(255,255,255,0.2);
 }
 
 /* === 🐍 Логотип ==== */
@@ -296,4 +300,6 @@ html, body {
 /* Удаляем скрытие wrapper */
 @media (orientation: landscape) and (max-height: 500px) {
   .landscape-warning { display: none; }
+
+
 }

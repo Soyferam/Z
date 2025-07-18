@@ -1,32 +1,17 @@
 window.addEventListener("DOMContentLoaded", () => {
-  // ✅ Эмуляция Telegram WebApp в обычном браузере
-  if (!window.Telegram) {
-    window.Telegram = {
-      WebApp: {
-        ready: () => console.log("Telegram WebApp: ready (mocked)"),
-        expand: () => console.log("Telegram WebApp: expand (mocked)"),
-        requestFullscreen: () => console.log("Telegram WebApp: fullscreen (mocked)")
-      }
-    };
+  // ✅ Telegram WebApp
+  const tg = window.Telegram?.WebApp;
+  if (tg) {
+    tg.ready();
+    tg.expand();
+    tg.requestFullscreen?.();
+    document.body.style.overflow = "hidden";
   }
 
-  // ✅ Telegram WebApp
-  const tg = window.Telegram.WebApp;
-  tg.ready();
-  tg.expand();
-  tg.requestFullscreen?.();
-  document.body.style.overflow = "hidden";
-
-  // ✅ Инициализация TonConnect UI
+  // ✅ TonConnect UI
   new TON_CONNECT_UI.TonConnectUI({
     manifestUrl: "https://z-ten-iota.vercel.app/tonconnect-manifest.json",
     buttonRootId: "ton-connect",
-    uiPreferences: {
-      language: "en",
-      borderRadius: "20px",
-      colorsSet: "dark",
-      theme: "dark"
-    }
   });
 
   // ▶️ Кнопка PLAY
@@ -47,7 +32,7 @@ window.addEventListener("DOMContentLoaded", () => {
   document.getElementById("btnWithdraw").onclick    = () => window.location.href = "withdraw.html";
   document.getElementById("btnReferral").onclick    = () => alert("Referral system coming soon");
 
-  // 📤 Share кнопка
+  // 📤 Share кнопка (если поддерживается)
   const shareBtn = document.getElementById("shareBtn");
   if (shareBtn) {
     shareBtn.addEventListener("click", () => {
@@ -63,7 +48,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 👀 Скрытие блока профита при фокусе на input
+  // 👀 Скрыть/показать блок профита при фокусе
   const profitBox = document.getElementById("profitBox");
   const depositInput = document.getElementById("depositInput");
 
@@ -77,7 +62,19 @@ window.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => {
         profitBox.style.opacity = "1";
         profitBox.style.pointerEvents = "auto";
-      }, 100);
+      }, 100); // чуть задержим, чтобы клавиатура точно свернулась
     });
+
+      // 🔍 Показывать заглушку, если TonConnect не загрузился
+  if (!window.TON_CONNECT_UI) {
+    const fallback = document.createElement("button");
+    fallback.innerText = "Connect Wallet (Dev)";
+    fallback.className = "dev-wallet-button";
+    
+    const tonConnectDiv = document.getElementById("ton-connect");
+    if (tonConnectDiv && tonConnectDiv.children.length === 0) {
+      tonConnectDiv.appendChild(fallback);
+    }
+  }
   }
 });
