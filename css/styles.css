@@ -1,3 +1,4 @@
+/* === 📦 Локальные шрифты === */
 @font-face {
   font-family: 'AntonSC';
   src: url('../fonts/AntonSC-Regular.ttf') format('truetype');
@@ -274,21 +275,21 @@ html, body {
 
 /* Особые кнопки */
 .custom-keyboard .btn-backspace {
-  font-size: 20px;
+  font-size: 22px;
 }
 .custom-keyboard .btn-enter {
-  grid-column: span 2;
   background: #1eff00;
   color: #000;
   font-weight: 900;
+  grid-column: span 1;
 }
 .custom-keyboard .btn-close {
   background: transparent;
   color: #fff;
-  font-size: 18px;
-  justify-content: flex-end;
-  padding-right: 10px;
-  font-weight: normal;
+  font-size: 28px;
+  font-weight: 900;
+  justify-content: center;
+  padding: 0;
 }
 
 /* === 📱 Маленькие экраны === */
@@ -307,7 +308,6 @@ html, body {
   .custom-keyboard .btn-enter {
     grid-column: span 4;
   }
-}
 }
 
 /* === 🌐 iPad Pro / iPhone X === */
@@ -336,8 +336,7 @@ html, body {
   .logo { top: 2vh; width: 15vw; }
   .amount-input { top: 38vh; }
   .btn-play { top: 50vh; font-size: 28px; padding: 10px 40px; }
-  .menu-buttons { top: 70vh; left: 50vw;}
-  .profit-box { bottom: 67vh; left: 18vw; padding: 5px 5px; }
+  .menu-buttons { top: 70vh; left: 50%; transform: translateX(-50%); }
 }
 
 /* === 💻 Десктопы === */
