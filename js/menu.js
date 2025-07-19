@@ -81,12 +81,13 @@ window.addEventListener("DOMContentLoaded", () => {
       const backBtn = slide.querySelector('.guide-back');
       const nextBtn = slide.querySelector('.guide-next');
       const video = slide.querySelector('video');
+      const source = slide.querySelector('video source');
 
       if (backBtn) {
         backBtn.style.display = index === 0 ? 'none' : 'block';
         backBtn.style.visibility = index === 0 ? 'hidden' : 'visible';
         backBtn.textContent = backBtn.dataset.text || 'Back';
-        console.log(`[Guide] Slide ${i + 1}: Back button display=${backBtn.style.display}, visibility=${backBtn.style.visibility}, text=${backBtn.textContent}, order=${window.getComputedStyle(backBtn).order}`);
+        console.log(`[Guide] Slide ${i + 1}: Back button display=${backBtn.style.display}, visibility=${backBtn.style.visibility}, text=${backBtn.textContent}, position=${window.getComputedStyle(backBtn).position}, left=${window.getComputedStyle(backBtn).left}`);
       } else {
         console.warn(`[Guide] Slide ${i + 1}: Back button not found`);
       }
@@ -95,14 +96,19 @@ window.addEventListener("DOMContentLoaded", () => {
         nextBtn.style.display = index === guideSlides.length - 1 ? 'none' : 'block';
         nextBtn.style.visibility = index === guideSlides.length - 1 ? 'hidden' : 'visible';
         nextBtn.textContent = nextBtn.dataset.text || 'Next';
-        console.log(`[Guide] Slide ${i + 1}: Next button display=${nextBtn.style.display}, visibility=${nextBtn.style.visibility}, text=${nextBtn.textContent}, order=${window.getComputedStyle(nextBtn).order}`);
+        console.log(`[Guide] Slide ${i + 1}: Next button display=${nextBtn.style.display}, visibility=${nextBtn.style.visibility}, text=${nextBtn.textContent}, position=${window.getComputedStyle(nextBtn).position}, right=${window.getComputedStyle(nextBtn).right}`);
       } else {
         console.warn(`[Guide] Slide ${i + 1}: Next button not found`);
       }
 
-      if (video) {
+      if (video && source) {
         if (isActive) {
-          video.play().catch(error => console.error("Video play error:", error));
+          // Загружаем видео только для активного слайда
+          if (!source.src) {
+            source.src = source.dataset.src || `./videos/guide${i + 1}.mp4`;
+            video.load();
+          }
+          video.play().catch(error => console.error(`[Guide] Video play error on slide ${i + 1}:`, error));
         } else {
           video.pause();
         }

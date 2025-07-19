@@ -305,15 +305,16 @@ html, body {
   border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   border-radius: 20px;
-  padding: 20px;
+  padding: 15px;
   width: 80%;
-  max-width: 600px;
-  max-height: 80%;
+  max-width: 340px; /* Соответствует .amount-input для компактности */
+  max-height: 70vh; /* Ограничение высоты */
   overflow-y: auto;
   color: #fff;
   font-family: 'Press Start 2P', monospace;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  box-sizing: border-box;
 }
 
 .guide-slide {
@@ -326,14 +327,24 @@ html, body {
 
 .guide-slide img {
   width: 100%;
+  max-width: 300px; /* Ограничение ширины для изображений */
   height: auto;
   margin-bottom: 10px;
   border-radius: 10px;
 }
 
+.guide-slide video {
+  width: 100%;
+  max-width: 300px; /* Соответствует оригинальным изображениям */
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  object-fit: contain; /* Сохраняет пропорции 3:4 */
+}
+
 .guide-slide p {
-  font-size: 14px;
-  margin: 0 0 20px 0;
+  font-size: 12px; /* Уменьшен для компактности */
+  margin: 0 0 15px 0;
   color: #fff !important;
 }
 
@@ -341,9 +352,9 @@ html, body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 15px;
   width: 100%;
-  min-height: 40px; /* Защищает пространство для кнопок */
+  min-height: 36px; /* Уменьшено для компактности */
 }
 
 .guide-back {
@@ -352,15 +363,15 @@ html, body {
   border: 1px solid rgba(255, 255, 255, 0.25) !important;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
   border-radius: 20px !important;
-  padding: 10px 20px !important;
-  font-size: 14px !important;
+  padding: 8px 16px !important;
+  font-size: 12px !important; /* Уменьшен для компактности */
   font-family: 'AntonSC', Arial, sans-serif !important;
   color: #fff !important;
   cursor: pointer;
   text-align: center;
   line-height: 20px !important;
-  min-width: 80px;
-  height: 40px;
+  min-width: 70px;
+  height: 36px; /* Уменьшено для компактности */
   visibility: visible;
   opacity: 1;
 }
@@ -371,15 +382,15 @@ html, body {
   border: 1px solid rgba(255, 255, 255, 0.25) !important;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
   border-radius: 20px !important;
-  padding: 10px 20px !important;
-  font-size: 14px !important;
+  padding: 8px 16px !important;
+  font-size: 12px !important; /* Уменьшен для компактности */
   font-family: 'AntonSC', Arial, sans-serif !important;
   color: #fff !important;
   cursor: pointer;
   text-align: center;
   line-height: 20px !important;
-  min-width: 80px;
-  height: 40px;
+  min-width: 70px;
+  height: 36px; /* Уменьшено для компактности */
   visibility: visible;
   opacity: 1;
 }
@@ -395,12 +406,12 @@ html, body {
 }
 
 .dot {
-  width: 10px;
-  height: 10px;
+  width: 8px; /* Уменьшено для компактности */
+  height: 8px;
   background: rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   display: inline-block;
-  margin: 0 5px;
+  margin: 0 4px;
   cursor: pointer;
 }
 
@@ -410,12 +421,53 @@ html, body {
 
 .guide-close {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 8px;
+  right: 8px;
   background: none;
   border: none;
-  font-size: 24px;
+  font-size: 20px; /* Уменьшен для компактности */
   cursor: pointer;
   color: #fff !important;
   font-family: 'AntonSC', Arial, sans-serif;
+}
+
+/* === 📱 Адаптивность для маленьких экранов === */
+@media (max-width: 400px), (max-height: 650px) {
+  .wallet-left { top: 13vh; left: 5vw; font-size: 12px; padding: 6px 12px; }
+  .wallet-right { top: 13vh; right: 3vw; }
+  .logo { top: 17vh; width: 50vw; max-width: 200px; }
+  .amount-input { top: 48vh; width: 59vw; left: 50%; transform: translateX(-50%); position: absolute; }
+  .btn-play { top: 55vh; font-size: 28px; padding: 10px 40px; }
+  .menu-buttons { top: 70vh; }
+  .profit-line, .tokens-line { font-size: 12px; }
+  .guide-content {
+    width: 90%;
+    max-width: 300px; /* Компактнее для маленьких экранов */
+    padding: 10px;
+  }
+  .guide-slide img, .guide-slide video {
+    max-width: 260px; /* Компактнее для маленьких экранов */
+  }
+  .guide-slide p {
+    font-size: 11px;
+  }
+  .guide-nav {
+    min-height: 32px;
+  }
+  .guide-back, .guide-next {
+    padding: 6px 12px !important;
+    font-size: 11px !important;
+    min-width: 60px;
+    height: 32px;
+  }
+  .guide-close {
+    top: 6px;
+    right: 6px;
+    font-size: 18px;
+  }
+  .dot {
+    width: 7px;
+    height: 7px;
+    margin: 0 3px;
+  }
 }
