@@ -80,6 +80,7 @@ window.addEventListener("DOMContentLoaded", () => {
       slide.classList.toggle('active', isActive);
       const backBtn = slide.querySelector('.guide-back');
       const nextBtn = slide.querySelector('.guide-next');
+      const video = slide.querySelector('video');
 
       if (backBtn) {
         backBtn.style.display = index === 0 ? 'none' : 'block';
@@ -97,6 +98,14 @@ window.addEventListener("DOMContentLoaded", () => {
         console.log(`[Guide] Slide ${i + 1}: Next button display=${nextBtn.style.display}, visibility=${nextBtn.style.visibility}, text=${nextBtn.textContent}, order=${window.getComputedStyle(nextBtn).order}`);
       } else {
         console.warn(`[Guide] Slide ${i + 1}: Next button not found`);
+      }
+
+      if (video) {
+        if (isActive) {
+          video.play().catch(error => console.error("Video play error:", error));
+        } else {
+          video.pause();
+        }
       }
     });
 
@@ -117,6 +126,8 @@ window.addEventListener("DOMContentLoaded", () => {
   guideClose.addEventListener('click', () => {
     console.log("[Guide] Closing guide modal");
     guideModal.style.display = 'none';
+    // Пауза всех видео при закрытии
+    document.querySelectorAll('.guide-slide video').forEach(video => video.pause());
   });
 
   // Navigation buttons
