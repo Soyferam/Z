@@ -1,11 +1,11 @@
 /* === 📦 Локальные шрифты === */
 @font-face {
   font-family: 'AntonSC';
-  src: url('./fonts/AntonSC-Regular.ttf') format('truetype');
+  src: url('../fonts/AntonSC-Regular.ttf') format('truetype');
 }
 @font-face {
   font-family: 'Press Start 2P';
-  src: url('./fonts/PressStart2P-Regular.ttf') format('truetype');
+  src: url('../fonts/PressStart2P-Regular.ttf') format('truetype');
 }
 
 /* === 🌌 Общий фон === */
