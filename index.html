@@ -10,6 +10,7 @@
   <link rel="preload" href="./videos/guide1.mp4" as="video">
   <link rel="preload" href="./img/logo.png" as="image">
   <link rel="preload" href="./img/snake-logo.png" as="image">
+  <link rel="preload" href="./css/styles.css" as="style">
   <style>
     /* Определение шрифтов */
     @font-face {
@@ -66,16 +67,30 @@
         tg.requestFullscreen?.();
       }
 
-      // Ожидаем загрузки шрифтов и первого видео
-      Promise.all([
-        document.fonts.ready,
-        // Проверяем загрузку первого видео
-        new Promise(resolve => {
-          const video = document.createElement('video');
-          video.src = './videos/guide1.mp4';
-          video.onloadeddata = resolve;
-          video.onerror = () => resolve(); // Если ошибка, продолжаем
-        })
+      // Ожидаем загрузки шрифтов и первого видео с таймаутом 5 секунд
+      Promise.race([
+        Promise.all([
+          document.fonts.ready, // Ждём шрифты
+          new Promise(resolve => {
+            const video = document.createElement('video');
+            video.src = './videos/guide1.mp4';
+            video.onloadeddata = resolve;
+            video.onerror = () => resolve(); // Если ошибка, продолжаем
+          }),
+          new Promise(resolve => {
+            const img1 = new Image();
+            img1.src = './img/logo.png';
+            img1.onload = resolve;
+            img1.onerror = () => resolve();
+          }),
+          new Promise(resolve => {
+            const img2 = new Image();
+            img2.src = './img/snake-logo.png';
+            img2.onload = resolve;
+            img2.onerror = () => resolve();
+          })
+        ]),
+        new Promise(resolve => setTimeout(resolve, 5000)) // Таймаут 5 секунд
       ]).then(() => {
         // Сохраняем флаг для автоматического открытия гайда
         sessionStorage.setItem('openGuideOnLoad', 'true');
