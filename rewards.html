@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="./css/styles.css" />
   <script src="https://telegram.org/js/telegram-web-app.js" defer></script>
   <script src="./js/common.js" defer></script>
+  <script src="./js/rewards.js" defer></script>
 </head>
 <body>
   <div class="wrapper">
@@ -19,12 +20,13 @@
     <h1 class="page-title">Rewards</h1>
     <!-- Список наград -->
     <div class="rewards-list">
-      <ul>
-        <li>First Win: <span>100 Tokens ⚡</span></li>
-        <li>Top 10 Leaderboard: <span>500 Tokens ⚡</span></li>
-        <li>Daily Login: <span>50 Tokens ⚡</span></li>
-        <li>Invite Friend: <span>200 Tokens ⚡</span></li>
-      </ul>
+      <div class="rewards-header">
+        <span>Task</span>
+        <span>Reward</span>
+      </div>
+      <div class="rewards-scroll">
+        <div class="rewards-items" id="rewardsItems"></div>
+      </div>
     </div>
   </div>
 </body>

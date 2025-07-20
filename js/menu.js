@@ -4,9 +4,19 @@ window.addEventListener("DOMContentLoaded", () => {
   if (tg) {
     tg.ready();
     tg.expand();
-    tg.requestFullscreen?.();
+    // Проверка и вызов requestFullscreen с обработкой ошибки
+    try {
+      if (tg.requestFullscreen && typeof tg.requestFullscreen === 'function') {
+        tg.requestFullscreen();
+        console.log("[Menu] requestFullscreen supported and called");
+      } else {
+        console.warn("[Menu] requestFullscreen not supported, skipping");
+      }
+    } catch (error) {
+      console.error("[Menu] Error with requestFullscreen:", error);
+    }
     document.body.style.overflow = "hidden";
-    console.log("[Guide] Telegram WebApp initialized");
+    console.log("[Menu] Telegram WebApp initialized");
   }
 
   // ✅ TonConnect UI
@@ -23,16 +33,51 @@ window.addEventListener("DOMContentLoaded", () => {
       return;
     }
     sessionStorage.setItem("depositAmount", amt);
-    window.location.href = "game.html";
+    window.location.href = "/game.html";
   });
 
   // 🧭 Навигация по меню
-  document.getElementById("btnRewards").onclick = () => window.location.href = "rewards.html";
-  document.getElementById("btnLeaderboard").onclick = () => window.location.href = "stats.html";
-  document.getElementById("btnWithdraw").onclick = () => window.location.href = "withdraw.html";
-  document.getElementById("btnReferral").onclick = () => window.location.href = "referral.html";
+  const btnRewards = document.getElementById("btnRewards");
+  if (btnRewards) {
+    btnRewards.onclick = () => {
+      console.log("[Menu] Redirecting to /rewards.html");
+      window.location.href = "/rewards.html";
+    };
+  } else {
+    console.error("[Menu] btnRewards not found");
+  }
 
-  // 📤 Share кнопка (если поддерживается)
+  const btnLeaderboard = document.getElementById("btnLeaderboard");
+  if (btnLeaderboard) {
+    btnLeaderboard.onclick = () => {
+      console.log("[Menu] Redirecting to /stats.html");
+      window.location.href = "/stats.html";
+    };
+  } else {
+    console.error("[Menu] btnLeaderboard not found");
+  }
+
+  const btnWithdraw = document.getElementById("btnWithdraw");
+  if (btnWithdraw) {
+    btnWithdraw.onclick = () => {
+      console.log("[Menu] Redirecting to /withdraw.html");
+      window.location.href = "/withdraw.html";
+    };
+  } else {
+    console.error("[Menu] btnWithdraw not found");
+  }
+
+  const btnReferral = document.getElementById("btnReferral");
+  if (btnReferral) {
+    btnReferral.onclick = () => {
+      console.log("[Menu] Redirecting to /referral.html");
+      window.location.href = "/referral.html";
+    };
+  } else {
+    console.error("[Menu] btnReferral not found");
+  }
+
+  // 📤 Share кнопка
   const shareBtn = document.getElementById("shareBtn");
   if (shareBtn) {
     shareBtn.addEventListener("click", () => {
@@ -48,25 +93,23 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 👀 Скрыть/показать блок профита при фокусе
+  // 👀 Скрыть/показать блок профита
   const profitBox = document.getElementById("profitBox");
   const depositInput = document.getElementById("depositInput");
-
   if (profitBox && depositInput) {
     depositInput.addEventListener("focus", () => {
       profitBox.style.opacity = "0";
       profitBox.style.pointerEvents = "none";
     });
-
     depositInput.addEventListener("blur", () => {
       setTimeout(() => {
         profitBox.style.opacity = "1";
         profitBox.style.pointerEvents = "auto";
-      }, 100); // Задержка для сворачивания клавиатуры
+      }, 100);
     });
   }
 
-  // 🧭 Guide functionality
+  // 🧭 Guide functionality (оставлено как есть)
   const guideModal = document.getElementById('guideModal');
   const guideClose = document.getElementById('guideClose');
   const guideSlides = document.querySelectorAll('.guide-slide');
@@ -87,7 +130,6 @@ window.addEventListener("DOMContentLoaded", () => {
         backBtn.style.display = index === 0 ? 'none' : 'block';
         backBtn.style.visibility = index === 0 ? 'hidden' : 'visible';
         backBtn.textContent = backBtn.dataset.text || 'Back';
-        console.log(`[Guide] Slide ${i + 1}: Back button display=${backBtn.style.display}, visibility=${backBtn.style.visibility}, text=${backBtn.textContent}, position=${window.getComputedStyle(backBtn).position}, left=${window.getComputedStyle(backBtn).left}`);
       } else {
         console.warn(`[Guide] Slide ${i + 1}: Back button not found`);
       }
@@ -96,14 +138,12 @@ window.addEventListener("DOMContentLoaded", () => {
         nextBtn.style.display = index === guideSlides.length - 1 ? 'none' : 'block';
         nextBtn.style.visibility = index === guideSlides.length - 1 ? 'hidden' : 'visible';
         nextBtn.textContent = nextBtn.dataset.text || 'Next';
-        console.log(`[Guide] Slide ${i + 1}: Next button display=${nextBtn.style.display}, visibility=${nextBtn.style.visibility}, text=${nextBtn.textContent}, position=${window.getComputedStyle(nextBtn).position}, right=${window.getComputedStyle(nextBtn).right}`);
       } else {
         console.warn(`[Guide] Slide ${i + 1}: Next button not found`);
       }
 
       if (video && source) {
         if (isActive) {
-          // Загружаем видео только для активного слайда
           if (!source.src) {
             source.src = source.dataset.src || `./videos/guide${i + 1}.mp4`;
             video.load();
@@ -132,7 +172,6 @@ window.addEventListener("DOMContentLoaded", () => {
   guideClose.addEventListener('click', () => {
     console.log("[Guide] Closing guide modal");
     guideModal.style.display = 'none';
-    // Пауза всех видео при закрытии
     document.querySelectorAll('.guide-slide video').forEach(video => video.pause());
   });
 
@@ -140,7 +179,6 @@ window.addEventListener("DOMContentLoaded", () => {
   guideSlides.forEach((slide, i) => {
     const nextBtn = slide.querySelector('.guide-next');
     const backBtn = slide.querySelector('.guide-back');
-
     if (nextBtn) {
       nextBtn.addEventListener('click', () => {
         if (currentSlide < guideSlides.length - 1) {
@@ -150,7 +188,6 @@ window.addEventListener("DOMContentLoaded", () => {
         }
       });
     }
-
     if (backBtn) {
       backBtn.addEventListener('click', () => {
         if (currentSlide > 0) {
@@ -171,13 +208,12 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Автоматическое открытие гайда при загрузке, если установлен флаг
+  // Auto-open guide
   if (sessionStorage.getItem('openGuideOnLoad') === 'true') {
     console.log("[Guide] Auto-opening guide modal on page load");
     guideModal.style.display = 'block';
     currentSlide = 0;
     showSlide(currentSlide);
-    // Сбрасываем флаг, чтобы гайд не открывался автоматически при обновлении
     sessionStorage.removeItem('openGuideOnLoad');
   }
 });
