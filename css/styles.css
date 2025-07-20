@@ -72,10 +72,7 @@ html, body {
   user-select: none;
 }
 .wallet-right {
-  position: absolute;
-  top: 12vh;
   right: 4vw;
-  z-index: 10;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -93,6 +90,69 @@ html, body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+.wallet-right#tokenBalance {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.25);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  border-radius: 20px;
+  padding: 8px 20px;
+  font-size: 16px;
+  font-family: 'AntonSC';
+  color: #1eff00; /* Bright green like profit-amount */
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Адаптивность для маленьких экранов */
+@media (max-width: 400px), (max-height: 650px) {
+  .wallet-left {
+    top: 13vh;
+    left: 5vw;
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+  .wallet-right {
+    top: 13vh;
+    right: 3vw;
+  }
+  .wallet-right#tokenBalance {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
+
+/* Горизонтальный режим */
+@media (orientation: landscape) and (max-height: 600px) {
+  .wallet-left {
+    top: 10vh;
+    left: 14vw;
+    font-size: 12px;
+  }
+  .wallet-right {
+    top: 10vh;
+    right: 10vw;
+  }
+  .wallet-right#tokenBalance {
+    font-size: 12px;
+  }
+}
+
+/* Десктопы */
+@media (min-width: 1024px) {
+  .wallet-left {
+    top: 4vh;
+    left: 4vw;
+  }
+  .wallet-right {
+    top: 4vh;
+    right: 4vw;
+  }
+  .wallet-right#tokenBalance {
+    font-size: 16px;
+  }
 }
 
 /* === 🐍 Логотип ==== */
@@ -201,19 +261,39 @@ html, body {
   z-index: 100;
   font-family: 'Press Start 2P';
 }
-.profit-text { display: flex; flex-direction: column; gap: 4px; }
-.profit-line, .tokens-line { font-size: 14px; white-space: nowrap; }
-.profit-amount, .profit-percent, .token-amount, .token-icon {
-  color: #1eff00; margin-left: 4px;
+.profit-text { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 4px; 
 }
-.token-icon { font-size: 14px; }
-.share-btn { display: flex; flex-direction: column; align-items: center; cursor: pointer; }
-.share-btn small { font-size: 10px; color: #aaa; margin-top: 2px; }
+.profit-line, .tokens-line { 
+  font-size: 14px; 
+  white-space: nowrap; 
+}
+.profit-amount, .profit-percent, .token-amount, .token-icon {
+  color: #1eff00; 
+  margin-left: 4px;
+}
+.token-icon { 
+  font-size: 14px; 
+}
+.share-btn { 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  cursor: pointer; 
+}
+.share-btn small { 
+  font-size: 10px; 
+  color: #aaa; 
+  margin-top: 2px; 
+}
 
 /* === 📱 Маленькие экраны === */
 @media (max-width: 400px), (max-height: 650px) {
   .wallet-left { top: 13vh; left: 5vw; font-size: 12px; padding: 6px 12px; }
   .wallet-right { top: 13vh; right: 3vw; }
+  .wallet-right#tokenBalance { font-size: 12px; padding: 6px 12px; }
   .logo { top: 17vh; width: 50vw; max-width: 200px; }
   .amount-input { top: 48vh; width: 59vw; left: 50%; transform: translateX(-50%); position: absolute; }
   .btn-play { top: 55vh; font-size: 28px; padding: 10px 40px; }
@@ -243,6 +323,7 @@ html, body {
   }
   .wallet-left { top: 10vh; left: 14vw; font-size: 12px; }
   .wallet-right { top: 10vh; right: 10vw; }
+  .wallet-right#tokenBalance { font-size: 12px; }
   .logo { top: 2vh; width: 15vw; }
   .amount-input { top: 38vh; }
   .btn-play { top: 50vh; font-size: 28px; padding: 10px 40px; }
@@ -254,6 +335,7 @@ html, body {
 @media (min-width: 1024px) {
   .wallet-left { top: 4vh; left: 4vw; }
   .wallet-right { top: 4vh; right: 4vw; }
+  .wallet-right#tokenBalance { font-size: 16px; }
   .amount-input { top: 55vh; }
   .btn-play { top: 60vh; font-size: 48px; }
   .logo { top: 5vh; max-width: 450px; }
@@ -582,16 +664,18 @@ html, body {
   flex: 1;
   text-align: left;
   font-size: 12px;
+  font-family: 'AntonSC';
 }
 
 .reward-button {
-  background: #1eff00; /* Bright green like profit-amount */
-  border: none;
-  border-radius: 5px;
+  background: #00cc00; /* Less acidic green */
+  border: 1px solid rgba(255, 255, 255, 0.25); /* Added border like back-btn */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Added shadow like back-btn */
+  border-radius: 20px; /* Rounded like back-btn */
   padding: 8px 12px;
   font-family: 'AntonSC';
   font-size: 12px;
-  color: #000;
+  color: #fff;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -600,12 +684,14 @@ html, body {
 }
 
 .reward-button:hover {
-  background: #00cc00; /* Slightly darker green on hover */
+  background: #00a300; /* Slightly darker green on hover */
 }
 
 .reward-button:disabled {
   background: #555;
   cursor: not-allowed;
+  border: 1px solid rgba(255, 255, 255, 0.25); /* Keep border for consistency */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Адаптивность для маленьких экранов */

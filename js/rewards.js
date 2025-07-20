@@ -1,8 +1,36 @@
 // rewards.js
 window.addEventListener("DOMContentLoaded", () => {
   const rewardsItems = document.getElementById("rewardsItems");
+  const tokenBalance = document.getElementById("tokenBalance");
 
-  // Mock server data (replace with actual API endpoint)
+  // Fetch token balance (mock for now, replace with API)
+  const fetchTokenBalance = async () => {
+    try {
+      // Placeholder for server request
+      // const response = await fetch('https://your-api.com/balance', {
+      //   method: 'GET',
+      //   headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem('token') }
+      // });
+      // const data = await response.json();
+      // return data.balance;
+
+      // Mock balance
+      return 2937;
+    } catch (error) {
+      console.error("[Rewards] Error fetching token balance:", error);
+      return 0;
+    }
+  };
+
+  // Update balance display
+  const updateBalance = async () => {
+    const balance = await fetchTokenBalance();
+    if (tokenBalance) {
+      tokenBalance.textContent = `${balance} ⚡`;
+    }
+  };
+
+  // Fetch tasks (mock data with corrected IDs)
   const fetchTasks = async () => {
     try {
       // Placeholder for server request
@@ -12,19 +40,15 @@ window.addEventListener("DOMContentLoaded", () => {
       // });
       // const tasks = await response.json();
 
-      // Mock data for demonstration
+      // Mock data with unique IDs
       const tasks = [
         { id: 1, description: "First Win", tokens: 100, completed: false },
         { id: 2, description: "Top 10 Leaderboard", tokens: 500, completed: true },
         { id: 3, description: "Daily Login", tokens: 50, completed: false },
         { id: 4, description: "Invite Friend", tokens: 200, completed: false },
         { id: 5, description: "Play 5 Games", tokens: 150, completed: false },
-        { id: 5, description: "Play 5 Games", tokens: 150, completed: false },
-        { id: 5, description: "Play 5 Games", tokens: 150, completed: false },
-        { id: 5, description: "Play 5 Games", tokens: 150, completed: false },
-        { id: 5, description: "Play 5 Games", tokens: 150, completed: false },
-        { id: 5, description: "Play 5 Games", tokens: 150, completed: false },
-        { id: 5, description: "Play 5 Games", tokens: 150, completed: false },
+        { id: 6, description: "Play 10 Games", tokens: 250, completed: false },
+        { id: 7, description: "Share Game", tokens: 100, completed: false },
       ];
       return tasks;
     } catch (error) {
@@ -43,8 +67,8 @@ window.addEventListener("DOMContentLoaded", () => {
       item.innerHTML = `
         <span class="reward-task">${task.description}</span>
         <button class="reward-button" data-task-id="${task.id}" ${
-        task.completed ? "disabled" : ""
-      }>
+          task.completed ? "disabled" : ""
+        }>
           ${task.tokens} ⚡
         </button>
       `;
@@ -63,11 +87,12 @@ window.addEventListener("DOMContentLoaded", () => {
       // const result = await response.json();
 
       // Mock response
-      const result = { success: true };
+      const result = { success: true, tokens: parseInt(taskId) };
       if (result.success) {
-        alert(`Claimed ${taskId} tokens!`);
-        // Refresh task list
+        alert(`Claimed ${result.tokens} tokens!`);
+        // Refresh task list and balance
         loadTasks();
+        updateBalance();
       } else {
         alert("Failed to claim reward.");
       }
@@ -77,7 +102,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // Load and render tasks
+  // Load and render tasks and balance
   const loadTasks = async () => {
     const tasks = await fetchTasks();
     renderTasks(tasks);
@@ -85,6 +110,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // Initial load
   loadTasks();
+  updateBalance();
 
   // Event delegation for claim buttons
   rewardsItems.addEventListener("click", (e) => {
