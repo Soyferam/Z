@@ -475,7 +475,7 @@ html, body {
 /* === 🔙 Кнопка Back === */
 .back-btn {
   position: absolute;
-  top: 12vh; /* На уровне баланса */
+  top: 12vh; /* На уровне баланса (как .wallet-left в menu.html) */
   left: 5vw;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.25);
@@ -517,12 +517,10 @@ html, body {
   }
 }
 
-/* Добавить в конец styles.css */
-
 /* === 📜 Заголовок страницы === */
 .page-title {
   position: absolute;
-  top: 52vh; /* Положение как у кнопки PLAY */
+  top: 52vh; /* Положение как у кнопки PLAY в menu.html */
   /* Чтобы изменить высоту, настрой top, например: top: 55vh; — ниже, top: 50vh; — выше */
   left: 50%;
   transform: translateX(-50%);
@@ -558,4 +556,160 @@ html, body {
   }
 }
 
+/* === 📋 Список наград (rewards.html) === */
+.rewards-list {
+  position: absolute;
+  top: 60vh; /* Ниже заголовка */
+  /* Чтобы изменить высоту, настрой top, например: top: 65vh; — ниже, top: 58vh; — выше */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 340px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 15px;
+  color: #fff;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  z-index: 10;
+}
+
+.rewards-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.rewards-list li {
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* === 📊 Таблица лидеров (stats.html) === */
+.leaderboard-table {
+  position: absolute;
+  top: 60vh; /* Ниже заголовка */
+  /* Чтобы изменить высоту, настрой top, например: top: 65vh; — ниже, top: 58vh; — выше */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 340px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 15px;
+  color: #fff;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  z-index: 10;
+}
+
+.leaderboard-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.leaderboard-table th,
+.leaderboard-table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.leaderboard-table th {
+  font-family: 'AntonSC', Arial, sans-serif;
+  font-size: 16px;
+}
+
+/* === 💸 Форма вывода (withdraw.html) === */
+.withdraw-form {
+  position: absolute;
+  top: 60vh; /* Ниже заголовка */
+  /* Чтобы изменить высоту, настрой top, например: top: 65vh; — ниже, top: 58vh; — выше */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 340px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 15px;
+  color: #fff;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  z-index: 10;
+}
+
+.withdraw-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 5px;
+  color: #fff;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+}
+
+.withdraw-form button {
+  width: 100%;
+  padding: 10px;
+  background: #00ff00;
+  border: none;
+  border-radius: 5px;
+  color: #000;
+  font-family: 'AntonSC', Arial, sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.withdraw-form button:hover {
+  background: #00cc00;
+}
+
+/* === 🔗 Реферальная ссылка (referral.html) === */
+.referral-box {
+  position: absolute;
+  top: 60vh; /* Ниже заголовка */
+  /* Чтобы изменить высоту, настрой top, например: top: 65vh; — ниже, top: 58vh; — выше */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 340px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 15px;
+  color: #fff;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  z-index: 10;
+}
+
+.referral-box input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 5px;
+  color: #fff;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+}
+
+.referral-box button {
+  width: 100%;
+  padding: 10px;
+  background: #00ff00;
+  border: none;
+  border-radius: 5px;
+  color: #000;
+  font-family: 'AntonSC', Arial, sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.referral-box button:hover {
+  background: #00cc00;
+}
 }

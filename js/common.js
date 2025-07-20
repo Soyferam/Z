@@ -26,26 +26,6 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 👀 Скрыть/показать блок профита при фокусе на любом input
-  const profitBox = document.getElementById("profitBox");
-  const inputs = document.querySelectorAll("input");
-
-  if (profitBox && inputs.length > 0) {
-    inputs.forEach(input => {
-      input.addEventListener("focus", () => {
-        profitBox.style.opacity = "0";
-        profitBox.style.pointerEvents = "none";
-      });
-
-      input.addEventListener("blur", () => {
-        setTimeout(() => {
-          profitBox.style.opacity = "1";
-          profitBox.style.pointerEvents = "auto";
-        }, 100); // Задержка для сворачивания клавиатуры
-      });
-    });
-  }
-
   // 🔙 Кнопка Back
   const backBtn = document.getElementById("backBtn");
   if (backBtn) {

@@ -13,27 +13,38 @@
 <body>
   <div class="wrapper">
     <div class="background-glow"></div>
-    <!-- 🔙 Кнопка Back -->
+    <!-- Кнопка Back -->
     <button class="back-btn" id="backBtn">Back</button>
-    <!-- 🐍 Логотип -->
-    <img src="./img/snake-logo.png" alt="ZmeiFi Logo" class="logo" />
-    <!-- 📜 Заголовок -->
+    <!-- Заголовок -->
     <h1 class="page-title">Leaderboard</h1>
-    <!-- 📈 Профит -->
-    <div class="profit-box" id="profitBox">
-      <div class="profit-text">
-        <div class="profit-line">
-          Profit: <span class="profit-amount">50$</span>
-          <span class="profit-percent">(20%)</span>
-        </div>
-        <div class="tokens-line">
-          Tokens: <span class="token-amount">2937</span>
-          <span class="token-icon">⚡</span>
-        </div>
-      </div>
-      <div class="share-btn" id="shareBtn">
-        🔗 <small>SHARE</small>
-      </div>
+    <!-- Таблица лидеров -->
+    <div class="leaderboard-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Player</th>
+            <th>Tokens</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>PlayerOne</td>
+            <td>5000 ⚡</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>SnakeMaster</td>
+            <td>4500 ⚡</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>ZmeiFiPro</td>
+            <td>4000 ⚡</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </body>
