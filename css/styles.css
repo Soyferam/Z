@@ -1,13 +1,13 @@
 /* === 📦 Локальные шрифты === */
 @font-face {
   font-family: 'AntonSC';
-  src: url('../fonts/AntonSC-Regular.ttf') format('truetype');
+  src: url('./fonts/AntonSC-Regular.ttf') format('truetype');
 }
 @font-face {
   font-family: 'Press Start 2P';
-  src: url('../fonts/PressStart2P-Regular.woff2') format('woff2'),
-       url('../fonts/PressStart2P-Regular.woff') format('woff'),
-       url('../fonts/PressStart2P-Regular.ttf') format('truetype');
+  src: url('./fonts/PressStart2P-Regular.woff2') format('woff2'),
+       url('./fonts/PressStart2P-Regular.woff') format('woff'),
+       url('./fonts/PressStart2P-Regular.ttf') format('truetype');
 }
 
 /* === 🌌 Общий фон === */
@@ -17,7 +17,7 @@ html, body {
   font-family: 'Press Start 2P', monospace;
   background-color: #000;
   background-image:
-    url('../img/noise.png'),
+    url('./img/noise.png'),
     radial-gradient(rgba(0, 0, 255, 0.2) 1px, transparent 1px),
     linear-gradient(135deg, #001428 0%, #000000 100%);
   background-size: cover, 20px 20px, cover;
@@ -241,7 +241,7 @@ html, body {
 /* === 🌐 Горизонтальный режим === */
 @media (orientation: landscape) and (max-height: 600px) {
   html, body {
-    background-image: url('../img/noise.png'), radial-gradient(#00f 1px, transparent 1px), linear-gradient(135deg, #001428 0%, #000000 100%);
+    background-image: url('./img/noise.png'), radial-gradient(#00f 1px, transparent 1px), linear-gradient(135deg, #001428 0%, #000000 100%);
   }
   .wallet-left { top: 10vh; left: 14vw; font-size: 12px; }
   .wallet-right { top: 10vh; right: 10vw; }
@@ -470,50 +470,40 @@ html, body {
     height: 7px;
     margin: 0 3px;
   }
-  /* Добавить в конец styles.css */
-
-/* === 🔙 Кнопка Back === */
-.back-btn {
-  position: absolute;
-  top: 18vh; /* Сдвинуто ниже, чтобы учесть кнопки выхода (было 12vh) */
-  left: 5vw;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-  border-radius: 20px;
-  padding: 8px 20px;
-  font-size: 16px;
-  font-family: 'AntonSC', Arial, sans-serif;
-  color: #fff;
-  cursor: pointer;
-  z-index: 10;
-  text-align: center;
-}
-
-/* Адаптивность для маленьких экранов */
-@media (max-width: 400px), (max-height: 650px) {
   .back-btn {
     top: 19vh; /* Сдвинуто ниже */
     left: 5vw;
     font-size: 12px;
     padding: 6px 12px;
   }
+  .page-title {
+    top: 26vh; /* Сдвинуто ниже */
+    font-size: 18px; /* Ещё меньше для компактности */
+  }
 }
 
-/* Горизонтальный режим */
+/* === 🌐 Горизонтальный режим === */
 @media (orientation: landscape) and (max-height: 600px) {
   .back-btn {
     top: 15vh; /* Сдвинуто ниже */
     left: 14vw;
     font-size: 12px;
   }
+  .page-title {
+    top: 20vh; /* Сдвинуто ниже */
+    font-size: 18px;
+  }
 }
 
-/* Десктопы */
+/* === 💻 Десктопы === */
 @media (min-width: 1024px) {
   .back-btn {
     top: 8vh; /* Сдвинуто ниже */
     left: 4vw;
+  }
+  .page-title {
+    top: 28vh; /* Сдвинуто ниже */
+    font-size: 28px;
   }
 }
 
@@ -521,7 +511,6 @@ html, body {
 .page-title {
   position: absolute;
   top: 25vh; /* Сдвинуто ниже, ниже кнопок выхода и баланса (было 52vh) */
-  /* Чтобы изменить высоту, настрой top, например: top: 28vh; — ниже, top: 22vh; — выше */
   left: 50%;
   transform: translateX(-50%);
   font-family: 'AntonSC', Arial, sans-serif;
@@ -532,35 +521,10 @@ html, body {
   text-align: center;
 }
 
-/* Адаптивность для маленьких экранов */
-@media (max-width: 400px), (max-height: 650px) {
-  .page-title {
-    top: 26vh; /* Сдвинуто ниже */
-    font-size: 18px; /* Ещё меньше для компактности */
-  }
-}
-
-/* Горизонтальный режим */
-@media (orientation: landscape) and (max-height: 600px) {
-  .page-title {
-    top: 20vh; /* Сдвинуто ниже */
-    font-size: 18px;
-  }
-}
-
-/* Десктопы */
-@media (min-width: 1024px) {
-  .page-title {
-    top: 28vh; /* Сдвинуто ниже */
-    font-size: 28px;
-  }
-}
-
 /* === 📋 Список наград (rewards.html) === */
 .rewards-list {
   position: absolute;
   top: 35vh; /* Сдвинуто ниже, ниже заголовка (было 60vh) */
-  /* Чтобы изменить высоту, настрой top, например: top: 38vh; — ниже, top: 32vh; — выше */
   left: 50%;
   transform: translateX(-50%);
   width: 80%;
@@ -590,7 +554,6 @@ html, body {
 .leaderboard-table {
   position: absolute;
   top: 35vh; /* Сдвинуто ниже, ниже заголовка (было 60vh) */
-  /* Чтобы изменить высоту, настрой top, например: top: 38vh; — ниже, top: 32vh; — выше */
   left: 50%;
   transform: translateX(-50%);
   width: 80%;
@@ -625,7 +588,6 @@ html, body {
 .withdraw-form {
   position: absolute;
   top: 35vh; /* Сдвинуто ниже, ниже заголовка (было 60vh) */
-  /* Чтобы изменить высоту, настрой top, например: top: 38vh; — ниже, top: 32vh; — выше */
   left: 50%;
   transform: translateX(-50%);
   width: 80%;
@@ -671,7 +633,6 @@ html, body {
 .referral-box {
   position: absolute;
   top: 35vh; /* Сдвинуто ниже, ниже заголовка (было 60vh) */
-  /* Чтобы изменить высоту, настрой top, например: top: 38vh; — ниже, top: 32vh; — выше */
   left: 50%;
   transform: translateX(-50%);
   width: 80%;
@@ -711,5 +672,4 @@ html, body {
 
 .referral-box button:hover {
   background: #00cc00;
-}
 }
