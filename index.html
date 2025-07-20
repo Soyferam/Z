@@ -3,100 +3,52 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Loading...</title>
-  <!-- Telegram SDK -->
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <!-- Предварительная загрузка ресурсов -->
-  <link rel="preload" href="./videos/guide1.mp4" as="video">
-  <link rel="preload" href="./img/logo.png" as="image">
-  <link rel="preload" href="./img/snake-logo.png" as="image">
-  <link rel="preload" href="./css/styles.css" as="style">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>ZmeiFi - Under Maintenance</title>
+  <link rel="stylesheet" href="./css/styles.min.css" />
   <style>
-    /* Определение шрифтов */
-    @font-face {
-      font-family: 'AntonSC';
-      src: url('../fonts/AntonSC-Regular.ttf') format('truetype');
-    }
-    @font-face {
-      font-family: 'Press Start 2P';
-      src: url('../fonts/PressStart2P-Regular.woff2') format('woff2'),
-           url('../fonts/PressStart2P-Regular.woff') format('woff'),
-           url('../fonts/PressStart2P-Regular.ttf') format('truetype');
-    }
-
-    /* Анимация точек */
-    .dots::after {
-      content: '';
-      animation: dots 1.5s infinite steps(4);
-    }
-
-    @keyframes dots {
-      0% { content: ''; }
-      25% { content: '.'; }
-      50% { content: '..'; }
-      75% { content: '...'; }
-      100% { content: ''; }
-    }
-
-    /* Стили страницы */
-    html, body {
+    /* Встроенные стили для заглушки, чтобы минимизировать зависимости */
+    body {
       margin: 0;
       padding: 0;
       background: #000;
-      color: #00FF00;
-      font-family: monospace;
+      color: #fff;
+      font-family: "AntonSC", sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
+      text-align: center;
+    }
+    .maintenance-container {
+      padding: 20px;
+      max-width: 90%;
+      width: 400px;
+    }
+    .maintenance-container h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    .maintenance-container p {
+      font-size: 16px;
+      opacity: 0.8;
+    }
+    @media (max-width: 400px) {
+      .maintenance-container h1 {
+        font-size: 20px;
+      }
+      .maintenance-container p {
+        font-size: 14px;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Скрытый элемент для загрузки шрифтов -->
-  <div style="font-family: 'AntonSC', 'Press Start 2P'; position: absolute; visibility: hidden;">Preload fonts</div>
-  <!-- Динамический индикатор загрузки -->
-  <div>Loading<span class="dots"></span></div>
-
-  <script>
-    window.addEventListener("DOMContentLoaded", () => {
-      const tg = window.Telegram?.WebApp;
-      if (tg) {
-        tg.ready();
-        tg.expand();
-        tg.requestFullscreen?.();
-      }
-
-      // Ожидаем загрузки шрифтов и первого видео с таймаутом 5 секунд
-      Promise.race([
-        Promise.all([
-          document.fonts.ready, // Ждём шрифты
-          new Promise(resolve => {
-            const video = document.createElement('video');
-            video.src = './videos/guide1.mp4';
-            video.onloadeddata = resolve;
-            video.onerror = () => resolve(); // Если ошибка, продолжаем
-          }),
-          new Promise(resolve => {
-            const img1 = new Image();
-            img1.src = './img/logo.png';
-            img1.onload = resolve;
-            img1.onerror = () => resolve();
-          }),
-          new Promise(resolve => {
-            const img2 = new Image();
-            img2.src = './img/snake-logo.png';
-            img2.onload = resolve;
-            img2.onerror = () => resolve();
-          })
-        ]),
-        new Promise(resolve => setTimeout(resolve, 5000)) // Таймаут 5 секунд
-      ]).then(() => {
-        // Сохраняем флаг для автоматического открытия гайда
-        sessionStorage.setItem('openGuideOnLoad', 'true');
-        window.location.href = "menu.html";
-      });
-    });
-  </script>
+  <div class="maintenance-container">
+    <h1>Under Maintenance</h1>
+    <p>ZmeiFi is temporarily down for scheduled maintenance. Please check back later!</p>
+  </div>
 </body>
 </html>
+1
