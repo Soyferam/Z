@@ -50,7 +50,7 @@ html, body {
 /* === 💳 Баланс и кошелёк === */
 .wallet-left, .wallet-right {
   position: absolute;
-  top: 18vh; /* Синхронизировано с back-btn */
+  top: 12vh; /* Синхронизировано с back-btn */
   z-index: 10;
 }
 .wallet-left {
