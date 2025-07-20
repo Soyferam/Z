@@ -15,7 +15,7 @@ html, body {
   font-family: 'Press Start 2P', monospace;
   background-color: #000;
   background-image:
-    url('./img/noise.png'),
+    url('../img/noise.png'), /* Исправлено: ./img -> ../img */
     radial-gradient(rgba(0, 0, 255, 0.2) 1px, transparent 1px),
     linear-gradient(135deg, #001428 0%, #000000 100%);
   background-size: cover, 20px 20px, cover;
