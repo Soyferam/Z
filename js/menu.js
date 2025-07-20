@@ -170,4 +170,14 @@ window.addEventListener("DOMContentLoaded", () => {
       showSlide(currentSlide);
     });
   });
+
+  // Автоматическое открытие гайда при загрузке, если установлен флаг
+  if (sessionStorage.getItem('openGuideOnLoad') === 'true') {
+    console.log("[Guide] Auto-opening guide modal on page load");
+    guideModal.style.display = 'block';
+    currentSlide = 0;
+    showSlide(currentSlide);
+    // Сбрасываем флаг, чтобы гайд не открывался автоматически при обновлении
+    sessionStorage.removeItem('openGuideOnLoad');
+  }
 });

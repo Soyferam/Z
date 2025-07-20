@@ -4,7 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Loading...</title>
+  <!-- Telegram SDK -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <!-- Предварительная загрузка ресурсов -->
+  <link rel="preload" href="./videos/guide1.mp4" as="video">
+  <link rel="preload" href="./img/logo.png" as="image">
+  <link rel="preload" href="./img/snake-logo.png" as="image">
   <style>
     /* Определение шрифтов */
     @font-face {
@@ -60,8 +65,20 @@
         tg.expand();
         tg.requestFullscreen?.();
       }
-      // Ожидаем загрузки шрифтов, затем перенаправляем
-      document.fonts.ready.then(() => {
+
+      // Ожидаем загрузки шрифтов и первого видео
+      Promise.all([
+        document.fonts.ready,
+        // Проверяем загрузку первого видео
+        new Promise(resolve => {
+          const video = document.createElement('video');
+          video.src = './videos/guide1.mp4';
+          video.onloadeddata = resolve;
+          video.onerror = () => resolve(); // Если ошибка, продолжаем
+        })
+      ]).then(() => {
+        // Сохраняем флаг для автоматического открытия гайда
+        sessionStorage.setItem('openGuideOnLoad', 'true');
         window.location.href = "menu.html";
       });
     });
