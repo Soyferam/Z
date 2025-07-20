@@ -27,10 +27,10 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   // 🧭 Навигация по меню
-  document.getElementById("btnRewards").onclick = () => alert("Rewards not ready yet");
+  document.getElementById("btnRewards").onclick = () => window.location.href = "rewards.html";
   document.getElementById("btnLeaderboard").onclick = () => window.location.href = "stats.html";
   document.getElementById("btnWithdraw").onclick = () => window.location.href = "withdraw.html";
-  document.getElementById("btnReferral").onclick = () => alert("Referral system coming soon");
+  document.getElementById("btnReferral").onclick = () => window.location.href = "referral.html";
 
   // 📤 Share кнопка (если поддерживается)
   const shareBtn = document.getElementById("shareBtn");

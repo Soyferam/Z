@@ -470,4 +470,89 @@ html, body {
     height: 7px;
     margin: 0 3px;
   }
+  /* Добавить в конец styles.css */
+
+/* === 🔙 Кнопка Back === */
+.back-btn {
+  position: absolute;
+  top: 12vh;
+  left: 5vw;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  padding: 8px 20px;
+  font-size: 16px;
+  font-family: 'AntonSC', Arial, sans-serif;
+  color: #fff !important;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* Адаптивность для маленьких экранов */
+@media (max-width: 400px), (max-height: 650px) {
+  .back-btn {
+    top: 13vh;
+    left: 5vw;
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
+
+/* Горизонтальный режим */
+@media (orientation: landscape) and (max-height: 600px) {
+  .back-btn {
+    top: 10vh;
+    left: 14vw;
+    font-size: 12px;
+  }
+}
+
+/* Десктопы */
+@media (min-width: 1024px) {
+  .back-btn {
+    top: 4vh;
+    left: 4vw;
+  }
+}
+
+/* Добавить в конец styles.css */
+
+/* === 📜 Заголовок страницы === */
+.page-title {
+  position: absolute;
+  top: 47vh;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'AntonSC', Arial, sans-serif;
+  font-size: 36px;
+  color: #fff;
+  letter-spacing: 8px;
+  z-index: 10;
+}
+
+/* Адаптивность для маленьких экранов */
+@media (max-width: 400px), (max-height: 650px) {
+  .page-title {
+    top: 48vh;
+    font-size: 28px;
+  }
+}
+
+/* Горизонтальный режим */
+@media (orientation: landscape) and (max-height: 600px) {
+  .page-title {
+    top: 38vh;
+    font-size: 28px;
+  }
+}
+
+/* Десктопы */
+@media (min-width: 1024px) {
+  .page-title {
+    top: 55vh;
+    font-size: 48px;
+  }
+}
+
 }
