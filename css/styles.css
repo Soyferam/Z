@@ -167,7 +167,7 @@ html, body {
   z-index: 10;
 }
 
-/* === 💰 Ввод TON ==== */
+/* === 💰 Ввод TON === */
 .amount-input {
   position: absolute;
   top: 47vh;
@@ -291,29 +291,78 @@ html, body {
 
 /* === 📱 Маленькие экраны === */
 @media (max-width: 400px), (max-height: 650px) {
-  .wallet-left { top: 13vh; left: 5vw; font-size: 12px; padding: 6px 12px; }
-  .wallet-right { top: 13vh; right: 3vw; }
-  .wallet-right#tokenBalance { font-size: 12px; padding: 6px 12px; }
-  .logo { top: 17vh; width: 50vw; max-width: 200px; }
-  .amount-input { top: 48vh; width: 59vw; left: 50%; transform: translateX(-50%); position: absolute; }
-  .btn-play { top: 55vh; font-size: 28px; padding: 10px 40px; }
-  .menu-buttons { top: 70vh; }
-  .profit-line, .tokens-line { font-size: 12px; }
+  .wallet-left {
+    top: 19vh; /* Синхронизировано с back-btn */
+    left: 5vw;
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+  .wallet-right {
+    top: 19vh; /* Синхронизировано с back-btn */
+    right: 3vw;
+  }
+  .wallet-right#tokenBalance {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+  .logo {
+    top: 17vh;
+    width: 50vw;
+    max-width: 200px;
+  }
+  .amount-input {
+    top: 48vh;
+    width: 59vw;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+  }
+  .btn-play {
+    top: 55vh;
+    font-size: 28px;
+    padding: 10px 40px;
+  }
+  .menu-buttons {
+    top: 70vh;
+  }
+  .profit-line, .tokens-line {
+    font-size: 12px;
+  }
 }
 
 /* === 🌐 iPad Pro / iPhone X === */
 @media (min-width: 820px) and (max-width: 1024px) and (orientation: portrait) {
-  .logo { top: 10vh; max-width: 300px; }
-  .amount-input { top: 40vh; width: 60vw; }
-  .btn-play { top: 50vh; font-size: 34px; }
-  .menu-buttons { top: 62vh; }
-  .profit-box { bottom: 4vh; }
+  .logo {
+    top: 10vh;
+    max-width: 300px;
+  }
+  .amount-input {
+    top: 40vh;
+    width: 60vw;
+  }
+  .btn-play {
+    top: 50vh;
+    font-size: 34px;
+  }
+  .menu-buttons {
+    top: 62vh;
+  }
+  .profit-box {
+    bottom: 4vh;
+  }
 }
 
 @media (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
-  .logo { top: 15vh; }
-  .amount-input { top: 45vh; width: 65vw; }
-  .btn-play { top: 52vh; }
+  .logo {
+    top: 15vh;
+  }
+  .amount-input {
+    top: 45vh;
+    width: 65vw;
+  }
+  .btn-play {
+    top: 52vh;
+  }
 }
 
 /* === 🌐 Горизонтальный режим === */
@@ -321,33 +370,81 @@ html, body {
   html, body {
     background-image: url('./img/noise.png'), radial-gradient(#00f 1px, transparent 1px), linear-gradient(135deg, #001428 0%, #000000 100%);
   }
-  .wallet-left { top: 10vh; left: 14vw; font-size: 12px; }
-  .wallet-right { top: 10vh; right: 10vw; }
-  .wallet-right#tokenBalance { font-size: 12px; }
-  .logo { top: 2vh; width: 15vw; }
-  .amount-input { top: 38vh; }
-  .btn-play { top: 50vh; font-size: 28px; padding: 10px 40px; }
-  .menu-buttons { top: 70vh; left: 50vw; }
-  .profit-box { bottom: 67vh; left: 18vw; padding: 5px 5px; }
+  .wallet-left {
+    top: 15vh;
+    left: 14vw;
+    font-size: 12px;
+  }
+  .wallet-right {
+    top: 15vh;
+    right: 10vw;
+  }
+  .wallet-right#tokenBalance {
+    font-size: 12px;
+  }
+  .logo {
+    top: 2vh;
+    width: 15vw;
+  }
+  .amount-input {
+    top: 38vh;
+  }
+  .btn-play {
+    top: 50vh;
+    font-size: 28px;
+    padding: 10px 40px;
+  }
+  .menu-buttons {
+    top: 70vh;
+    left: 50vw;
+  }
+  .profit-box {
+    bottom: 67vh;
+    left: 18vw;
+    padding: 5px 5px;
+  }
 }
 
 /* === 💻 Десктопы === */
 @media (min-width: 1024px) {
-  .wallet-left { top: 4vh; left: 4vw; }
-  .wallet-right { top: 4vh; right: 4vw; }
-  .wallet-right#tokenBalance { font-size: 16px; }
-  .amount-input { top: 55vh; }
-  .btn-play { top: 60vh; font-size: 48px; }
-  .logo { top: 5vh; max-width: 450px; }
-  .menu-buttons { top: 75vh; }
-  .profit-box { bottom: 2vh; }
+  .wallet-left {
+    top: 8vh;
+    left: 4vw;
+  }
+  .wallet-right {
+    top: 8vh;
+    right: 4vw;
+  }
+  .wallet-right#tokenBalance {
+    font-size: 16px;
+  }
+  .amount-input {
+    top: 55vh;
+  }
+  .btn-play {
+    top: 60vh;
+    font-size: 48px;
+  }
+  .logo {
+    top: 5vh;
+    max-width: 450px;
+  }
+  .menu-buttons {
+    top: 75vh;
+  }
+  .profit-box {
+    bottom: 2vh;
+  }
 }
 
 /* === ❌ Предупреждение о горизонтальной ориентации === */
 .landscape-warning {
   display: none;
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: rgba(0,0,0,0.95);
   color: #fff;
   font-size: 16px;
@@ -359,7 +456,9 @@ html, body {
   padding: 20px;
 }
 @media (orientation: landscape) and (max-height: 500px) {
-  .landscape-warning { display: none; }
+  .landscape-warning {
+    display: none;
+  }
 }
 
 /* === 🧭 Guide Modal (Liquid Glass Style) === */
@@ -387,8 +486,8 @@ html, body {
   border-radius: 20px;
   padding: 15px;
   width: 80%;
-  max-width: 340px; /* Соответствует .amount-input для компактности */
-  max-height: 70vh; /* Ограничение высоты */
+  max-width: 340px;
+  max-height: 70vh;
   overflow-y: auto;
   color: #fff;
   font-family: 'Press Start 2P';
@@ -407,7 +506,7 @@ html, body {
 
 .guide-slide img {
   width: 100%;
-  max-width: 300px; /* Ограничение ширины для изображений */
+  max-width: 300px;
   height: auto;
   margin-bottom: 10px;
   border-radius: 10px;
@@ -415,15 +514,15 @@ html, body {
 
 .guide-slide video {
   width: 100%;
-  max-width: 300px; /* Соответствует оригинальным изображениям */
+  max-width: 300px;
   height: auto;
   margin-bottom: 10px;
   border-radius: 10px;
-  object-fit: contain; /* Сохраняет пропорции 3:4 */
+  object-fit: contain;
 }
 
 .guide-slide p {
-  font-size: 12px; /* Уменьшен для компактности */
+  font-size: 12px;
   margin: 0 0 15px 0;
   color: #fff !important;
 }
@@ -434,43 +533,43 @@ html, body {
   align-items: center;
   margin-top: 15px;
   width: 100%;
-  min-height: 36px; /* Уменьшено для компактности */
+  min-height: 36px;
 }
 
 .guide-back {
-  margin-right: auto; /* Слева */
+  margin-right: auto;
   background: rgba(255, 255, 255, 0.1) !important;
   border: 1px solid rgba(255, 255, 255, 0.25) !important;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
   border-radius: 20px !important;
   padding: 8px 16px !important;
-  font-size: 12px !important; /* Уменьшен для компактности */
+  font-size: 12px !important;
   font-family: 'AntonSC' !important;
   color: #fff !important;
   cursor: pointer;
   text-align: center;
   line-height: 20px !important;
   min-width: 70px;
-  height: 36px; /* Уменьшено для компактности */
+  height: 36px;
   visibility: visible;
   opacity: 1;
 }
 
 .guide-next {
-  margin-left: auto; /* Справа */
+  margin-left: auto;
   background: rgba(255, 255, 255, 0.1) !important;
   border: 1px solid rgba(255, 255, 255, 0.25) !important;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
   border-radius: 20px !important;
   padding: 8px 16px !important;
-  font-size: 12px !important; /* Уменьшен для компактности */
+  font-size: 12px !important;
   font-family: 'AntonSC' !important;
   color: #fff !important;
   cursor: pointer;
   text-align: center;
   line-height: 20px !important;
   min-width: 70px;
-  height: 36px; /* Уменьшено для компактности */
+  height: 36px;
   visibility: visible;
   opacity: 1;
 }
@@ -486,7 +585,7 @@ html, body {
 }
 
 .dot {
-  width: 8px; /* Уменьшено для компактности */
+  width: 8px;
   height: 8px;
   background: rgba(255, 255, 255, 0.3);
   border-radius: 50%;
@@ -505,7 +604,7 @@ html, body {
   right: 8px;
   background: none;
   border: none;
-  font-size: 20px; /* Уменьшен для компактности */
+  font-size: 20px;
   cursor: pointer;
   color: #fff !important;
   font-family: 'AntonSC';
@@ -514,8 +613,8 @@ html, body {
 /* === 🔙 Кнопка Back === */
 .back-btn {
   position: absolute;
-  top: 18vh; /* Сдвинуто ниже кнопок выхода */
-  left: 5vw; /* Слева от центра */
+  top: 18vh;
+  left: 5vw;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
@@ -532,7 +631,7 @@ html, body {
 /* Адаптивность для маленьких экранов */
 @media (max-width: 400px), (max-height: 650px) {
   .back-btn {
-    top: 19vh; /* Сдвинуто ниже */
+    top: 19vh;
     left: 5vw;
     font-size: 12px;
     padding: 6px 12px;
@@ -542,7 +641,7 @@ html, body {
 /* Горизонтальный режим */
 @media (orientation: landscape) and (max-height: 600px) {
   .back-btn {
-    top: 15vh; /* Сдвинуто ниже */
+    top: 15vh;
     left: 14vw;
     font-size: 12px;
   }
@@ -551,7 +650,7 @@ html, body {
 /* Десктопы */
 @media (min-width: 1024px) {
   .back-btn {
-    top: 8vh; /* Сдвинуто ниже */
+    top: 8vh;
     left: 4vw;
   }
 }
@@ -559,7 +658,7 @@ html, body {
 /* === 📜 Заголовок страницы === */
 .page-title {
   position: absolute;
-  top: 18vh; /* Выровнено с кнопкой Back */
+  top: 18vh;
   left: 50%;
   transform: translateX(-50%);
   font-family: 'AntonSC';
@@ -573,7 +672,7 @@ html, body {
 /* Адаптивность для маленьких экранов */
 @media (max-width: 400px), (max-height: 650px) {
   .page-title {
-    top: 19vh; /* Сдвинуто ниже */
+    top: 19vh;
     font-size: 18px;
   }
 }
@@ -581,7 +680,7 @@ html, body {
 /* Горизонтальный режим */
 @media (orientation: landscape) and (max-height: 600px) {
   .page-title {
-    top: 15vh; /* Сдвинуто ниже */
+    top: 15vh;
     font-size: 18px;
   }
 }
@@ -589,7 +688,7 @@ html, body {
 /* Десктопы */
 @media (min-width: 1024px) {
   .page-title {
-    top: 8vh; /* Сдвинуто ниже */
+    top: 8vh;
     font-size: 28px;
   }
 }
@@ -622,7 +721,7 @@ html, body {
 }
 
 .rewards-scroll {
-  max-height: 50vh; /* Limit height to make it scrollable */
+  max-height: 50vh;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.3) rgba(0, 0, 0, 0.5);
@@ -668,10 +767,10 @@ html, body {
 }
 
 .reward-button {
-  background: #00cc00; /* Less acidic green */
-  border: 1px solid rgba(255, 255, 255, 0.25); /* Added border like back-btn */
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Added shadow like back-btn */
-  border-radius: 20px; /* Rounded like back-btn */
+  background: #00cc00;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
   padding: 8px 12px;
   font-family: 'AntonSC';
   font-size: 12px;
@@ -684,13 +783,13 @@ html, body {
 }
 
 .reward-button:hover {
-  background: #00a300; /* Slightly darker green on hover */
+  background: #00a300;
 }
 
 .reward-button:disabled {
   background: #555;
   cursor: not-allowed;
-  border: 1px solid rgba(255, 255, 255, 0.25); /* Keep border for consistency */
+  border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
@@ -745,7 +844,7 @@ html, body {
 /* === 📊 Таблица лидеров (stats.html) === */
 .leaderboard-table {
   position: absolute;
-  top: 28vh; /* Сдвинуто ниже заголовка */
+  top: 28vh;
   left: 50%;
   transform: translateX(-50%);
   width: 80%;
@@ -779,7 +878,7 @@ html, body {
 /* === 💸 Форма вывода (withdraw.html) === */
 .withdraw-form {
   position: absolute;
-  top: 28vh; /* Сдвинуто ниже заголовка */
+  top: 28vh;
   left: 50%;
   transform: translateX(-50%);
   width: 80%;
@@ -824,7 +923,7 @@ html, body {
 /* === 🔗 Реферальная ссылка (referral.html) === */
 .referral-box {
   position: absolute;
-  top: 28vh; /* Сдвинуто ниже заголовка */
+  top: 28vh;
   left: 50%;
   transform: translateX(-50%);
   width: 80%;
