@@ -475,7 +475,7 @@ html, body {
 /* === 🔙 Кнопка Back === */
 .back-btn {
   position: absolute;
-  top: 12vh;
+  top: 12vh; /* На уровне баланса */
   left: 5vw;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.25);
@@ -484,9 +484,10 @@ html, body {
   padding: 8px 20px;
   font-size: 16px;
   font-family: 'AntonSC', Arial, sans-serif;
-  color: #fff !important;
+  color: #fff;
   cursor: pointer;
   z-index: 10;
+  text-align: center;
 }
 
 /* Адаптивность для маленьких экранов */
@@ -521,7 +522,8 @@ html, body {
 /* === 📜 Заголовок страницы === */
 .page-title {
   position: absolute;
-  top: 47vh;
+  top: 52vh; /* Положение как у кнопки PLAY */
+  /* Чтобы изменить высоту, настрой top, например: top: 55vh; — ниже, top: 50vh; — выше */
   left: 50%;
   transform: translateX(-50%);
   font-family: 'AntonSC', Arial, sans-serif;
@@ -529,6 +531,7 @@ html, body {
   color: #fff;
   letter-spacing: 8px;
   z-index: 10;
+  text-align: center;
 }
 
 /* Адаптивность для маленьких экранов */
