@@ -5,9 +5,7 @@
 }
 @font-face {
   font-family: 'Press Start 2P';
-  src: url('./fonts/PressStart2P-Regular.woff2') format('woff2'),
-       url('./fonts/PressStart2P-Regular.woff') format('woff'),
-       url('./fonts/PressStart2P-Regular.ttf') format('truetype');
+  src: url('./fonts/PressStart2P-Regular.ttf') format('truetype');
 }
 
 /* === 🌌 Общий фон === */
@@ -65,7 +63,7 @@ html, body {
   display: flex;
   align-items: center;
   font-size: 16px;
-  font-family: 'AntonSC', Arial, sans-serif;
+  font-family: 'AntonSC';
   cursor: pointer;
 }
 .wallet-left img {
@@ -89,7 +87,7 @@ html, body {
   border-radius: 20px;
   padding: 10px 20px;
   font-size: 16px;
-  font-family: 'AntonSC', Arial, sans-serif;
+  font-family: 'AntonSC';
   color: #fff !important;
   cursor: pointer;
   display: inline-flex;
@@ -129,7 +127,7 @@ html, body {
   font-size: 14px;
   text-align: center;
   outline: none;
-  font-family: 'Press Start 2P', monospace;
+  font-family: 'Press Start 2P';
 }
 
 /* === ▶️ Кнопка PLAY === */
@@ -144,7 +142,7 @@ html, body {
   border-radius: 50px;
   padding: 10px 70px;
   font-size: 36px;
-  font-family: 'AntonSC', Arial, sans-serif;
+  font-family: 'AntonSC';
   letter-spacing: 8px;
   color: #fff !important;
   cursor: pointer;
@@ -172,7 +170,7 @@ html, body {
   border-radius: 20px;
   padding: 12px 16px;
   font-size: 14px;
-  font-family: 'AntonSC', Arial, sans-serif;
+  font-family: 'AntonSC';
   color: #fff !important;
   cursor: pointer;
   transition: 0.3s ease;
@@ -201,7 +199,7 @@ html, body {
   max-width: 95%;
   box-sizing: border-box;
   z-index: 100;
-  font-family: 'Press Start 2P', monospace;
+  font-family: 'Press Start 2P';
 }
 .profit-text { display: flex; flex-direction: column; gap: 4px; }
 .profit-line, .tokens-line { font-size: 14px; white-space: nowrap; }
@@ -271,7 +269,7 @@ html, body {
   background: rgba(0,0,0,0.95);
   color: #fff;
   font-size: 16px;
-  font-family: 'AntonSC', Arial, sans-serif;
+  font-family: 'AntonSC';
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -311,7 +309,7 @@ html, body {
   max-height: 70vh; /* Ограничение высоты */
   overflow-y: auto;
   color: #fff;
-  font-family: 'Press Start 2P', monospace;
+  font-family: 'Press Start 2P';
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-sizing: border-box;
@@ -365,7 +363,7 @@ html, body {
   border-radius: 20px !important;
   padding: 8px 16px !important;
   font-size: 12px !important; /* Уменьшен для компактности */
-  font-family: 'AntonSC', Arial, sans-serif !important;
+  font-family: 'AntonSC' !important;
   color: #fff !important;
   cursor: pointer;
   text-align: center;
@@ -384,7 +382,7 @@ html, body {
   border-radius: 20px !important;
   padding: 8px 16px !important;
   font-size: 12px !important; /* Уменьшен для компактности */
-  font-family: 'AntonSC', Arial, sans-serif !important;
+  font-family: 'AntonSC' !important;
   color: #fff !important;
   cursor: pointer;
   text-align: center;
@@ -428,103 +426,96 @@ html, body {
   font-size: 20px; /* Уменьшен для компактности */
   cursor: pointer;
   color: #fff !important;
-  font-family: 'AntonSC', Arial, sans-serif;
+  font-family: 'AntonSC';
 }
 
-/* === 📱 Адаптивность для маленьких экранов === */
+/* === 🔙 Кнопка Back === */
+.back-btn {
+  position: absolute;
+  top: 18vh; /* Сдвинуто ниже кнопок выхода */
+  left: 5vw; /* Слева от центра */
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  padding: 8px 20px;
+  font-size: 16px;
+  font-family: 'AntonSC';
+  color: #fff;
+  cursor: pointer;
+  z-index: 10;
+  text-align: center;
+}
+
+/* Адаптивность для маленьких экранов */
 @media (max-width: 400px), (max-height: 650px) {
-  .wallet-left { top: 13vh; left: 5vw; font-size: 12px; padding: 6px 12px; }
-  .wallet-right { top: 13vh; right: 3vw; }
-  .logo { top: 17vh; width: 50vw; max-width: 200px; }
-  .amount-input { top: 48vh; width: 59vw; left: 50%; transform: translateX(-50%); position: absolute; }
-  .btn-play { top: 55vh; font-size: 28px; padding: 10px 40px; }
-  .menu-buttons { top: 70vh; }
-  .profit-line, .tokens-line { font-size: 12px; }
-  .guide-content {
-    width: 90%;
-    max-width: 300px; /* Компактнее для маленьких экранов */
-    padding: 10px;
-  }
-  .guide-slide img, .guide-slide video {
-    max-width: 260px; /* Компактнее для маленьких экранов */
-  }
-  .guide-slide p {
-    font-size: 11px;
-  }
-  .guide-nav {
-    min-height: 32px;
-  }
-  .guide-back, .guide-next {
-    padding: 6px 12px !important;
-    font-size: 11px !important;
-    min-width: 60px;
-    height: 32px;
-  }
-  .guide-close {
-    top: 6px;
-    right: 6px;
-    font-size: 18px;
-  }
-  .dot {
-    width: 7px;
-    height: 7px;
-    margin: 0 3px;
-  }
   .back-btn {
     top: 19vh; /* Сдвинуто ниже */
     left: 5vw;
     font-size: 12px;
     padding: 6px 12px;
   }
-  .page-title {
-    top: 26vh; /* Сдвинуто ниже */
-    font-size: 18px; /* Ещё меньше для компактности */
-  }
 }
 
-/* === 🌐 Горизонтальный режим === */
+/* Горизонтальный режим */
 @media (orientation: landscape) and (max-height: 600px) {
   .back-btn {
     top: 15vh; /* Сдвинуто ниже */
     left: 14vw;
     font-size: 12px;
   }
-  .page-title {
-    top: 20vh; /* Сдвинуто ниже */
-    font-size: 18px;
-  }
 }
 
-/* === 💻 Десктопы === */
+/* Десктопы */
 @media (min-width: 1024px) {
   .back-btn {
     top: 8vh; /* Сдвинуто ниже */
     left: 4vw;
-  }
-  .page-title {
-    top: 28vh; /* Сдвинуто ниже */
-    font-size: 28px;
   }
 }
 
 /* === 📜 Заголовок страницы === */
 .page-title {
   position: absolute;
-  top: 25vh; /* Сдвинуто ниже, ниже кнопок выхода и баланса (было 52vh) */
+  top: 18vh; /* Выровнено с кнопкой Back */
   left: 50%;
   transform: translateX(-50%);
-  font-family: 'AntonSC', Arial, sans-serif;
-  font-size: 24px; /* Уменьшен шрифт с 36px до 24px, как у .wallet-left в адаптивном режиме */
+  font-family: 'AntonSC';
+  font-size: 24px;
   color: #fff;
-  letter-spacing: 4px; /* Уменьшено для компактности */
+  letter-spacing: 4px;
   z-index: 10;
   text-align: center;
+}
+
+/* Адаптивность для маленьких экранов */
+@media (max-width: 400px), (max-height: 650px) {
+  .page-title {
+    top: 19vh; /* Сдвинуто ниже */
+    font-size: 18px;
+  }
+}
+
+/* Горизонтальный режим */
+@media (orientation: landscape) and (max-height: 600px) {
+  .page-title {
+    top: 15vh; /* Сдвинуто ниже */
+    font-size: 18px;
+  }
+}
+
+/* Десктопы */
+@media (min-width: 1024px) {
+  .page-title {
+    top: 8vh; /* Сдвинуто ниже */
+    font-size: 28px;
+  }
 }
 
 /* === 📋 Список наград (rewards.html) === */
 .rewards-list {
   position: absolute;
-  top: 35vh; /* Сдвинуто ниже, ниже заголовка (было 60vh) */
+  top: 28vh; /* Сдвинуто ниже заголовка */
   left: 50%;
   transform: translateX(-50%);
   width: 80%;
@@ -533,7 +524,7 @@ html, body {
   border-radius: 10px;
   padding: 15px;
   color: #fff;
-  font-family: 'Press Start 2P', monospace;
+  font-family: 'Press Start 2P';
   font-size: 14px;
   z-index: 10;
 }
@@ -553,7 +544,7 @@ html, body {
 /* === 📊 Таблица лидеров (stats.html) === */
 .leaderboard-table {
   position: absolute;
-  top: 35vh; /* Сдвинуто ниже, ниже заголовка (было 60vh) */
+  top: 28vh; /* Сдвинуто ниже заголовка */
   left: 50%;
   transform: translateX(-50%);
   width: 80%;
@@ -562,7 +553,7 @@ html, body {
   border-radius: 10px;
   padding: 15px;
   color: #fff;
-  font-family: 'Press Start 2P', monospace;
+  font-family: 'Press Start 2P';
   font-size: 14px;
   z-index: 10;
 }
@@ -580,14 +571,14 @@ html, body {
 }
 
 .leaderboard-table th {
-  font-family: 'AntonSC', Arial, sans-serif;
+  font-family: 'AntonSC';
   font-size: 16px;
 }
 
 /* === 💸 Форма вывода (withdraw.html) === */
 .withdraw-form {
   position: absolute;
-  top: 35vh; /* Сдвинуто ниже, ниже заголовка (было 60vh) */
+  top: 28vh; /* Сдвинуто ниже заголовка */
   left: 50%;
   transform: translateX(-50%);
   width: 80%;
@@ -596,7 +587,7 @@ html, body {
   border-radius: 10px;
   padding: 15px;
   color: #fff;
-  font-family: 'Press Start 2P', monospace;
+  font-family: 'Press Start 2P';
   font-size: 14px;
   z-index: 10;
 }
@@ -609,7 +600,7 @@ html, body {
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 5px;
   color: #fff;
-  font-family: 'Press Start 2P', monospace;
+  font-family: 'Press Start 2P';
   font-size: 14px;
 }
 
@@ -620,7 +611,7 @@ html, body {
   border: none;
   border-radius: 5px;
   color: #000;
-  font-family: 'AntonSC', Arial, sans-serif;
+  font-family: 'AntonSC';
   font-size: 16px;
   cursor: pointer;
 }
@@ -632,7 +623,7 @@ html, body {
 /* === 🔗 Реферальная ссылка (referral.html) === */
 .referral-box {
   position: absolute;
-  top: 35vh; /* Сдвинуто ниже, ниже заголовка (было 60vh) */
+  top: 28vh; /* Сдвинуто ниже заголовка */
   left: 50%;
   transform: translateX(-50%);
   width: 80%;
@@ -641,7 +632,7 @@ html, body {
   border-radius: 10px;
   padding: 15px;
   color: #fff;
-  font-family: 'Press Start 2P', monospace;
+  font-family: 'Press Start 2P';
   font-size: 14px;
   z-index: 10;
 }
@@ -654,7 +645,7 @@ html, body {
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 5px;
   color: #fff;
-  font-family: 'Press Start 2P', monospace;
+  font-family: 'Press Start 2P';
   font-size: 14px;
 }
 
@@ -665,7 +656,7 @@ html, body {
   border: none;
   border-radius: 5px;
   color: #000;
-  font-family: 'AntonSC', Arial, sans-serif;
+  font-family: 'AntonSC';
   font-size: 16px;
   cursor: pointer;
 }
