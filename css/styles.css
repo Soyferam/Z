@@ -613,7 +613,7 @@ html, body {
 /* === 🔙 Кнопка Back === */
 .back-btn {
   position: absolute;
-  top: 18vh;
+  top: 12vh;
   left: 5vw;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.25);
