@@ -50,7 +50,7 @@ html, body {
 /* === 💳 Баланс и кошелёк === */
 .wallet-left, .wallet-right {
   position: absolute;
-  top: 18vh; /* Синхронизировано с back-btn */
+  top: 12vh;
   z-index: 10;
 }
 .wallet-left {
@@ -109,13 +109,13 @@ html, body {
 /* Адаптивность для маленьких экранов */
 @media (max-width: 400px), (max-height: 650px) {
   .wallet-left {
-    top: 19vh; /* Синхронизировано с back-btn */
+    top: 13vh;
     left: 5vw;
     font-size: 12px;
     padding: 6px 12px;
   }
   .wallet-right {
-    top: 19vh; /* Синхронизировано с back-btn */
+    top: 13vh;
     right: 3vw;
   }
   .wallet-right#tokenBalance {
@@ -127,12 +127,12 @@ html, body {
 /* Горизонтальный режим */
 @media (orientation: landscape) and (max-height: 600px) {
   .wallet-left {
-    top: 15vh; /* Синхронизировано с back-btn */
+    top: 10vh;
     left: 14vw;
     font-size: 12px;
   }
   .wallet-right {
-    top: 15vh; /* Синхронизировано с back-btn */
+    top: 10vh;
     right: 10vw;
   }
   .wallet-right#tokenBalance {
@@ -143,15 +143,14 @@ html, body {
 /* Десктопы */
 @media (min-width: 1024px) {
   .wallet-left {
-    top: 8vh; /* Синхронизировано с back-btn */
+    top: 4vh;
     left: 4vw;
   }
   .wallet-right {
-    top: 8vh; /* Синхронизировано с back-btn */
+    top: 4vh;
     right: 4vw;
   }
   .wallet-right#tokenBalance {
-    top: 9vh;
     font-size: 16px;
   }
 }
