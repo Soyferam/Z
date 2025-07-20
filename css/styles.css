@@ -167,7 +167,7 @@ html, body {
   z-index: 10;
 }
 
-/* === 💰 Ввод TON === */
+/* === 💰 Ввод TON ==== */
 .amount-input {
   position: absolute;
   top: 47vh;
