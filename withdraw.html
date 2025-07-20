@@ -21,9 +21,25 @@
     <h1 class="page-title">Withdraw</h1>
     <!-- Форма вывода -->
     <div class="withdraw-form">
-      <input type="number" inputmode="decimal" step="0.01" min="0" placeholder="Enter TON amount" id="withdrawAmount" />
-      <input type="text" placeholder="Enter wallet address" id="walletAddress" />
+      <div class="balance-display">
+        <span>Available Balance: <span id="availableBalance">0</span> TON</span>
+      </div>
+      <div class="withdraw-input-group">
+        <input type="number" inputmode="decimal" step="0.01" min="0" placeholder="Amount" id="withdrawAmount" />
+        <button id="allBtn">All</button>
+      </div>
       <button id="withdrawBtn">Withdraw</button>
+    </div>
+    <!-- Список статистики -->
+    <div class="game-stats">
+      <div class="game-stats-header">
+        <span>Game</span>
+        <span>Result</span>
+        <span>Profit</span>
+      </div>
+      <div class="game-stats-scroll">
+        <div class="game-stats-items" id="gameStatsItems"></div>
+      </div>
     </div>
   </div>
 </body>

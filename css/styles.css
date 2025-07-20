@@ -841,8 +841,8 @@ html, body {
   }
 }
 
-/* === 📊 Таблица лидеров (stats.html) === */
-.leaderboard-table {
+/* === 📊 Лидерборд (stats.html) === */
+.leaderboard {
   position: absolute;
   top: 28vh;
   left: 50%;
@@ -853,26 +853,194 @@ html, body {
   border-radius: 10px;
   padding: 15px;
   color: #fff;
-  font-family: 'Press Start 2P';
-  font-size: 14px;
+  font-family: "AntonSC";
+  font-size: 12px; /* Компактный размер текста */
   z-index: 10;
+  box-sizing: border-box;
 }
 
-.leaderboard-table table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.leaderboard-table th,
-.leaderboard-table td {
-  padding: 8px;
-  text-align: left;
+.leaderboard-header {
+  display: grid;
+  grid-template-columns: 40px 40px 1fr 70px 70px; /* Колонки: Rank, Avatar, Name (гибкая), Profit, Tokens */
+  gap: 8px; /* Отступы между колонками */
+  padding: 8px 12px;
+  font-family: "AntonSC";
+  font-size: 14px; /* Уменьшенный размер заголовков */
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+  align-items: center;
 }
 
-.leaderboard-table th {
-  font-family: 'AntonSC';
-  font-size: 16px;
+.leaderboard-header span {
+  white-space: nowrap; /* Предотвращает перенос текста в заголовке */
+  overflow: hidden; /* Обрезает длинный текст */
+  text-overflow: ellipsis; /* Добавляет многоточие для длинного текста */
+}
+
+.leaderboard-scroll {
+  max-height: 50vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(0, 0, 0, 0.5);
+}
+
+.leaderboard-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.leaderboard-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.leaderboard-scroll::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.leaderboard-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Отступ между строками */
+  padding: 10px 0;
+}
+
+.leaderboard-item {
+  display: grid;
+  grid-template-columns: 40px 40px 1fr 70px 70px; /* Та же структура, что в заголовке */
+  gap: 8px; /* Отступы между колонками */
+  align-items: center;
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+  min-height: 40px; /* Минимальная высота строки */
+}
+
+.leaderboard-item:last-child {
+  border-bottom: none;
+}
+
+.avatar {
+  width: 28px; /* Компактная аватарка */
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover; /* Аватарка не искажается */
+  vertical-align: middle;
+}
+
+.rank {
+  font-family: "AntonSC";
+  font-weight: bold;
+  font-size: 12px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.name {
+  font-family: "AntonSC";
+  font-size: 12px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Обрезает длинные имена */
+}
+
+.profit,
+.tokens {
+  font-family: "AntonSC";
+  font-size: 12px;
+  text-align: right;
+  white-space: nowrap; /* Предотвращает перенос чисел */
+  overflow: hidden; /* Обрезает длинные значения */
+}
+
+.user-profile {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.user-profile .leaderboard-item {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+/* Адаптивность для маленьких экранов */
+@media (max-width: 400px), (max-height: 650px) {
+  .leaderboard {
+    top: 25vh;
+    width: 90%;
+    font-size: 10px;
+  }
+  .leaderboard-header {
+    font-size: 12px;
+    grid-template-columns: 35px 35px 1fr 60px 60px; /* Уменьшенные колонки */
+    gap: 6px;
+    padding: 6px 10px;
+  }
+  .leaderboard-item {
+    grid-template-columns: 35px 35px 1fr 60px 60px;
+    gap: 6px;
+    padding: 6px 10px;
+    min-height: 36px;
+  }
+  .avatar {
+    width: 24px;
+    height: 24px;
+  }
+  .rank,
+  .name,
+  .profit,
+  .tokens {
+    font-size: 10px;
+  }
+}
+
+/* Горизонтальный режим */
+@media (orientation: landscape) and (max-height: 600px) {
+  .leaderboard {
+    top: 20vh;
+    width: 70%;
+  }
+  .leaderboard-scroll {
+    max-height: 40vh;
+  }
+  .leaderboard-header {
+    grid-template-columns: 40px 40px 1fr 65px 65px;
+    gap: 8px;
+  }
+  .leaderboard-item {
+    grid-template-columns: 40px 40px 1fr 65px 65px;
+    gap: 8px;
+  }
+}
+
+/* Десктопы */
+@media (min-width: 1024px) {
+  .leaderboard {
+    top: 20vh;
+    max-width: 400px;
+  }
+  .leaderboard-header {
+    font-size: 16px;
+    grid-template-columns: 50px 50px 1fr 80px 80px;
+    gap: 10px;
+  }
+  .leaderboard-item {
+    grid-template-columns: 50px 50px 1fr 80px 80px;
+    gap: 10px;
+    padding: 10px 14px;
+  }
+  .avatar {
+    width: 32px;
+    height: 32px;
+  }
+  .rank,
+  .name,
+  .profit,
+  .tokens {
+    font-size: 14px;
+  }
 }
 
 /* === 💸 Форма вывода (withdraw.html) === */
@@ -887,40 +1055,277 @@ html, body {
   border-radius: 10px;
   padding: 15px;
   color: #fff;
-  font-family: 'Press Start 2P';
-  font-size: 14px;
+  font-family: "AntonSC";
+  font-size: 12px;
   z-index: 10;
+  box-sizing: border-box;
+}
+
+.balance-display {
+  font-family: "AntonSC";
+  font-size: 14px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.withdraw-input-group {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
 }
 
 .withdraw-form input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
+  flex: 1; /* Поле ввода занимает оставшееся пространство */
+  max-width: 70%; /* Укороченное поле ввода */
+  padding: 8px;
   background: rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 5px;
   color: #fff;
-  font-family: 'Press Start 2P';
-  font-size: 14px;
+  font-family: "AntonSC";
+  font-size: 12px;
+  box-sizing: border-box;
 }
 
-.withdraw-form button {
-  width: 100%;
-  padding: 10px;
-  background: #00ff00;
-  border: none;
+.withdraw-form button#allBtn {
+  width: 30%; /* Кнопка "All" занимает меньше места */
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 5px;
-  color: #000;
-  font-family: 'AntonSC';
-  font-size: 16px;
+  color: #fff;
+  font-family: "AntonSC";
+  font-size: 12px;
   cursor: pointer;
 }
 
-.withdraw-form button:hover {
-  background: #00cc00;
+.withdraw-form button#allBtn:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
 
-/* === 🔗 Реферальная ссылка (referral.html) === */
+.withdraw-form button#withdrawBtn {
+  width: 100%;
+  padding: 10px;
+  background: #00cc00;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-family: "AntonSC";
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.withdraw-form button#withdrawBtn:hover {
+  background: #00a300;
+}
+
+/* === 📊 Статистика игр (withdraw.html) === */
+.game-stats {
+  position: absolute;
+  top: 55vh; /* Расположен ниже формы вывода */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 340px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 15px;
+  color: #fff;
+  font-family: "AntonSC";
+  font-size: 12px;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+.game-stats-header {
+  display: grid;
+  grid-template-columns: 80px 1fr 100px; /* Game, Result, Profit */
+  gap: 8px;
+  padding: 8px 12px;
+  font-family: "AntonSC";
+  font-size: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+  align-items: center;
+}
+
+.game-stats-header span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.game-stats-scroll {
+  max-height: 30vh; /* Ограниченная высота для прокрутки */
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(0, 0, 0, 0.5);
+}
+
+.game-stats-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.game-stats-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.game-stats-scroll::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.game-stats-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 0;
+}
+
+.game-stats-item {
+  display: grid;
+  grid-template-columns: 80px 1fr 100px; /* Game, Result, Profit */
+  gap: 8px;
+  align-items: center;
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+  min-height: 36px;
+}
+
+.game-stats-item:last-child {
+  border-bottom: none;
+}
+
+.game-id {
+  font-family: "AntonSC";
+  font-size: 12px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.result {
+  font-family: "AntonSC";
+  font-size: 12px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.result.win {
+  color: #1eff00;
+}
+
+.result.loss {
+  color: #ff4d4d;
+}
+
+.profit {
+  font-family: "AntonSC";
+  font-size: 12px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.profit.positive {
+  color: #1eff00;
+}
+
+.profit.negative {
+  color: #ff4d4d;
+}
+
+/* Адаптивность для маленьких экранов */
+@media (max-width: 400px), (max-height: 650px) {
+  .withdraw-form {
+    top: 25vh;
+    width: 90%;
+    font-size: 10px;
+  }
+  .balance-display {
+    font-size: 12px;
+  }
+  .withdraw-form input {
+    font-size: 10px;
+  }
+  .withdraw-form button {
+    font-size: 12px;
+  }
+  .game-stats {
+    top: 52vh;
+    width: 90%;
+    font-size: 10px;
+  }
+  .game-stats-header {
+    font-size: 12px;
+    grid-template-columns: 60px 1fr 80px;
+    gap: 6px;
+    padding: 6px 10px;
+  }
+  .game-stats-item {
+    grid-template-columns: 60px 1fr 80px;
+    gap: 6px;
+    padding: 6px 10px;
+    min-height: 32px;
+  }
+  .game-id,
+  .result,
+  .profit {
+    font-size: 10px;
+  }
+}
+
+/* Горизонтальный режим */
+@media (orientation: landscape) and (max-height: 600px) {
+  .withdraw-form {
+    top: 20vh;
+    width: 70%;
+  }
+  .game-stats {
+    top: 50vh;
+    width: 70%;
+  }
+  .game-stats-scroll {
+    max-height: 25vh;
+  }
+}
+
+/* Десктопы */
+@media (min-width: 1024px) {
+  .withdraw-form {
+    top: 20vh;
+    max-width: 400px;
+  }
+  .balance-display {
+    font-size: 16px;
+  }
+  .withdraw-form input {
+    font-size: 14px;
+  }
+  .withdraw-form button {
+    font-size: 16px;
+  }
+  .game-stats {
+    top: 50vh;
+    max-width: 400px;
+  }
+  .game-stats-header {
+    font-size: 16px;
+    grid-template-columns: 100px 1fr 120px;
+    gap: 10px;
+  }
+  .game-stats-item {
+    grid-template-columns: 100px 1fr 120px;
+    gap: 10px;
+    padding: 10px 14px;
+  }
+  .game-id,
+  .result,
+  .profit {
+    font-size: 14px;
+  }
+}
+
+/* === 🤝 Реферальная система (referral.html) === */
 .referral-box {
   position: absolute;
   top: 28vh;
@@ -932,35 +1337,245 @@ html, body {
   border-radius: 10px;
   padding: 15px;
   color: #fff;
-  font-family: 'Press Start 2P';
-  font-size: 14px;
+  font-family: "AntonSC";
+  font-size: 12px;
   z-index: 10;
+  box-sizing: border-box;
+  display: flex;
+  gap: 8px;
 }
 
 .referral-box input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
+  flex: 1;
+  padding: 8px;
   background: rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 5px;
   color: #fff;
-  font-family: 'Press Start 2P';
-  font-size: 14px;
+  font-family: "AntonSC";
+  font-size: 12px;
+  box-sizing: border-box;
 }
 
 .referral-box button {
-  width: 100%;
-  padding: 10px;
-  background: #00ff00;
+  width: 80px;
+  padding: 8px;
+  background: #00cc00;
   border: none;
   border-radius: 5px;
-  color: #000;
-  font-family: 'AntonSC';
-  font-size: 16px;
+  color: #fff;
+  font-family: "AntonSC";
+  font-size: 12px;
   cursor: pointer;
 }
 
 .referral-box button:hover {
-  background: #00cc00;
+  background: #00a300;
+}
+
+.referrals {
+  position: absolute;
+  top: 45vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 340px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 15px;
+  color: #fff;
+  font-family: "AntonSC";
+  font-size: 12px;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+.referrals-header {
+  display: grid;
+  grid-template-columns: 40px 1fr 80px; /* Avatar, Name, Profit */
+  gap: 8px;
+  padding: 8px 0; /* Убраны боковые отступы для точного выравнивания */
+  font-family: "AntonSC";
+  font-size: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  align-items: center;
+}
+
+.referrals-header span:nth-child(1) {
+  text-align: center; /* Avatar */
+}
+
+.referrals-header span:nth-child(2) {
+  text-align: left; /* Name */
+}
+
+.referrals-header span:nth-child(3) {
+  text-align: right; /* Profit */
+}
+
+.referrals-scroll {
+  max-height: 40vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(0, 0, 0, 0.5);
+}
+
+.referrals-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.referrals-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.referrals-scroll::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.referrals-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 0;
+}
+
+.referrals-item {
+  display: grid;
+  grid-template-columns: 40px 1fr 80px; /* Точно соответствует заголовкам */
+  gap: 8px;
+  align-items: center;
+  padding: 8px 0; /* Убраны боковые отступы */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  min-height: 36px;
+}
+
+.referrals-item:last-child {
+  border-bottom: none;
+}
+
+.avatar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.name {
+  font-family: "AntonSC";
+  font-size: 12px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profit {
+  font-family: "AntonSC";
+  font-size: 12px;
+  text-align: right;
+  white-space: nowrap;
+  color: #1eff00;
+}
+
+/* Адаптивность для маленьких экранов */
+@media (max-width: 400px), (max-height: 650px) {
+  .referral-box {
+    top: 25vh;
+    width: 90%;
+    font-size: 10px;
+  }
+  .referral-box input {
+    font-size: 10px;
+    padding: 6px;
+  }
+  .referral-box button {
+    font-size: 10px;
+    padding: 6px;
+    width: 60px;
+  }
+  .referrals {
+    top: 42vh;
+    width: 90%;
+    font-size: 10px;
+  }
+  .referrals-header {
+    font-size: 12px;
+    grid-template-columns: 35px 1fr 60px;
+    gap: 6px;
+    padding: 6px 0;
+  }
+  .referrals-item {
+    grid-template-columns: 35px 1fr 60px;
+    gap: 6px;
+    padding: 6px 0;
+    min-height: 32px;
+  }
+  .avatar {
+    width: 24px;
+    height: 24px;
+  }
+  .name,
+  .profit {
+    font-size: 10px;
+  }
+}
+
+/* Горизонтальный режим */
+@media (orientation: landscape) and (max-height: 600px) {
+  .referral-box {
+    top: 20vh;
+    width: 70%;
+  }
+  .referrals {
+    top: 40vh;
+    width: 70%;
+  }
+  .referrals-scroll {
+    max-height: 35vh;
+  }
+}
+
+/* Десктопы */
+@media (min-width: 1024px) {
+  .referral-box {
+    top: 20vh;
+    max-width: 400px;
+  }
+  .referral-box input {
+    font-size: 14px;
+  }
+  .referral-box button {
+    font-size: 14px;
+    width: 100px;
+  }
+  .referrals {
+    top: 40vh;
+    max-width: 400px;
+  }
+  .referrals-header {
+    font-size: 16px;
+    grid-template-columns: 50px 1fr 100px;
+    gap: 10px;
+    padding: 10px 0;
+  }
+  .referrals-item {
+    grid-template-columns: 50px 1fr 100px;
+    gap: 10px;
+    padding: 10px 0;
+  }
+  .avatar {
+    width: 32px;
+    height: 32px;
+  }
+  .name,
+  .profit {
+    font-size: 14px;
+  }
 }
