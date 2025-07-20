@@ -151,6 +151,7 @@ html, body {
     right: 4vw;
   }
   .wallet-right#tokenBalance {
+    top: 8vh;
     font-size: 16px;
   }
 }
