@@ -27,13 +27,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // ▶️ Кнопка PLAY
   document.getElementById("playBtn").addEventListener("click", () => {
-    const amt = parseFloat(document.getElementById("depositInput").value);
-    if (isNaN(amt) || amt <= 0) {
-      alert("Please enter a valid TON amount.");
-      return;
-    }
-    sessionStorage.setItem("depositAmount", amt);
-    window.location.href = "/game.html";
+    console.log("[Menu] Redirecting to https://z2-ji4e.vercel.app/");
+    window.location.href = "https://z2-ji4e.vercel.app/";
   });
 
   // 🧭 Навигация по меню

@@ -196,17 +196,19 @@ html, body {
   top: 52vh;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.25);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   border-radius: 50px;
-  padding: 10px 70px;
-  font-size: 36px;
+  padding: 10px 50px; /* Increased padding to accommodate text */
+  font-size: 28px;
   font-family: 'AntonSC';
   letter-spacing: 8px;
   color: #fff !important;
   cursor: pointer;
   z-index: 10;
+  white-space: nowrap; /* Prevent text from wrapping */
+  text-align: center; /* Ensure text is centered */
 }
 
 /* === 📋 Кнопки меню === */
