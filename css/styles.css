@@ -1578,4 +1578,29 @@ html, body {
   .profit {
     font-size: 14px;
   }
+  /* === 🔄 Круговой индикатор загрузки === */
+.loader {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top: 3px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Скрытие текста кнопки во время загрузки */
+.btn-loading .button-text {
+  display: none;
+}
+
+/* Скрытие индикатора загрузки по умолчанию */
+.btn-loading .loader {
+  display: block !important;
+}
 }

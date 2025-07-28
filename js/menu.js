@@ -109,13 +109,35 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 🧭 Guide functionality (оставлено как есть)
+  // 🧭 Guide functionality
+  const guideBtn = document.getElementById('btnGuide');
   const guideModal = document.getElementById('guideModal');
   const guideClose = document.getElementById('guideClose');
   const guideSlides = document.querySelectorAll('.guide-slide');
   const guideDots = document.querySelectorAll('.dot');
+  const guideVideos = document.querySelectorAll('.guide-slide video');
   let currentSlide = 0;
 
+  // Функция для проверки загрузки всех видео
+  const checkVideosLoaded = () => {
+    return Promise.all(
+      Array.from(guideVideos).map(video => {
+        return new Promise(resolve => {
+          // Если видео уже загружено
+          if (video.readyState >= 3) { // HAVE_FUTURE_DATA или выше
+            resolve();
+          } else {
+            video.addEventListener('loadeddata', resolve, { once: true });
+            // Устанавливаем preload="auto", чтобы начать загрузку
+            video.setAttribute('preload', 'auto');
+            video.load(); // Запускаем загрузку видео
+          }
+        });
+      })
+    );
+  };
+
+  // Функция отображения слайда
   function showSlide(index) {
     console.log(`[Guide] Showing slide ${index + 1} of ${guideSlides.length}`);
     guideSlides.forEach((slide, i) => {
@@ -160,22 +182,43 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Open guide
-  document.getElementById('btnGuide').addEventListener('click', () => {
-    console.log("[Guide] Opening guide modal");
-    guideModal.style.display = 'block';
-    currentSlide = 0;
-    showSlide(currentSlide);
-  });
+  // Обработчик клика по кнопке "GUIDE"
+  if (guideBtn) {
+    guideBtn.addEventListener('click', async () => {
+      console.log("[Guide] Opening guide modal");
+      // Показываем индикатор загрузки
+      guideBtn.classList.add('btn-loading');
+      try {
+        // Ждем, пока все видео загрузятся
+        await checkVideosLoaded();
+        // Показываем модальное окно
+        guideModal.style.display = 'block';
+        currentSlide = 0;
+        showSlide(currentSlide);
+        // Убираем индикатор загрузки
+        guideBtn.classList.remove('btn-loading');
+      } catch (error) {
+        console.error('Ошибка загрузки видео:', error);
+        guideBtn.classList.remove('btn-loading');
+        alert('Не удалось загрузить видео. Попробуйте снова.');
+      }
+    });
+  } else {
+    console.error("[Menu] btnGuide not found");
+  }
 
-  // Close guide
-  guideClose.addEventListener('click', () => {
-    console.log("[Guide] Closing guide modal");
-    guideModal.style.display = 'none';
-    document.querySelectorAll('.guide-slide video').forEach(video => video.pause());
-  });
+  // Закрытие модального окна
+  if (guideClose) {
+    guideClose.addEventListener('click', () => {
+      console.log("[Guide] Closing guide modal");
+      guideModal.style.display = 'none';
+      document.querySelectorAll('.guide-slide video').forEach(video => video.pause());
+    });
+  } else {
+    console.error("[Menu] guideClose not found");
+  }
 
-  // Navigation buttons
+  // Навигация по слайдам
   guideSlides.forEach((slide, i) => {
     const nextBtn = slide.querySelector('.guide-next');
     const backBtn = slide.querySelector('.guide-back');
@@ -199,7 +242,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Dots
+  // Точки навигации
   guideDots.forEach((dot, index) => {
     dot.addEventListener('click', () => {
       console.log(`[Guide] Clicking dot: Moving to slide ${index + 1}`);
@@ -208,12 +251,22 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Auto-open guide
+  // Автооткрытие гайда
   if (sessionStorage.getItem('openGuideOnLoad') === 'true') {
     console.log("[Guide] Auto-opening guide modal on page load");
-    guideModal.style.display = 'block';
-    currentSlide = 0;
-    showSlide(currentSlide);
-    sessionStorage.removeItem('openGuideOnLoad');
+    guideBtn.classList.add('btn-loading');
+    checkVideosLoaded()
+      .then(() => {
+        guideModal.style.display = 'block';
+        currentSlide = 0;
+        showSlide(currentSlide);
+        guideBtn.classList.remove('btn-loading');
+        sessionStorage.removeItem('openGuideOnLoad');
+      })
+      .catch(error => {
+        console.error('Ошибка загрузки видео при автооткрытии:', error);
+        guideBtn.classList.remove('btn-loading');
+        alert('Не удалось загрузить видео. Попробуйте снова.');
+      });
   }
 });
