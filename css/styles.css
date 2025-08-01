@@ -158,7 +158,7 @@ html, body {
 /* === 🐍 Логотип ==== */
 .logo {
   position: absolute;
-  top: 17vh;
+  top: 19vh;
   left: 50%;
   transform: translateX(-50%);
   width: 60vw;
@@ -179,12 +179,12 @@ html, body {
 }
 .amount-input input {
   width: 100%;
-  padding: 10px 10px;
+  padding: 10px 5px;
   border-radius: 20px;
   border: none;
   background: rgba(255,255,255,0.08);
   color: #fff;
-  font-size: 14px;
+  font-size: 12px;
   text-align: center;
   outline: none;
   font-family: 'Press Start 2P';
@@ -203,7 +203,7 @@ html, body {
   padding: 10px 50px; /* Increased padding to accommodate text */
   font-size: 28px;
   font-family: 'AntonSC';
-  letter-spacing: 8px;
+  letter-spacing: 5px;
   color: #fff !important;
   cursor: pointer;
   z-index: 10;

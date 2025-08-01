@@ -1,4 +1,3 @@
-// rewards.js
 window.addEventListener("DOMContentLoaded", () => {
   const rewardsItems = document.getElementById("rewardsItems");
   const tokenBalance = document.getElementById("tokenBalance");
@@ -26,7 +25,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const updateBalance = async () => {
     const balance = await fetchTokenBalance();
     if (tokenBalance) {
-      tokenBalance.textContent = `${balance} ⚡`;
+      tokenBalance.innerHTML = `${balance} <img class="token-icon" src="./img/token-logo.png" alt="Token">`;
     }
   };
 
@@ -69,7 +68,7 @@ window.addEventListener("DOMContentLoaded", () => {
         <button class="reward-button" data-task-id="${task.id}" ${
           task.completed ? "disabled" : ""
         }>
-          ${task.tokens} ⚡
+          ${task.tokens} <img class="token-icon" src="./img/token-logo.png" alt="Token">
         </button>
       `;
       rewardsItems.appendChild(item);
