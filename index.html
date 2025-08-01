@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Loading...</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js" onload="window.lottieLoaded = true;"></script>
   <link rel="preload" href="./img/logo.png" as="image">
   <link rel="preload" href="./img/snake-logo.png" as="image">
   <link rel="preload" href="./css/styles.css" as="style">
@@ -47,10 +47,10 @@
       font-size: 24px;
     }
     #loading-animation {
-      width: 150px; /* Увеличил размер для видимости */
+      width: 150px;
       height: 150px;
       margin: 0 auto 20px;
-      background: transparent; /* Гарантирует прозрачный фон */
+      background: transparent;
     }
     .fallback-text {
       display: none;
@@ -70,11 +70,13 @@
   </div>
   <script>
     window.addEventListener("DOMContentLoaded", () => {
-      const tg = window.Telegram?.WebApp;
-      if (tg) {
-        tg.ready();
-        tg.expand();
-        tg.requestFullscreen?.();
+      // Проверяем, загружена ли библиотека Lottie
+      if (!window.lottieLoaded || !window.lottie) {
+        console.error('Lottie library not loaded');
+        document.querySelector('.fallback-text').style.display = 'block';
+        initTelegram(); // Инициализируем Telegram, даже если Lottie не загружен
+        startLoading();
+        return;
       }
 
       // Инициализация Lottie-анимации
@@ -92,41 +94,66 @@
           console.error('Lottie animation failed to load');
           document.querySelector('.fallback-text').style.display = 'block';
         });
+
+        // Успешная загрузка анимации
+        animation.addEventListener('data_ready', () => {
+          console.log('Lottie animation loaded successfully');
+          initTelegram(); // Инициализируем Telegram после загрузки анимации
+        });
       } catch (error) {
         console.error('Lottie initialization error:', error);
         document.querySelector('.fallback-text').style.display = 'block';
+        initTelegram(); // Инициализируем Telegram, даже если ошибка
       }
 
-      Promise.race([
-        Promise.all([
-          document.fonts.ready,
-          new Promise(resolve => {
-            const img1 = new Image();
-            img1.src = './img/logo.png';
-            img1.onload = resolve;
-            img1.onerror = () => resolve();
-          }),
-          new Promise(resolve => {
-            const img2 = new Image();
-            img2.src = './img/snake-logo.png';
-            img2.onload = resolve;
-            img2.onerror = () => resolve();
-          })
-        ]),
-        new Promise(resolve => setTimeout(resolve, 3000)) // Таймаут 3 секунды
-      ]).then(() => {
-        const loadingScreen = document.getElementById('loading-screen');
-        if (loadingScreen) {
-          loadingScreen.style.opacity = '0';
-          setTimeout(() => {
+      // Функция инициализации Telegram Web App
+      function initTelegram() {
+        const tg = window.Telegram?.WebApp;
+        if (tg) {
+          tg.ready();
+          tg.expand();
+          tg.requestFullscreen?.();
+          console.log('Telegram Web App initialized');
+        } else {
+          console.log('Telegram Web App not available');
+        }
+      }
+
+      // Запуск процесса загрузки
+      function startLoading() {
+        Promise.race([
+          Promise.all([
+            document.fonts.ready,
+            new Promise(resolve => {
+              const img1 = new Image();
+              img1.src = './img/logo.png';
+              img1.onload = resolve;
+              img1.onerror = () => resolve();
+            }),
+            new Promise(resolve => {
+              const img2 = new Image();
+              img2.src = './img/snake-logo.png';
+              img2.onload = resolve;
+              img2.onerror = () => resolve();
+            })
+          ]),
+          new Promise(resolve => setTimeout(resolve, 3000)) // Таймаут 3 секунды
+        ]).then(() => {
+          const loadingScreen = document.getElementById('loading-screen');
+          if (loadingScreen) {
+            loadingScreen.style.opacity = '0';
+            setTimeout(() => {
+              sessionStorage.setItem('openGuideOnLoad', 'true');
+              window.location.href = 'menu.html';
+            }, 500);
+          } else {
             sessionStorage.setItem('openGuideOnLoad', 'true');
             window.location.href = 'menu.html';
-          }, 500);
-        } else {
-          sessionStorage.setItem('openGuideOnLoad', 'true');
-          window.location.href = 'menu.html';
-        }
-      });
+          }
+        });
+      }
+
+      startLoading();
     });
   </script>
 </body>
