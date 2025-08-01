@@ -121,24 +121,19 @@
 
       // Запуск процесса загрузки
       function startLoading() {
-        Promise.race([
-          Promise.all([
-            document.fonts.ready,
-            new Promise(resolve => {
-              const img1 = new Image();
-              img1.src = './img/logo.png';
-              img1.onload = resolve;
-              img1.onerror = () => resolve();
-            }),
-            new Promise(resolve => {
-              const img2 = new Image();
-              img2.src = './img/snake-logo.png';
-              img2.onload = resolve;
-              img2.onerror = () => resolve();
-            })
-          ]),
-          new Promise(resolve => setTimeout(resolve, 10000)) // Таймаут 10 секунд
-        ]).then(() => {
+        // Предварительная загрузка ресурсов (без ожидания)
+        document.fonts.ready.catch(() => console.log('Fonts failed to load'));
+        const img1 = new Image();
+        img1.src = './img/logo.png';
+        img1.onerror = () => console.log('logo.png failed to load');
+        const img2 = new Image();
+        img2.src = './img/snake-logo.png';
+        img2.onerror = () => console.log('snake-logo.png failed to load');
+
+        // Гарантированный таймаут 10 секунд
+        console.log('Starting 10-second animation display');
+        setTimeout(() => {
+          console.log('10 seconds elapsed, transitioning to menu.html');
           const loadingScreen = document.getElementById('loading-screen');
           if (loadingScreen) {
             loadingScreen.style.opacity = '0';
@@ -150,11 +145,11 @@
             sessionStorage.setItem('openGuideOnLoad', 'true');
             window.location.href = 'menu.html';
           }
-        });
+        }, 10000); // 10 секунд
       }
 
       startLoading();
     });
   </script>
 </body>
-</html>
+</html>1
