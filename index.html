@@ -9,6 +9,11 @@
   <link rel="preload" href="./img/logo.png" as="image">
   <link rel="preload" href="./img/snake-logo.png" as="image">
   <link rel="preload" href="./css/styles.css" as="style">
+  <link rel="preload" href="./videos/guide1.mp4" as="video">
+  <link rel="preload" href="./videos/guide2.mp4" as="video">
+  <link rel="preload" href="./videos/guide3.mp4" as="video">
+  <link rel="preload" href="./videos/guide4.mp4" as="video">
+  <link rel="preload" href="./videos/guide5.mp4" as="video">
   <style>
     @font-face {
       font-family: 'AntonSC';
@@ -83,15 +88,15 @@
       try {
         const animation = lottie.loadAnimation({
           container: document.getElementById('loading-animation'),
-          renderer: 'svg', // SVG для совместимости
+          renderer: 'canvas', // Используем canvas для совместимости
           loop: true,
           autoplay: true,
-          path: './assets/loading.json' // Укажи правильный путь к файлу
+          path: './assets/loading.json' // Проверь путь к файлу
         });
 
         // Обработка ошибок загрузки анимации
-        animation.addEventListener('error', () => {
-          console.error('Lottie animation failed to load');
+        animation.addEventListener('error', (e) => {
+          console.error('Lottie animation failed to load:', e);
           document.querySelector('.fallback-text').style.display = 'block';
         });
 
@@ -121,19 +126,81 @@
 
       // Запуск процесса загрузки
       function startLoading() {
-        // Предварительная загрузка ресурсов (без ожидания)
-        document.fonts.ready.catch(() => console.log('Fonts failed to load'));
-        const img1 = new Image();
-        img1.src = './img/logo.png';
-        img1.onerror = () => console.log('logo.png failed to load');
-        const img2 = new Image();
-        img2.src = './img/snake-logo.png';
-        img2.onerror = () => console.log('snake-logo.png failed to load');
+        // Ожидание загрузки всех ресурсов
+        const resources = [
+          document.fonts.ready.catch(() => console.log('Fonts failed to load')),
+          new Promise(resolve => {
+            const img1 = new Image();
+            img1.src = './img/logo.png';
+            img1.onload = resolve;
+            img1.onerror = () => {
+              console.log('logo.png failed to load');
+              resolve();
+            };
+          }),
+          new Promise(resolve => {
+            const img2 = new Image();
+            img2.src = './img/snake-logo.png';
+            img2.onload = resolve;
+            img2.onerror = () => {
+              console.log('snake-logo.png failed to load');
+              resolve();
+            };
+          }),
+          // Проверка загрузки всех видео из гайда
+          new Promise(resolve => {
+            const video1 = document.createElement('video');
+            video1.src = './videos/guide1.mp4';
+            video1.onloadeddata = resolve;
+            video1.onerror = () => {
+              console.log('guide1.mp4 failed to load');
+              resolve();
+            };
+          }),
+          new Promise(resolve => {
+            const video2 = document.createElement('video');
+            video2.src = './videos/guide2.mp4';
+            video2.onloadeddata = resolve;
+            video2.onerror = () => {
+              console.log('guide2.mp4 failed to load');
+              resolve();
+            };
+          }),
+          new Promise(resolve => {
+            const video3 = document.createElement('video');
+            video3.src = './videos/guide3.mp4';
+            video3.onloadeddata = resolve;
+            video3.onerror = () => {
+              console.log('guide3.mp4 failed to load');
+              resolve();
+            };
+          }),
+          new Promise(resolve => {
+            const video4 = document.createElement('video');
+            video4.src = './videos/guide4.mp4';
+            video4.onloadeddata = resolve;
+            video4.onerror = () => {
+              console.log('guide4.mp4 failed to load');
+              resolve();
+            };
+          }),
+          new Promise(resolve => {
+            const video5 = document.createElement('video');
+            video5.src = './videos/guide5.mp4';
+            video5.onloadeddata = resolve;
+            video5.onerror = () => {
+              console.log('guide5.mp4 failed to load');
+              resolve();
+            };
+          })
+        ];
 
-        // Гарантированный таймаут 10 секунд
         console.log('Starting 10-second animation display');
-        setTimeout(() => {
-          console.log('10 seconds elapsed, transitioning to menu.html');
+        Promise.race([
+          Promise.all(resources),
+          new Promise(resolve => setTimeout(resolve, 5000)) // Таймаут 10 секунд
+        ]).then(() => {
+          console.log('Resources loaded or 10 seconds elapsed, transitioning to menu.html');
           const loadingScreen = document.getElementById('loading-screen');
           if (loadingScreen) {
             loadingScreen.style.opacity = '0';
@@ -145,11 +212,11 @@
             sessionStorage.setItem('openGuideOnLoad', 'true');
             window.location.href = 'menu.html';
           }
-        }, 3000); // 10 секунд
+        });
       }
 
       startLoading();
     });
   </script>
 </body>
-</html>1
+</html>
