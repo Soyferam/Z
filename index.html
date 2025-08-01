@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Loading...</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <link rel="preload" href="./videos/guide1.mp4" as="video">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
   <link rel="preload" href="./img/logo.png" as="image">
   <link rel="preload" href="./img/snake-logo.png" as="image">
   <link rel="preload" href="./css/styles.css" as="style">
@@ -46,18 +46,16 @@
       font-family: 'AntonSC', sans-serif;
       font-size: 24px;
     }
-    .loading-spinner {
-      width: 40px;
-      height: 40px;
-      border: 4px solid #fff;
-      border-top: 4px solid #1eff00;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
+    #loading-animation {
+      width: 150px; /* Увеличил размер для видимости */
+      height: 150px;
       margin: 0 auto 20px;
+      background: transparent; /* Гарантирует прозрачный фон */
     }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    .fallback-text {
+      display: none;
+      color: #ff0000;
+      font-size: 16px;
     }
   </style>
 </head>
@@ -65,8 +63,9 @@
   <div style="font-family: 'AntonSC', 'Press Start 2P'; position: absolute; visibility: hidden;">Preload fonts</div>
   <div id="loading-screen" class="loading-screen">
     <div class="loading-content">
-      <div class="loading-spinner"></div>
-      <p>Loading  🐍Shhh...</p>
+      <div id="loading-animation"></div>
+      <p class="fallback-text">Animation failed to load</p>
+      <p>Loading 🐍Shhh...</p>
     </div>
   </div>
   <script>
@@ -77,15 +76,30 @@
         tg.expand();
         tg.requestFullscreen?.();
       }
+
+      // Инициализация Lottie-анимации
+      try {
+        const animation = lottie.loadAnimation({
+          container: document.getElementById('loading-animation'),
+          renderer: 'svg', // SVG для совместимости
+          loop: true,
+          autoplay: true,
+          path: './assets/loading.json' // Укажи правильный путь к файлу
+        });
+
+        // Обработка ошибок загрузки анимации
+        animation.addEventListener('error', () => {
+          console.error('Lottie animation failed to load');
+          document.querySelector('.fallback-text').style.display = 'block';
+        });
+      } catch (error) {
+        console.error('Lottie initialization error:', error);
+        document.querySelector('.fallback-text').style.display = 'block';
+      }
+
       Promise.race([
         Promise.all([
           document.fonts.ready,
-          new Promise(resolve => {
-            const video = document.createElement('video');
-            video.src = './videos/guide1.mp4';
-            video.onloadeddata = resolve;
-            video.onerror = () => resolve();
-          }),
           new Promise(resolve => {
             const img1 = new Image();
             img1.src = './img/logo.png';
@@ -99,18 +113,18 @@
             img2.onerror = () => resolve();
           })
         ]),
-        new Promise(resolve => setTimeout(resolve, 5000))
+        new Promise(resolve => setTimeout(resolve, 3000)) // Таймаут 3 секунды
       ]).then(() => {
-        const loadingScreen = document.getElementById("loading-screen");
+        const loadingScreen = document.getElementById('loading-screen');
         if (loadingScreen) {
-          loadingScreen.style.opacity = "0";
+          loadingScreen.style.opacity = '0';
           setTimeout(() => {
             sessionStorage.setItem('openGuideOnLoad', 'true');
-            window.location.href = "menu.html";
-          }, 500); // Match transition duration
+            window.location.href = 'menu.html';
+          }, 500);
         } else {
           sessionStorage.setItem('openGuideOnLoad', 'true');
-          window.location.href = "menu.html";
+          window.location.href = 'menu.html';
         }
       });
     });

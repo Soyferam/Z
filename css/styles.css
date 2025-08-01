@@ -332,6 +332,12 @@ html, body {
   }
 }
 
+#loading-animation {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 20px;
+}
+
 /* === 🌐 iPad Pro / iPhone X === */
 @media (min-width: 820px) and (max-width: 1024px) and (orientation: portrait) {
   .logo {
