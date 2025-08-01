@@ -74,7 +74,7 @@
       if (!window.lottieLoaded || !window.lottie) {
         console.error('Lottie library not loaded');
         document.querySelector('.fallback-text').style.display = 'block';
-        initTelegram(); // Инициализируем Telegram, даже если Lottie не загружен
+        initTelegram();
         startLoading();
         return;
       }
@@ -98,12 +98,12 @@
         // Успешная загрузка анимации
         animation.addEventListener('data_ready', () => {
           console.log('Lottie animation loaded successfully');
-          initTelegram(); // Инициализируем Telegram после загрузки анимации
+          initTelegram();
         });
       } catch (error) {
         console.error('Lottie initialization error:', error);
         document.querySelector('.fallback-text').style.display = 'block';
-        initTelegram(); // Инициализируем Telegram, даже если ошибка
+        initTelegram();
       }
 
       // Функция инициализации Telegram Web App
@@ -137,7 +137,7 @@
               img2.onerror = () => resolve();
             })
           ]),
-          new Promise(resolve => setTimeout(resolve, 3000)) // Таймаут 3 секунды
+          new Promise(resolve => setTimeout(resolve, 10000)) // Таймаут 10 секунд
         ]).then(() => {
           const loadingScreen = document.getElementById('loading-screen');
           if (loadingScreen) {
