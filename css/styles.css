@@ -263,32 +263,48 @@ html, body {
   z-index: 100;
   font-family: 'Press Start 2P';
 }
-.profit-text { 
-  display: flex; 
-  flex-direction: column; 
-  gap: 4px; 
+
+.profit-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left; /* Выравнивание текста слева */
+  width: 100%; /* Гарантирует одинаковую ширину для строк */
 }
-.profit-line, .tokens-line { 
-  font-size: 14px; 
-  white-space: nowrap; 
+
+.profit-line,
+.tokens-line {
+  font-size: 14px;
+  white-space: nowrap;
+  line-height: 1.2; /* Одинаковая высота строки */
 }
-.profit-amount, .profit-percent, .token-amount, .token-icon {
-  color: #1eff00; 
-  margin-left: 4px;
+
+.profit-amount,
+.profit-percent,
+.token-amount {
+  color: #1eff00;
+  margin-left: 4px; /* Одинаковый отступ для цветных элементов */
 }
-.token-icon { 
-  font-size: 14px; 
+
+.token-icon {
+  width: 27px; /* Размер изображения, соответствует шрифту */
+  height: 27px;
+  vertical-align: middle; /* Выравнивание по центру текста */
+  margin-left: 4px; /* Тот же отступ, что у других элементов */
+  display: inline-block; /* Для корректного выравнивания */
 }
-.share-btn { 
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
-  cursor: pointer; 
+
+.share-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
 }
-.share-btn small { 
-  font-size: 10px; 
-  color: #aaa; 
-  margin-top: 2px; 
+
+.share-btn small {
+  font-size: 10px;
+  color: #aaa;
+  margin-top: 2px;
 }
 
 /* === 📱 Маленькие экраны === */
